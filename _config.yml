@@ -1,0 +1,33 @@
+# Site settings
+title: AJ Stuyvenberg
+email: astuyve@gmail.com
+description: Software Engineer, Parachute Enthusiast.
+url: "" # the base hostname & protocol for your site
+
+# Homepage tiles
+tiles-source: posts # accepts "posts" or "pages"
+tiles-count: 4
+
+# Misc settings
+featured-image-source:
+
+# Social settings
+github_url: https://github.com/astuyve
+instagram_url: https://instagram.com/aj.stuyv
+linkedin_url: https://www.linkedin.com/in/aj-stuyvenberg-91852521
+twitter_url: https://twitter.com/astuyve
+youtube_url: https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+kramdown:
+  syntax_highlighter:  rouge
+  input:               GFM # Github Flavored Markdown
+  hard_wrap:           false # do not replace newlines by <br>s
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
