@@ -25,6 +25,7 @@ youtube_url: https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Build settings
 markdown: kramdown
