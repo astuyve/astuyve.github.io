@@ -1,1 +1,3 @@
 User-agent: *
+Disallow:
+Sitemap: http://aaronstuyvenberg.com/sitemap.xml
