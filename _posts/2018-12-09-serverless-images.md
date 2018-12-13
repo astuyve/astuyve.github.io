@@ -5,11 +5,11 @@ description: Leverage this CloudFormation template with a few simple tweaks to d
 image: pic06.jpg
 ---
 
-As a melting pot for all things youth sport technologies, SportsEngine has experienced a fair share of integration challenges. Aggregating and integrating player information is key to our long-term success as a company, and a significant part of that is dealing with images of athletes on the platform.
+As a melting pot for all things youth sport technologies, [SportsEngine](https://sportsengine.com) has experienced a fair share of integration challenges. Aggregating and integrating player information is key to our long-term success as a company, and a significant part of that is dealing with images of athletes on the platform.
 
 Traditionally the solution for cropping, resizing, and storing images was simple. You'd decide on how many sizes and formats of an image you'd need, and upload each version to S3 when a user decided to attach a new image to their profile. In the Ruby on Rails world, I'd use something like CarrierWave to interface with S3, expose the resulting image in an API, and be done with it. This worked well, for a while.
 
-Today's users expect high resolution images for their desktop, mobile web, and application experience. It's not time-effective to create dozens of different variations of images for every single upload. Instead, it's best to design a system that allows the client to specify details such as image size, filetype, and color tone - and let the service create an image in response.
+Today's users expect high resolution images for their desktop, mobile, and web application experience. It's not time-effective to create dozens of different variations of images for every single upload. Instead, it's best to design a system that allows the client to specify details such as image size, filetype, and color tone - and let the service create an image in response.
 
 Enter an Image Service. AWS makes it simple with the [Serverless Image Handler template](https://aws.amazon.com/answers/web-applications/serverless-image-handler/). Using CloudFront, Api Gateway, Lambda, and S3 you can easily deploy a new service to manipulate images on the fly. You can even utilize AWS Rekognition to automatically detect faces and crop images to center subjects!
 
