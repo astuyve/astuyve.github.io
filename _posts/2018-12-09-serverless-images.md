@@ -14,11 +14,11 @@ Today's users expect high resolution images for their desktop, mobile, and web a
 Enter an Image Service. AWS makes it simple with the [Serverless Image Handler template](https://aws.amazon.com/answers/web-applications/serverless-image-handler/). Using CloudFront, Api Gateway, Lambda, and S3 you can easily deploy a new service to manipulate images on the fly. You can even utilize AWS Rekognition to automatically detect faces and crop images to center subjects!
 
 ### Serverless Image Handler Architecture
-<span class="image center"><img src="/assets/images/serverless_image_handler.png" alt="Serverless Image Handler Architecture Diagram" /></span>
+<span class="image fit"><img src="/assets/images/serverless_image_handler.png" alt="Serverless Image Handler Architecture Diagram" /></span>
 
 Here's how the process works:
 1. The client requests an image from a CloudFront URL.
-2. CloudFront checks it's cache. If the image exists, it's returned. 
+2. CloudFront checks its cache. If the image exists, it's returned.
 3. If the image doesn't exist, the client request is sent to a resource handled by API Gateway
 4. API Gateway triggers an AWS Lambda function, which:
 5. Fetches the existing image from Amazon S3
