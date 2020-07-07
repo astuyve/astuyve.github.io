@@ -11,7 +11,7 @@ author:
 
 # Homepage tiles
 tiles-source: posts # accepts "posts" or "pages"
-tiles-count: 4
+tiles-count: 6
 
 # Misc settings
 featured-image-source:
@@ -32,9 +32,9 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:categories/:title/
 kramdown:
-  syntax_highlighter:  rouge
-  input:               GFM # Github Flavored Markdown
-  hard_wrap:           false # do not replace newlines by <br>s
+  syntax_highlighter: rouge
+  input: GFM # Github Flavored Markdown
+  hard_wrap: false # do not replace newlines by <br>s
 sass:
   style: compressed
 exclude:
