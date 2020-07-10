@@ -11,7 +11,7 @@ How many times have you said this to yourself, while working on a bug?
 
 I found myself saying it recently. Here at [serverless](https://serverless.com) we've been hard at work on a killer developer experience called [components](https://www.serverless.com/components/), and part of my job has been to design and build the onboarding experience.
 
-Components are meant to be small, reusable pieces of infrastructure-as-code (think libraries or node modules, but for cloud infrastructure). People can publish components to a registry and share them with other developers. To help people get packages from the registry we sought to built a simple, one-command initialization system for the framework that would get developers up and running in the most frictionless way possible, like teflon, but for cloud development.
+Components are meant to be small, reusable pieces of infrastructure-as-code (think libraries or node modules, but for cloud infrastructure). People can publish components to a registry and share them with other developers. To help people get packages from the registry we sought to build a simple, one-command initialization system for the framework that would get developers up and running in the most frictionless way possible, like teflon, but for cloud development.
 
 The `init` command does a lot of things, but for the sake of brevity, let's say it fetched a zip archive from the component registry, inflated/extracted it, and pre-configured attributes in the `serverless.yml` file for the developer.
 
