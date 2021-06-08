@@ -9,6 +9,8 @@ In the days of the LAMP stack, local web development was straightforward. You'd 
 
 In the world of serverless development, building serverless apps via local emulation suffers from several drawbacks. It's hard to locally mock a large number of disparate services, the services are gaining new features frequently, and offline emulation tools are often community maintained, meaning that new features lag their cloud counterparts until someone like yourself [adds them](https://github.com/mj1618/serverless-offline-sns/pull/56).
 
+The differences between a live AWS environment and a local emulators are many and stark. IAM policies can only be tested in the cloud. Timeouts and memory limits don't exist locally, neither do vCPUs or cold starts. Especially confounding are configuration failures which may cause a function to run without responding, or not to run at all!
+
 There are some great tools such as [serverless offline](https://github.com/dherault/serverless-offline), [SAM local](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-local-start-api.html), and the [architect framework](https://arc.codes/docs/en/guides/developer-experience/local-development), but I propose that we consider a different way forward - a cloud development environment.
 
 Emulating the cloud on your laptop is fragile, prone to lacking features, and hard to keep orderly (especially for new developers). Instead of trying to constantly keep up with the army of engineers at AWS, let's see how we can use per-feature stacks, shared data access, and extremely quick deployments, to replace local emulation entirely.
