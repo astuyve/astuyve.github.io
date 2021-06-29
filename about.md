@@ -4,7 +4,7 @@ title: About Me
 description: A bit more about who I am, where I came from, and what I'm doing
 ---
 <span class="image left"><img src="/assets/images/pic03.jpg" alt="" /></span>
-I'm a Senior Software Engineer at [Serverless](https://serverless.com/) where I help build Serverless Enterprise; a product dedicated to helping organizations develop, deploy, secure, and monitor their Serverless applications.
+I'm a (ex) Principal Software Engineer at [Serverless](https://serverless.com/) where I help build Serverless Enterprise; a product dedicated to helping organizations develop, deploy, secure, and monitor their Serverless applications.
 
 When I'm not writing software, you can find me [Base Jumping](https://www.instagram.com/p/BiW8qCRh1IA/?taken-by=aj.stuyv) in the [red-dirt canyons of Utah](https://www.instagram.com/p/Bb-VyUdAfs1/), or the [edge of a cliff near the Alps - gearing up with my wingsuit](https://www.instagram.com/p/BPQCe4uA1l3/?taken-by=aj.stuyv).
 
