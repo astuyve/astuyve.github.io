@@ -20,10 +20,8 @@ As you grow, you'll also want to solve new business problems with Serverless. Th
 
 Although it's tempting to reach for a [plugin](https://www.npmjs.com/package/serverless-plugin-split-stacks) which can split stacks into smaller stacks, that's only going to _increase_ your deployment times (not to mention overall complexity). It's time to split stacks, but the right answer is not to split one giant stack programmatically. The answer is to *split your infrastructure from your code, intentionally.*
 
-To successfully scale your Serverless teams and deployments, you need to divide infrastructure from code, use CloudFormation Outputs to share resources, and leverages SSM to keep non-CloudFormation tools like Terraform in sync.
-
 ## Divide and conquer your business domains in the cloud
-Specifically, split your long-lived and/or shared infrastructure from the resources you change frequently. Frequently changed resources are generally:
+Specifically what I'm talking about here is splitting your long-lived and/or shared infrastructure from the resources you change frequently. Frequently changed resources are generally:
 - Lambda function code & configuration
 - API Gateway configuration (unless you're using a shared gateway or mono-lambda pattern)
 - DynamoDB table (unless it's shared, which I don't typically recommend)
