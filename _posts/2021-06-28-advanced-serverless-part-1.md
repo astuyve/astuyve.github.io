@@ -70,7 +70,7 @@ You can learn more about cross-stack references [here](https://docs.aws.amazon.c
 ## Notes on Terraform, and other non-CloudFormation systems
 It's also common to reconcile Serverless with your existing IaC tools, like Terraform. If you do use Terraform, I'd recommend adhering to the same principles above. Namely, rely on Terraform to provision your long-lived, seldom-changed infrastructure. Then use SAM, Serverless Framework, or whatever you prefer for rapid code deployments.
 
-Terraform doesn't rely on CloudFormation. Instead, it stores state in an plethora of backends (often an S3 bucket), which means you'll need to share resource identifiers manually, instead of using CloudFormation Outputs. The easiest option I've found is to rely on AWS Systems Manager [(SSM)](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html).
+Terraform doesn't rely on CloudFormation. Instead, it offers to store state in an plethora of backends (often an S3 bucket), which means you'll need to share resource identifiers manually, instead of using CloudFormation Outputs. The easiest option I've found is to rely on AWS Systems Manager [(SSM)](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html).
 
 If you use Terraform to provision something like a Cognito pool, or a shared SQS Queue, you'll need to publish the ARN or name into SSM using the [Terraform SSM parameter resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter). Then you can consume them in Serverless apps with the `${ssm:...}` [reference](https://www.serverless.com/framework/docs/providers/aws/guide/variables#reference-variables-using-the-ssm-parameter-store).
 
