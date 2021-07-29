@@ -60,7 +60,7 @@ You can also greatly reduce your overall package size and footprint with:
 package:
   individually: true
 ```
-This can help improve cold start times.
+This _can_ help improve cold start times, but any gain here is likely offset by the distribution of web requests across several functions. DO NOT choose either API pattern based on the perceived risk of cold starts, as they are rare, (getting rarer), short (getting shorter), and easily mitigated via other measures.
 
 Finally, a Single-Function API fits the general design narrative that AWS has for Lambda-based APIs. This means you'll generally encounter less friction, and have the most flexibility when using API-based rate limiting, API keys, authorizers, and more.
 
@@ -112,11 +112,13 @@ Mono-Lambda APIs are also much simpler to consider from a release and deployment
 
 I oftentimes find folks with extremely complicated release processes for Single-Function APIs, caused by hundreds of Lambda functions and multiple shared libraries (via layers or private packages). If your organization doesn't have the resources to devote towards enabling shared code to be deployed and released to Single-Function APIs quickly and safely, a Mono-Lambda is a good choice.
 
-The uniform configuration of a Mono-Lambda API can be a blessing or a curse. If your problem domain encompasses numerous resources with similar actions and behaviors, and you're using a [single-table DynamoDB pattern](https://www.alexdebrie.com/posts/dynamodb-single-table/), the IAM policy for each resource is probably very similar, and you're likely better off with a Mono-Lambda API than a Single-Function API.
+The uniform configuration of a Mono-Lambda API can be a blessing or a curse. If your problem domain encompasses numerous resources with similar actions and behaviors, and you're using a [single-table DynamoDB pattern](https://www.alexdebrie.com/posts/dynamodb-single-table/), the IAM policy for each resource is probably very similar. This means you can generate a reasonably strict policy which still allows the Mono-Lambda API to perform necessary operations, without being over permissive.
 
 With a Mono-Lambda API, you'll be doing things like routing, request format validation, access control, and throttling inside of your Lambda function. This is fine for many people, as Express/Koa/etc all have robust libraries you can use, and developers are likely already familiar with how to do this. If you're not using the advanced features of API Gateway, it makes a lot of sense to consider a Mono-Lambda API.
 
-If you don't care about those advanced API Gateway features or losing granularity on IAM/concurrency/timeout settings, the biggest downside of a Mono-Lambda API is that Cloudwatch can be a bit of a mess to work with. By default, logs for the entire function go to one stream. Since your function processes different resources, it can be hard to trace. I'd suggest writing highly structured log messages using a custom logger, and then relying on Cloudwatch log insights to filter. That can be slow, and there are a ton of 3rd party options to help manage this (Full disclosure - I work at one). So explore your options and try many of them!
+If you don't care about those advanced API Gateway features or losing granularity on IAM/concurrency/timeout settings, the biggest downside of a Mono-Lambda API is that the AWS console and Cloudwatch can be a bit of a mess to work with. By default, logs for the entire function go to one stream. Since your function processes different resources, it can be hard to trace. I'd suggest writing highly structured log messages using a custom logger, and then relying on Cloudwatch log insights to filter.
+
+That can be slow, and there are a ton of 3rd party options to help manage this (Full disclosure - I work at one). So explore your options and try many of them!
 
 ### Example
 ```yaml
@@ -130,7 +132,7 @@ functions:
 ```
 
 ## Closing thoughts
-My opinion is that a Mono-Lambda vs Single-Function isn't a hard-and-fast choice, but rather a spectrum, with most users having a combination of both in the long term.
+Mono-Lambda vs Single-Function isn't a hard-and-fast choice, but rather a spectrum, with most users trying a combination of both in the long term.
 
 I think a Mono-Lambda is a great default choice, and since it's easy to split out Serverless functions down the line, it's not a one-way choice.
 
