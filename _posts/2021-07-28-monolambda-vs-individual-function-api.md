@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The what, why, and how of Mono-Lambda vs Single Function APIs
+title: The what, why, and when of Mono-Lambda vs Single Function APIs
 description: An analytical comparison of two common API patterns in Lambda - 8 minutes
 image: pic12.jpg
 ---
