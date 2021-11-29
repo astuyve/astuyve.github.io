@@ -24,7 +24,11 @@ Now that you're armed with the knowledge of how to create an integration between
 
 If you're building a user-facing API, consider shifting all non-essential functionality from the API Function execution into a stream-based, asynchronous Lambda execution. Consider a user registration API endpoint. Beyond simply storing the user data in the user table, you'll likely want to send the user a confirmation email. You could do that inside of the user registration API endpoint, but what happens if the email service is down briefly, or their API is running slowly?
 
-Instead of forcing the user to endure the downstream effects of your registration business logic, a DynamoDB stream function can send the email asynchronously (and handle retries or failures as needed)! This also applies to
+Instead of forcing the user to endure the downstream effects of your registration business logic, a DynamoDB stream function can send the email asynchronously (and handle retries or failures as needed)!
+
+This also applies to situations where a downstream API is flaky, or runs longer than you'd like. Using a DDB stream, your function can receive a batch of events, allowing you to group updates to the downstream API and retry failures without the user having to wait.
+
+We've explored how to speed up and improve reliability of your Serverless applications using DynamoDB streams, next we'll talk about synchronizing data across services.
 
 ## Linking services together with Pub/Sub
 
@@ -51,6 +55,14 @@ You can accomplish this using a combination of DynamoDB conditional updates, and
 3. A stream event update triggers our schedule function. We perform necessary bookkeeping (like verifying the user identity, checking for other jobs queued for this repository, etc), and then use a conditional update to change the job status from pending to active. If another function has scheduled the job, this change will fail, so we guarantee only one job will be ran per webhook (even if the notification is received more than once)
 4. The job status attribute change results in another DDB stream lambda invocation, since we know we'll only ever see this change once (as it's being made via a conditional update), we can actually kick off the CI/CD process!
 5. This pattern can be repeated for status changes (like build passed/failed, etc), as well as sending notifications to the user (or back to GitHub).
+
+This is only one example of a collection of asynchronous data pipeline examples, you can apply this strategy of async, idempotent design to a number of other cases like
+
+- Updating order history after a credit card transaction has processed
+- Tracking updates for a shipment
+- Hydrating a data store from archived data
+
+and more!
 
 ## Wrapping it up
 
