@@ -7,7 +7,7 @@ image: pic13.jpg
 
 DynamoDB (DDB) is a compelling datastore choice for Serverless developers for a few key reasons. Dynamo offers a HTTP API, IAM Authorization, serverless pay-per-use billing, and almost unlimited scale when used properly. But there's more to DynamoDB than a convenient way to store and fetch data for Lambda users.
 
-If you're new to DynamoDB and Serverless, you may not yet have come across [DynamoDB Streams](https://aws.amazon.com/blogs/database/dynamodb-streams-use-cases-and-design-patterns/) yet. Perhaps you have, but are a bit unclear on how to apply them to your applications. Like the OP of this [twitter thread](https://twitter.com/astuyve/status/1437925409354567684), the compelling use cases for DynamoDB Streams aren't immediately apparent.
+If you're new to DynamoDB and Serverless, you may not yet have come across [DynamoDB Streams](https://aws.amazon.com/blogs/database/dynamodb-streams-use-cases-and-design-patterns/) yet. Perhaps you have, but are a bit unclear on how to apply them to your applications. Like the OP of this [twitter thread](https://twitter.com/astuyve/status/1437925409354567684), the compelling use cases for DynamoDB Streams may not be clear to you.
 
 Fear not! In this post we'll briefly cover what DynamoDB Streams are, and spend most of the post covering specific applications and examples. By the end, you'll know how and when to use streams to improve API performance, increase resiliency, and build new capabilities.
 
