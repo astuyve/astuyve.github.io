@@ -41,7 +41,7 @@ arn:aws:lambda:aws-region:acct-id:function:helloworld
 
 ## Developer Ergonomics
 
-I freely admit that this is harder to do than simply invoking `$LATEST`. There's a reason multi-phase deployments are not the default for these IaC tools. In many cases you'll need to deploy twice, once to update the function code/configuration, and once to update your integration to point to the new function. Of course if you've [split your stacks](https://dev.to/aws-builders/serverless-at-team-scale-a8), this would already be your deployment practice. But fundamentally I don't think this is your fault, developer.
+I freely admit that this is harder to do than simply invoking `$LATEST`. There's a reason multi-phase deployments are not the default for these IaC tools. In many cases you'll need to deploy twice, once to update the function code/configuration, and once to update your integration to point to the new function. Of course if you've [split your stacks](https://dev.to/aws-builders/serverless-at-team-scale-a8), this would already be your deployment practice. But fundamentally I don't think this is your fault, developer. We need sensible defaults that include best practices. We need less risky IAM policies, and we need safer deployments.
 
 We need to demand more ergonomic tools.
 
