@@ -11,7 +11,7 @@ author:
 
 # Homepage tiles
 tiles-source: posts # accepts "posts" or "pages"
-tiles-count: 6
+tiles-count: 10
 
 # Misc settings
 featured-image-source:
@@ -21,6 +21,7 @@ github_url: https://github.com/astuyve
 instagram_url: https://www.instagram.com/aj.stuyv
 linkedin_url: https://www.linkedin.com/in/aaron-stuyvenberg
 twitter_url: https://twitter.com/astuyve
+mastodon_url: https://hachyderm.io/@a0j
 youtube_url: https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw
 
 plugins:
