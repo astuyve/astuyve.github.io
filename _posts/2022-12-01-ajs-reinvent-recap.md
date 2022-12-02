@@ -45,6 +45,14 @@ You can import existing CloudFormation or SAM templates and visualize them, make
 
 Check out the [blog post](https://aws.amazon.com/blogs/compute/visualize-and-create-your-serverless-workloads-with-aws-application-composer/) from Julian Wood to learn more.
 
+## Bonus: Javascript resolvers for AppSync
+
+AppSync helps developers write GraphQL APIs on AWS, which I haven't used seriously - mainly due to my aversion to authoring VTL.
+
+Now I'll need to give it a serious second look, as we can use a subset of Javascript to implement business logic in AppSync.
+
+There are limitations, but this release likely helps many users remove Lambda functions which they previously used between AppSync and other AWS resources. For that alone, it deserves a mention here. Learn more [here](https://aws.amazon.com/blogs/mobile/getting-started-with-javascript-resolvers-in-aws-appsync-graphql-apis/).
+
 ## Wrapping up
 
 Alright, if you've made it to the end, I assume I have either deeply offended you, or piqued your interest. You can find more of my thoughts on my [blog](https://aaronstuyvenberg.com) and on [twitter](https://twitter.com/astuyve) and let me know!
