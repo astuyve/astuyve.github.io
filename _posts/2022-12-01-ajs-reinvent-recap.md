@@ -19,6 +19,8 @@ However - I often found the need to use a Lambda function as a target to filter 
 
 Enter EventBridge Pipes. Pipes allow you to define optional filter, transform, or enrich stages between sources and target destinations. The Pipe will maintain order for you, and doesn't have to be used with an Event Bus.
 
+Perhaps the most important impact on EventBridge Pipes is [pricing](https://aws.amazon.com/eventbridge/pricing/). Events published to a pipe are $.40/million _after filtering_, where EventBridge is $1/million. More on this later.
+
 You can learn more about EventBridge Pipes in the [blog post](https://aws.amazon.com/blogs/aws/new-create-point-to-point-integrations-between-event-producers-and-consumers-with-amazon-eventbridge-pipes)
 
 ## SnapStart
