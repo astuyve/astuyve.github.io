@@ -37,9 +37,9 @@ Hopefully we see SnapStart for more runtimes very soon.
 
 I had never used Stackery for a production deployment, but given how complex some of my CloudFormation templates have been - I think I probably should have. Stackery was SaaS product that helped you build Serverless applications with a simple drag and drop interface.
 
-Stackery was acqui-hired by AWS in 2021, and the product was shut down. It seems that some of those innovations and influences have been rolled into a new feature called Application Composer, and the UX actually looks; really really good.
+Stackery was acqui-hired by AWS in 2021, and the product was shut down. It seems that some of those innovations and influences have been rolled into a new feature called Application Composer, and the UX seems surprisingly polished.
 
-AWS is infamous for building really reliable, scalable infrastructure tools with a clunky developer experience. But from the videos I've seen so far, Application Composer looks excellent. I haven't played with it yet, but I'm looking forward to it.
+AWS is infamous for building reliable, scalable infrastructure tools with a clunky developer experience. But from the videos I've seen so far, Application Composer looks excellent. I haven't played with it yet, but I'm looking forward to it.
 
 <span class="image fit"><a href ="/assets/images/composer.png" target="_blank"><img src="/assets/images/composer.png" alt ="Application Composer - image from AWS Blog"></a></span>
 
