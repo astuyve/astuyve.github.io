@@ -25,7 +25,7 @@ Then we'll use [esbuild](https://esbuild.github.io/) to tree-shake and minify ea
 2. One tree-shaken v2 SDK client
 3. One tree-shaken v3 SDK client
 
-Each of these tests were performed in my local AWS region, using functions configured with 1024mb of RAM. The client I selected was SNS. I ran each test 3 times and screengrabbed one. Limitations are noted at the end.
+Each of these tests were performed in my local AWS region (us-east-1), using x86 Lambda Functions configured with 1024mb of RAM. The client I selected was SNS. I ran each test 3 times and screengrabbed one. Limitations are noted at the end.
 
 ## Loading the entire v2 SDK
 
