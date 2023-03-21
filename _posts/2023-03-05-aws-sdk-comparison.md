@@ -37,7 +37,7 @@ const snsClient = new AWS.SNS({});
 // ... some handler code
 ```
 
-Although functional, this code is suboptimal as it loads the entire AWS SDK into memory. Let's take a look at that flamegraph for the cold start trace:
+Although functional, this code is suboptimal as it loads the entire AWS SDK into memory. Let's take a look at that flame graph for the cold start trace:
 <span class="image fit"><a href ="/assets/images/aws-sdk/v2_all.png" target="_blank"><img src="/assets/images/aws-sdk/v2_all.png" alt="Loading the entire AWS SDK"></a></span>
 In this case we can see that this function loaded the entire `aws-sdk` in *324ms*. Check out all of this extra _stuff_ that we're loading!
 
@@ -48,6 +48,35 @@ First run: 324ms
 Second run: 344ms
 Third run: 343ms
 ```
+
+## Packaging and loading the entire v2 SDK
+
+One common piece of advice I've read suggests that users should pin a specific version of the `aws-sdk`, and package it into their application.
+
+Although the `aws-sdk` is already provided by AWS in the Lambda runtime, the logic is that AWS can roll out changes to the SDK at any point with no changes on your side. These changes _should_ be backwards compatible, but unless you're specifically [managing runtime updates](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-runtime-management-controls/), those new SDK changes will be applied automatically - potentially breaking your application.
+
+But does manually packaging the `aws-sdk` impact the cold start duration? In this test, the code is still the same:
+
+```js
+const AWS = require('aws-sdk');
+const snsClient = new AWS.SNS({});
+// ... some handler code
+```
+
+Yet the flame graph is not:
+<span class="image fit"><a href ="/assets/images/aws-sdk/v2_all_packaged.png" target="_blank"><img src="/assets/images/aws-sdk/v2_all_packaged.png" alt="Loading the entire v2 AWS SDK - packaged by us"></a></span>
+
+Note the difference from the first flame graph. When we load node modules from the runtime, the span labels are `aws.lambda.require_runtime`. Now that we're packaging our own version of the sdk, we see the same general composition of spans labeled `aws.lambda.require`.
+
+We also see that packaging our own v2 `aws-sdk` clocks in at `540ms`!
+
+```
+First run: 540ms
+Second run: 531ms
+Third run: 502ms
+```
+
+The v3 `aws-sdk` is modularized by default, so we won't test importing the entire v3 SDK, so we'll move on to sub-client imports.
 
 ## Loading one v2 SDK client
 Let's consider a more efficient approach. We can instead simply pluck the SNS client (or whichever client you please) from the library itself:
@@ -134,7 +163,7 @@ const { SNSClient, PublishBatchCommand } = require("@aws-sdk/client-sns");
 const snsClient = new SNSClient({})
 ```
 
-Here's the flamegraph:
+Here's the flame graph:
 <span class="image fit"><a href ="/assets/images/aws-sdk/v3_minified.png" target="_blank"><img src="/assets/images/aws-sdk/v3_minified.png" alt="Loading only the SNS client, minified v3 AWS SDK"></a></span>
 Far better now, *104ms*. After repeating this test a few times, I saw that 104ms tended towards the high end and measured some as low as 83ms. No surprise that this will vary a bit (see the caveats), but I thought it was interesting that we got around the same performance as the minified v2 sns client code.
 ```
