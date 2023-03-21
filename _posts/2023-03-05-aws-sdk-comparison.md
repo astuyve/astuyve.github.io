@@ -180,7 +180,7 @@ I also find it fun to see the core modules, which are provided by Node Core, are
 Here's the list of fastest to slowest packaging strategies for the AWS SDK:
 
 |Config|Runtime|Result|
-|--------|----------|
+|--------|----|-----|
 |esbuild + individual v2 SNS client|Node16x|63ms|
 |esbuild + individual v3 SNS client|Node18x|83ms|
 |v2 SNS client from the runtime|Node16x|104ms|
