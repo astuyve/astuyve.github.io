@@ -186,6 +186,7 @@ Here's the list of fastest to slowest packaging strategies for the AWS SDK:
 |v2 SNS client from the runtime|104ms|
 |v3 SNS client from the runtime|250ms|
 |Entire v2 client from the runtime|324ms|
+|Entire v2 client, packaged by us|540ms|
 |esbuild + entire v2 SDK|570ms|
 
 ## Caveats, etc
