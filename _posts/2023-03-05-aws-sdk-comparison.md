@@ -179,15 +179,15 @@ I also find it fun to see the core modules, which are provided by Node Core, are
 ## Scoring
 Here's the list of fastest to slowest packaging strategies for the AWS SDK:
 
-|Config|Result|
+|Config|Runtime|Result|
 |--------|----------|
-|esbuild + individual v2 SNS client|63ms|
-|esbuild + individual v3 SNS client|83ms|
-|v2 SNS client from the runtime|104ms|
-|v3 SNS client from the runtime|250ms|
-|Entire v2 client from the runtime|324ms|
-|Entire v2 client, packaged by us|540ms|
-|esbuild + entire v2 SDK|570ms|
+|esbuild + individual v2 SNS client|Node16x|63ms|
+|esbuild + individual v3 SNS client|Node18x|83ms|
+|v2 SNS client from the runtime|Node16x|104ms|
+|v3 SNS client from the runtime|Node18x|250ms|
+|Entire v2 client from the runtime|Node16x|324ms|
+|Entire v2 client, packaged by us|Node16x|540ms|
+|esbuild + entire v2 SDK|Node16x|570ms|
 
 ## Caveats, etc
 Measuring the cold start time of a Lambda function and drawing concrete conclusions at the millisecond level is a bit of a perilous task. Deep below a running Lambda function lives an actual server whose load factor is totally unknowable to us as users. There could be an issue with noisy reighbors, where other Lambda functions are stealing too many resources. The host could have failing hardware, older components, etc. It could be networked via an overtaxed switch or subnet, or simply have a bug somewhere in the millions of lines of code needed to run a Lambda function.
