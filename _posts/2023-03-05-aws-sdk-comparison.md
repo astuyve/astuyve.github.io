@@ -134,11 +134,23 @@ Third run: 621ms
 ```
 
 ## Why is this so much slower than the non-bundled version?
-Handler-contributed cold start duration is primarily driven by syscalls used by the runtime (NodeJS) to open files; eg `fs.readSync`. The handler file is now 7.5mb uncompressed, and Node has to load it entirely.
+Handler-contributed cold start duration is primarily driven by syscalls used by the runtime (NodeJS) to open files; eg `fs.readSync`.
+
+To break this down:
+1. Your code tells NodeJS to `require` the file.
+2. NodeJS finds the file (this happens inside the `require` method)
+3. NodeJS makes a system call, which tells the Firecracker VM instance to open the file.
+4. Firecracker opens the file.
+5. NodeJS reads the file entirely.
+6. Your function code continues running.
+
+The handler file is now 7.5mb uncompressed, and Node has to load it entirely.
 
 <span class="image"><a href ="/assets/images/aws-sdk/large_handler.png" target="_blank"><img src="/assets/images/aws-sdk/large_handler.png" alt="Loading the entire minified v2 AWS SDK"></a></span>
 
 Additionally I suspect that AWS can separately cache the built-in sdk with better locality (on each worker node) than your individual handler package, which must be fetched after a Lambda Worker is assigned to run your function.
+
+In simple terms - AWS knows most functions will need to load the AWS SDK, so the library is cached on each machine before your function is even created.
 
 ## Minified v2 SDK - loading only the SNS client
 Once again we're importing only the SNS client, but this time we've minified it, so the code is the same:
