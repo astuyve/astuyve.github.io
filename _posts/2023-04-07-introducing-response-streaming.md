@@ -4,7 +4,7 @@ title: Introducing Streaming Response from AWS Lambda
 description: A quick look a new way to stream data from AWS Lambda functions, written in NodeJS.
 image: response-streaming.png
 ---
-Today, AWS has announced support for [Streaming Responses from Lambda Functions](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/). This long-awaited capability helps developers stream responses from their functions to their users without necessarily waiting for the entire response to be finished. It's especially useful for server-side rendering, commonly used by modern javascript frameworks.
+Today, AWS has announced support for [Streaming Responses from Lambda Functions](https://aws.amazon.com/blogs/compute/introducing-aws-lambda-response-streaming/). This long-awaited capability helps developers stream responses from their functions to their users without necessarily waiting for the entire response to be finished. It's especially useful for server-side rendering, commonly used by modern javascript frameworks. This capability reduces Time to First Byte, which makes your application feel snappier, and load more quickly - especially for users who are geographically far from the AWS datacenter you're using, or users with poor connections.
 
 Let's dive in.
 
@@ -51,6 +51,11 @@ const image = awslambda.streamifyResponse(
   }
 );
 ```
+
+You can see the response streaming to the browser, which looks like this:
+<video width="1410" height="720" controls>
+  <source src="/assets/images/streaming_response.mp4" type="video/mp4">
+</video> 
 
 ## Calling these functions
 
