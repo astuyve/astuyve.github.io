@@ -52,6 +52,11 @@ const image = awslambda.streamifyResponse(
 );
 ```
 
+You can see the response streaming to the browser, which looks like this:
+<video width="1410" height="720" controls>
+  <source src="/assets/images/streaming_response.mp4" type="video/mp4">
+</video> 
+
 ## Calling these functions
 
 Next, if you're going to call a function which issues a Streaming Response programmatically using the NodeJS AWS SDK, you'll need to use v3. I've [written about this change extensively](https://aaronstuyvenberg.com/aws-sdk-comparison/), but most importantly for this feature - it doesn't seem that the v2 SDK is supported at all. So you'll need to upgrade before you can take advantage of Streaming Responses. If you're looking to invoke a function using Streaming Responses with other languages, it's also now supported using the AWS SDK for Java 2.x, and AWS SDKs for Go version 1 and version 2. I'd hope Python's boto3 support is coming soon.
