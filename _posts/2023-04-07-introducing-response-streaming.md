@@ -10,7 +10,7 @@ Let's dive in.
 
 ## Enabling
 
-To enable Streaming Responses, developers will have to modify their function code slightly. Your handler will need to use a new decorator available in the Lambda runtime for Node 14, 16, or 18, which wraps your handler.
+To enable Streaming Responses, developers will have to modify their function code slightly. Your handler will need to use a new decorator available in the Lambda runtime for Node 14, 16, or 18, which wraps your handler. This decorator is injected directly in the runtime, so you don't need to import any packages. A user [extracted the method from the base lambda image](https://gist.github.com/magJ/63bac8198469b6a25d5697ad490d31e6#file-index-mjs-L925) quite some time ago, so this launch has clearly been planned for a while.
 
 Here's an example from the launch post:
 ```javascript
