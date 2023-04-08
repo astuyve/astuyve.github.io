@@ -63,7 +63,7 @@ Next, if you're going to call a function which issues a Streaming Response progr
 
 ## But wait, one catch
 
-Finally, developers can use this capability only with the newer Lambda Function URL integration. Function URLs are one of several ways to trigger a Lambda Function via an HTTP request, which I've covered [previously, in another post](https://dev.to/aws-builders/introducing-lambda-function-urls-4ahd). This will be a bit limiting in terms of authentication mechanisms, but most importantly it enables developers to stream responses larger than the previous 6MB limit afforded by AWS Lambda.
+Finally, developers can use this capability only with the newer Lambda Function URL integration. Function URLs are one of several ways to trigger a Lambda Function via an HTTP request, which I've covered [previously, in another post](https://dev.to/aws-builders/introducing-lambda-function-urls-4ahd). This will be a bit limiting in terms of authentication mechanisms.
 
 API Gateway and ALB are more common HTTP Integration methods for Lambda, and they do not support chunked transfer encoding - so you can't stream responses directly from a Lambda function to API Gateway or ALB using this feature.
 
