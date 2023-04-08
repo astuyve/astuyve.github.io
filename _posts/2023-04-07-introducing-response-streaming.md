@@ -65,6 +65,10 @@ Next, if you're going to call a function which issues a Streaming Response progr
 
 Finally, developers can use this capability only with the newer Lambda Function URL integration. Function URLs are one of several ways to trigger a Lambda Function via an HTTP request, which I've covered [previously, in another post](https://dev.to/aws-builders/introducing-lambda-function-urls-4ahd). This will be a bit limiting in terms of authentication mechanisms, but most importantly it enables developers to stream responses larger than the previous 6MB limit afforded by AWS Lambda.
 
+API Gateway and ALB are more common HTTP Integration methods for Lambda, and they do not support chunked transfer encoding - so you can't stream responses directly from a Lambda function to API Gateway or ALB using this feature.
+
+You can use API Gateway in front of Lambda Function URL, and use that to increase the response size from the previous limit of 10mb, up to the new soft limit of 20mb - but users won't see an improvement in Time to First Byte.
+
 ## My take
 If you're using Lambda to serve media such as images, videos, or audio - Streaming Responses will help immensely. That's not been a core use case for me personally, but I suspect this will be most leveraged by developers using Lambda to serve frontend applications using server-side rendering. For those users, I think this launch is particularly exciting.
 Ultimately, Streaming Response for Lambda is an important step in bringing the capability of Lambda closer to what users can get in other, traditional server-ful compute environments. It's an exciting new feature, and I'm looking forward to seeing the capabilities it unlocks for users.
