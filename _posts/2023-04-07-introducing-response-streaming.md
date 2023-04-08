@@ -42,7 +42,7 @@ Apart from something like server-side HTML rendering, this feature also helps tr
 /**
  * Response streaming function which loads a large image.
  */
-const image = awslambda.streamifyResponse(
+module.exports.handler = awslambda.streamifyResponse(
   async (event, responseStream, _context) => {
     responseStream.setContentType("image/jpeg");
     let result = fs.createReadStream('large-photo.jpeg');
