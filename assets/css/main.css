@@ -2614,6 +2614,11 @@
 
 		}
 
+	.post.title {
+		background-color: #2e3842;
+		padding: 2em 0 1em 0 ;
+		text-align: center;
+	}
 /* Wrapper */
 
 	.wrapper {
