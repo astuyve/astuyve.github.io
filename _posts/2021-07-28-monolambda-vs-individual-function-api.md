@@ -2,7 +2,7 @@
 layout: post
 title: The what, why, and when of Mono-Lambda vs Single Function APIs
 description: An analytical comparison of two common API patterns in Lambda - 8 minutes
-image: pic12.jpg
+image: /assets/images/pic12.jpg
 ---
 
 Almost once per week, I see a question on Twitter, StackOverflow, or Reddit about how to structure Serverless APIs. Like most things in software, the tl;dr is "it depends". If you're bored already, just skim the TL;DR and [tweet at me](https://twitter.com/astuyve) with your objections. If not, get ready to dive in!

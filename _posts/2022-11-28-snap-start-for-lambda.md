@@ -2,7 +2,7 @@
 layout: post
 title: Introducing Lambda SnapStart
 description: A first look at the new way to beat cold starts - 6 minutes
-image: pic16.jpg
+image: /assets/images/pic16.jpg
 ---
 
 ## Introducing Snap Start for Lambda

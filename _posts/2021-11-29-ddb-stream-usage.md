@@ -2,7 +2,7 @@
 layout: post
 title: Stream your data!
 description: Leveraging DynamoDB streams to improve your API performance and service reliability - 8 minutes
-image: pic13.jpg
+image: /assets/images/pic13.jpg
 ---
 
 DynamoDB (DDB) is a compelling datastore choice for Serverless developers for a few key reasons. Dynamo offers a HTTP API, IAM Authorization, serverless pay-per-use billing, and almost unlimited scale when used properly. But there's more to DynamoDB than a convenient way to store and fetch data for Lambda users.
