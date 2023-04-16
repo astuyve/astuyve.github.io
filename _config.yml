@@ -5,7 +5,7 @@ description: The internet home of Aaron (AJ) Stuyvenberg. Software Engineering b
 url: "https://aaronstuyvenberg.com"
 
 author:
-  name: Aaron Stuyvenberg
+  name: AJ Stuyvenberg
   twitter_username: astuyve
   github_username: astuyve
 
@@ -13,9 +13,10 @@ author:
 tiles-source: posts # accepts "posts" or "pages"
 tiles-count: 15
 
-# Misc settings
-featured-image-source:
 
+twitter:
+  username: astuyve
+  card: summary_large_image
 # Social settings
 github_url: https://github.com/astuyve
 instagram_url: https://www.instagram.com/aj.stuyv
