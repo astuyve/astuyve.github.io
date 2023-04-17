@@ -65,7 +65,7 @@ Finally, developers can use this capability only with the newer Lambda Function 
 
 API Gateway and ALB are more common HTTP Integration methods for Lambda, and they do not support chunked transfer encoding - so you can't stream responses directly from a Lambda function to API Gateway or ALB using this feature.
 
-You can use API Gateway in front of Lambda Function URL, and use that to increase the response size from the previous limit of 10mb, up to the new soft limit of 20mb - but users won't see an improvement in Time to First Byte.
+You can use API Gateway in front of Lambda Function URL, and use that to increase the response size from the previous limit of 6mb, up to the new limit of 10mb - but users won't see an improvement in Time to First Byte. If you instead choose to use only Function URLs, you can stream up to 20mb from a function; which is only the soft limit.
 
 ## My take
 If you're using Lambda to serve media such as images, videos, or audio - Streaming Responses will help immensely. That's not been a core use case for me personally, but I suspect this will be most leveraged by developers using Lambda to serve frontend applications using server-side rendering. For those users, I think this launch is particularly exciting.
