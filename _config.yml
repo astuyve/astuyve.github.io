@@ -13,7 +13,6 @@ author:
 tiles-source: posts # accepts "posts" or "pages"
 tiles-count: 15
 
-
 twitter:
   username: astuyve
   card: summary_large_image
