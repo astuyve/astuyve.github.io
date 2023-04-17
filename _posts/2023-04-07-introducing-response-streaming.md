@@ -16,8 +16,8 @@ Here's an example from the launch post:
 ```javascript
 exports.handler = awslambda.streamifyResponse(
     async (event, responseStream, context) => {
-        responseStream.setContentType(“text/plain”);
-        responseStream.write(“Hello, world!”);
+        responseStream.setContentType("text/plain");
+        responseStream.write("Hello, world!");
         responseStream.end();
     }
 );
@@ -45,7 +45,7 @@ Apart from something like server-side HTML rendering, this feature also helps tr
 exports.handler = awslambda.streamifyResponse(
   async (event, responseStream, _context) => {
     responseStream.setContentType("image/jpeg");
-    let result = fs.createReadStream('large-photo.jpeg');
+    let result = fs.createReadStream("large-photo.jpeg");
 
     await pipeline(result, responseStream);    
   }
