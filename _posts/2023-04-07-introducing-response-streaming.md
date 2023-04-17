@@ -53,9 +53,7 @@ exports.handler = awslambda.streamifyResponse(
 ```
 
 You can see the response streaming to the browser, which looks like this:
-<video width="1410" height="720" controls>
-  <source src="/assets/images/streaming_response.mp4" type="video/mp4">
-</video> 
+<span class="image fit"><a href ="/assets/images/response_streaming.gif" target="_blank"><img src="/assets/images/response_streaming.gif" alt="Animated gif of flowers loading"></a></span>
 
 ## Calling these functions
 
