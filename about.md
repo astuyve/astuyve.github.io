@@ -8,4 +8,4 @@ I'm a Senior Software Engineer at [Datadog](https://datadoghq.com) working on so
 
 When I'm not writing software, you can find me [Base Jumping](https://www.youtube.com/watch?v=mkZFH1OaqOA) in the [red-dirt canyons of Utah](https://www.youtube.com/watch?v=4s-nHJUCmrQ), or the [edge of a cliff near the Alps - gearing up with my wingsuit](https://www.youtube.com/watch?v=2MMXDcrpxQE).
 
-I was born in Neenah, Wisconsin. I studied Computer Science at the University of Minnesota (BS - 2013).
+I'm from Neenah, Wisconsin. I studied Computer Science at the University of Minnesota.
