@@ -31,7 +31,7 @@ You can find the code in the [example repository](https://github.com/DataDog/ser
 The Cloudcast is the industry's leading, independent Cloud Computing podcast. Since 2011, co-hosts Aaron Delp & Brian Gracely have interviewed technology and business leaders that are shaping the future of computing.
 </blockquote>
 
-You can [listen to the episode](https://www.thecloudcast.net/2022/08/2022-state-of-serverless-report.html) here.
+You can [listen to the episode here](https://www.thecloudcast.net/2022/08/2022-state-of-serverless-report.html).
 
 ---
 ## Constant Variables
