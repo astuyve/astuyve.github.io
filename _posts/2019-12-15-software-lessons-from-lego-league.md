@@ -3,6 +3,9 @@ layout: post
 title: Engineering fundamentals I learned from Lego League
 description: My thoughts on how years of Lego robotics competition shaped my career as a Software Engineer. Reading time - 7 minutes
 image: /assets/images/pic08.jpg
+categories: posts
+redirect_from:
+  - /software-lessons-from-lego-league
 ---
 
 Like many young children, I spent the majority of my youth obsessed with Lego. It started with mismatched hand-me-downs from cousins and neighbors and grew until an entire corner of the family room was dedicated to the Lego pile.

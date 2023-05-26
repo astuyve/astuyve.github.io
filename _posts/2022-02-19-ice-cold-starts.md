@@ -3,6 +3,9 @@ layout: post
 title: Ice Cold Starts
 description: Understanding the various types of cold starts in Lambda - 9 minutes
 image: /assets/images/pic14.jpg
+categories: posts
+redirect_from:
+  - /ice-cold-starts
 ---
 
 ## Lambda Cold Starts
