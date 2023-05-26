@@ -5,6 +5,7 @@ description: How we successfully merged two identity providers, imported 50,000 
 categories: posts
 redirect_from:
   - /importing-50000-users-in-a-zero-downtime-environment
+  - /importing-50000-users-in-a-zero-downtime-environment/
 image: assets/images/pic01.jpg
 ---
 

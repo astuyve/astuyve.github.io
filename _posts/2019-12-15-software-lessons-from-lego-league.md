@@ -5,6 +5,7 @@ description: My thoughts on how years of Lego robotics competition shaped my car
 categories: posts
 redirect_from:
   - /software-lessons-from-lego-league
+  - /software-lessons-from-lego-league/
 image: assets/images/pic08.jpg
 ---
 

@@ -5,6 +5,7 @@ description: Leveraging DynamoDB streams to improve your API performance and ser
 categories: posts
 redirect_from:
   - /ddb-stream-usage
+  - /ddb-stream-usage/
 image: assets/images/pic13.jpg
 ---
 

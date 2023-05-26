@@ -5,6 +5,7 @@ description: A first look at the new way to beat cold starts - 6 minutes
 categories: posts
 redirect_from:
   - /snap-start-for-lambda
+  - /snap-start-for-lambda/
 image: assets/images/pic16.jpg
 ---
 

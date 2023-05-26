@@ -5,6 +5,7 @@ description: Leverage this CloudFormation template with a few simple tweaks to d
 categories: posts
 redirect_from:
   - /software-lessons-from-lego-league
+  - /software-lessons-from-lego-league/
 image: assets/images/pic06.jpg
 ---
 
