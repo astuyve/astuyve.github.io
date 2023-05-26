@@ -11,7 +11,7 @@ author:
 
 # Homepage tiles
 tiles-source: posts # accepts "posts" or "pages"
-tiles-count: 15
+tiles-count: 25
 
 twitter:
   username: astuyve
