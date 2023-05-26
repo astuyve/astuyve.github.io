@@ -2,6 +2,10 @@
 layout: post
 title: Deploying a Serverless Image Service on AWS with CloudFront, Api Gateway, S3, AWS Lambda, and Thumbor
 description: Leverage this CloudFormation template with a few simple tweaks to deploy a cost-effective Image Service to your platform.
+categories: posts
+redirect_from:
+  - /software-lessons-from-lego-league
+  - /software-lessons-from-lego-league/
 image: assets/images/pic06.jpg
 ---
 

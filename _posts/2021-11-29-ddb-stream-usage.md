@@ -2,6 +2,10 @@
 layout: post
 title: Stream your data!
 description: Leveraging DynamoDB streams to improve your API performance and service reliability - 8 minutes
+categories: posts
+redirect_from:
+  - /ddb-stream-usage
+  - /ddb-stream-usage/
 image: assets/images/pic13.jpg
 ---
 
