@@ -1,7 +1,10 @@
 ---
 layout: post
-title: Serverless tools can cut both ways
+title: Safely migrating Lambda functions from x86 to ARM
 description: Exploring an interesting side-effect of CloudFormation deployments for Lambda - 6 minutes
+categories: posts
+redirect_from:
+  - /lambda-arch-switch
 image: assets/images/pic15.jpg
 ---
 
