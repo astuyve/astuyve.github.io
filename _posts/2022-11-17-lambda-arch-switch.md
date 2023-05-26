@@ -2,7 +2,7 @@
 layout: post
 title: Serverless tools can cut both ways
 description: Exploring an interesting side-effect of CloudFormation deployments for Lambda - 6 minutes
-image: /assets/images/pic15.jpg
+image: assets/images/pic15.jpg
 ---
 
 ## Sharp tools and their sharp edges

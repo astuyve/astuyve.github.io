@@ -2,7 +2,7 @@
 layout: post
 title: How to pass a SQS URL to a Serverless Function
 description: Easily pass an SQS URL to your serverless function - 2 minutes
-image: /assets/images/pic01.jpg
+image: assets/images/pic01.jpg
 ---
 
 ### How to pass a SQS URL to a Serverless Function

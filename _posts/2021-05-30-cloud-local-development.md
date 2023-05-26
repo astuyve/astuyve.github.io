@@ -2,7 +2,7 @@
 layout: post
 title: Developing against the Cloud
 description: Stop emulating, start developing with real cloud services - 5 minutes
-image: /assets/images/pic07.jpg
+image: assets/images/pic07.jpg
 ---
 
 In the days of the LAMP stack, local web development was straightforward. You'd have a copy of your code on your machine, and fire up a local server with something like `rails server`. As complexity and codebases grew, we turned to Docker which promised to save us from configuration hell. The problem only compounded as the popularity of service-oriented architectures caused the number of services in an average backend to explode.

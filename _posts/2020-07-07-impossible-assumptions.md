@@ -2,7 +2,7 @@
 layout: post
 title: That's not possible!
 description: Learning new and fun things about the Zip file data structure. Reading time - 2 minutes
-image: /assets/images/pic09.jpg
+image: assets/images/pic09.jpg
 ---
 
 ### That's not possible!
