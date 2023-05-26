@@ -2,10 +2,10 @@
 layout: post
 title: Safely migrating Lambda functions from x86 to ARM
 description: Exploring an interesting side-effect of CloudFormation deployments for Lambda - 6 minutes
-image: /assets/images/pic15.jpg
 categories: posts
 redirect_from:
   - /lambda-arch-switch
+image: assets/images/pic15.jpg
 ---
 
 ## Sharp tools and their sharp edges

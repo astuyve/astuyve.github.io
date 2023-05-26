@@ -2,10 +2,10 @@
 layout: post
 title: AJ's re:Invent Recap - 2022
 description: My three favorite features launched at re:Invent 2022
-image: /assets/images/reinvent2022.jpg
 categories: posts
 redirect_from:
   - /ajs-reinvent-recap
+image: assets/images/reinvent2022.jpg
 ---
 
 ## re:Invent Recap
