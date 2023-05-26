@@ -2,7 +2,7 @@
 layout: post
 title: Introducing Lambda SnapStart
 description: A first look at the new way to beat cold starts - 6 minutes
-image: /assets/images/pic16.jpg
+image: assets/images/pic16.jpg
 ---
 
 ## Introducing Snap Start for Lambda
@@ -24,7 +24,7 @@ We see that a traditional Lambda invocation (known as an on-demand invocation) b
 
 Now with SnapStart, a snapshot is taken after a new version of the function is created.
 
-<span class="image fit"><a href ="/assets/images/snapstart_now.png" target="_blank"><img src="/assets/images/snapstart_now.png" alt ="SnapStart vs Cold Start"></a></span>
+<span class="image fit"><a href ="/assets/images/snapstart_now.jpg" target="_blank"><img src="/assets/images/snapstart_now.png" alt ="SnapStart vs Cold Start"></a></span>
 
 Creating and publishing a new Version takes some additional time, compared to simply using `$LATEST`. Thankfully snapshots are somewhat long-lived. They are only reaped by Lambda if the function is not invoked for a couple of weeks, then the next invocation would be on-demand and generate a new snapshot.
 

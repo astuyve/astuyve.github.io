@@ -2,7 +2,7 @@
 layout: post
 title: Importing 50,000 Users in a continuous delivery environment
 description: How we successfully merged two identity providers, imported 50,000 user accounts, and did it all with no downtime.
-image: /assets/images/pic01.jpg
+image: assets/images/pic01.jpg
 ---
 
 
