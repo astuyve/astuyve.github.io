@@ -5,6 +5,7 @@ description: Exploring an interesting side-effect of CloudFormation deployments 
 categories: posts
 redirect_from:
   - /lambda-arch-switch
+  - /lambda-arch-switch/
 image: assets/images/pic15.jpg
 ---
 

@@ -5,6 +5,7 @@ description: An analytical comparison of two common API patterns in Lambda - 8 m
 categories: posts
 redirect_from:
   - /monolambda-vs-individual-function-api
+  - /monolambda-vs-individual-function-api/
 image: assets/images/pic12.jpg
 ---
 

@@ -5,6 +5,7 @@ description: Stop emulating, start developing with real cloud services - 5 minut
 categories: posts
 redirect_from:
   - /cloud-local-development
+  - /cloud-local-development/
 image: assets/images/pic07.jpg
 ---
 

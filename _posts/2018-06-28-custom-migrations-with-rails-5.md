@@ -5,6 +5,7 @@ description: Leverage support for multiple databases in Rails 5 to implement cus
 categories: posts
 redirect_from:
   - /custom-migrations-with-rails-5
+  - /custom-migrations-with-rails-5/
 image: assets/images/pic07.jpg
 ---
 

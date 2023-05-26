@@ -5,6 +5,7 @@ description: Benchmarking cold start performance of the AWS SDK v2 and v3.
 categories: posts
 redirect_from:
   - /aws-sdk-comparison
+  - /aws-sdk-comparison/
 image: assets/images/aws-sdk/sdk_header_image.png
 ---
 

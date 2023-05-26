@@ -5,6 +5,7 @@ description: Reduce complexity, cognitive load, and deployment times by splittin
 categories: posts
 redirect_from:
   - /serverless-at-team-scale
+  - /serverless-at-team-scale/
 image: assets/images/pic11.jpg
 ---
 One of the great aspects of building Serverless applications is that it's pretty dang easy to get started. You can plop down five lines of yaml in your framework of choice, and deploy a full endpoint comprising an API Gateway, a route, a Lambda function and trigger, IAM role and policy, AND even logging. And the best part is that it's massively scalable. You don't need to deploy a load balancer, understand how a reverse-proxy works, or learn how to set up syslog. You can just push code!

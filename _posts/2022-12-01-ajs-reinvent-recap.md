@@ -5,6 +5,7 @@ description: My three favorite features launched at re:Invent 2022
 categories: posts
 redirect_from:
   - /ajs-reinvent-recap
+  - /ajs-reinvent-recap/
 image: assets/images/reinvent2022.jpg
 ---
 
