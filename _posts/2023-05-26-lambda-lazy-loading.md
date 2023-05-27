@@ -49,7 +49,7 @@ const { v4: uuidv4 } = require("uuid");
 The full code is available [here](https://gist.github.com/astuyve/2e7fe4b39a7ffcfa0646deb9e147802d).
 
 ## Eager Loading Cold Start
-We can measure the duration of this Cold Start Trace and see that loading DynamoDB (which also loads STS, needed by both Dynamo and SNS) loads in around 360ms:
+We can measure the duration of this Cold Start Trace and see that loading DynamoDB loads in around 360ms. The DynamoDB client also depends on the AWS STS client, which is true of SNS and most other services. The trace looks like this:
 
 <span class="image fit"><a href ="/assets/images/eager_load_dynamodb.png" target="_blank"><img src="/assets/images/eager_load_dynamodb.png" alt="Eager Load DynamoDB Cold Start Trace"></a></span>
 
@@ -106,10 +106,12 @@ So what happens when a `Todo item` is created for AJ? You can see that the ~80ms
 <span class="image fit"><a href ="/assets/images/lazy_load_sns.png" target="_blank"><img src="/assets/images/lazy_load_sns.png" alt="Lazy Load SNS Cold Start Trace"></a></span>
 
 ## Wrapping up
-It's worth noting that the `init` portion of your Lambda execution is free, whereas normal AWS Lambda execution time is billed; but in some circumstances this is a tiny price to pay for the performance improvement.
+Keen observers would point out that the `init` portion of a Lambda execution lifecycle is free. And they're right! For now. AWS doesn't promise that the init duration is free (although this is [widely observed](https://bitesizedserverless.com/bite/when-is-the-lambda-init-phase-free-and-when-is-it-billed/) and has been for some time).
+
+Cost in dollars shouldn't really be a factor here, as the overall number of cold starts is limited and shifting this dependency to the user with a special case is worth saving everyone other use the initialization time.
 
 This technique is especially applicable to [mono-lambda APIs](https://aaronstuyvenberg.com/posts/monolambda-vs-individual-function-api) where dependencies can vary by route, or specific users like in this simple example. I'd also make a strong case that this type of atypical behavior ought to be refactored out into a separate Lambda Function, but that will be a topic for a different day.
 
 As you embark on your Serverless journey, keep an eye out for opportunities to be lazy!
 
-Hopefully you enjoyed this post. If you're also interested Serverless, and you like reading content with lots of data and measurements, be sure to check out the rest of my [blog](https://aaronstuyvenberg.com) and [twitter feed](https://twitter.com/astuyve)!
+Hopefully you enjoyed this post. If you're interested in other Serverless minutia, be sure to check out the rest of my [blog](https://aaronstuyvenberg.com) and [twitter feed](https://twitter.com/astuyve)!
