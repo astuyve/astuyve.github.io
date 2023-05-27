@@ -6,7 +6,7 @@ categories: posts
 image: assets/images/
 ---
 
-If you've heard anything about Serverless Applications or AWS Lambda Functions, you've certainly heard of the dreaded Cold Start. I've written a lot about Cold Starts, and I spend a great deal of time measuring them as I did for my post on [Benchmarking the AWS SDK](aaronstuyvenberg.com/aws-sdk-comparison/).
+If you've heard anything about Serverless Applications or AWS Lambda Functions, you've certainly heard of the dreaded Cold Start. I've written a lot about Cold Starts, and I spend a great deal of time measuring and comparing various [Cold Start Benchmarks](aaronstuyvenberg.com/aws-sdk-comparison/).
 
 In this post we'll recap what a Cold Start is, then we'll define a technique called Lazy Loading, show you when and how to use it, and measure the outcome!
 
