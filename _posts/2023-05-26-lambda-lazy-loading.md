@@ -3,7 +3,7 @@ layout: post
 title: Thawing your Lambda Cold Starts with Lazy Loading
 description: This post will show you how to identify opportunities where Lazy Loading can help you reduce Cold Start Latency. You'll learn this technique, while not always applicable, is something to watch for on your Serverless journey.
 categories: posts
-image: assets/images/
+image: assets/images/lazy_load_article.jpg
 ---
 
 If you've heard anything about Serverless Applications or AWS Lambda Functions, you've certainly heard of the dreaded Cold Start. I've written a lot about Cold Starts, and I spend a great deal of time measuring and comparing various [Cold Start Benchmarks](aaronstuyvenberg.com/aws-sdk-comparison/).
@@ -27,7 +27,8 @@ The architecture of this application looks like this:
 
 ## Eager Loading
 Eager loading happens when you load a dependency by calling `require`, or `import` at the top of your function code.
-Normally, dependencies in your function are Eager loaded - or loaded during initialization. For Node, Python, and Ruby runtimes - your dependencies are loaded when your application bundle is loaded by AWS Lambda. If you're writing Rust or Go, this is the default behavior as well because binaries are statically compiled into one file.
+
+Normally, dependencies in your function are Eager loaded - or loaded during initialization. For Node, Python, and Ruby runtimes - your dependencies are loaded when the runtime begins reading your handler files and processing each `require` or `import` in the order they are written. If you're writing Rust or Go, this is the default behavior as well because binaries are statically compiled into one file.
 
 This code is very typical and you've probably seen it many times. At the top of the file, we load a DynamoDB client along with a SNS client, then we move on to process the payload:
 
@@ -40,7 +41,7 @@ const dynamoClient = new DynamoDBClient({ region: process.env.AWS_REGION });
 const ddbClient = DynamoDBDocumentClient.from(dynamoClient);
 
 const { SNSClient, PublishBatchCommand } = require("@aws-sdk/client-sns");
-const snsClient = new SNSClient({ region: process.env.AWS_REGION })
+const snsClient = new SNSClient({ region: process.env.AWS_REGION });
 const { v4: uuidv4 } = require("uuid");
 
 // handler code in gist
@@ -86,7 +87,7 @@ const loadSns = () => {
 module.exports.addItem = async (event) => {
   const body = JSON.parse(event.body);
   const promises = []
-  const newItemId = uuidv4()
+  const newItemId = uuidv4();
   // It's for AJ - load the SNS client!
   if (body.userId === 'aj') {
     loadSns();
