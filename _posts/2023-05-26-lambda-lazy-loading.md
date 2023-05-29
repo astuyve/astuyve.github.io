@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Thawing your Lambda Cold Starts with Lazy Loading
-description: This post will show you how to identify opportunities where Lazy Loading can help you reduce Cold Start Latency. You'll learn this technique, while not always applicable, is something to watch for on your Serverless journey.
+description: This post will show you how to identify opportunities where Lazy Loading dependencies can help you reduce Cold Start Latency. We'll walk through a demo application and measure the performance impact of Lazy Loading in AWS Lambda!
 categories: posts
 image: assets/images/lazy_load_article.jpg
 ---
