@@ -106,6 +106,12 @@ So what happens when a `Todo item` is created for AJ? You can see that the ~80ms
 
 <span class="image fit"><a href ="/assets/images/lazy_load_sns.png" target="_blank"><img src="/assets/images/lazy_load_sns.png" alt="Lazy Load SNS Cold Start Trace"></a></span>
 
+Subsequent invocations for AJ won't result in any additional latency, as modules are cached by the Node process (or Ruby, or Python), so subsequent calls to `loadSns()` are effectively a no-op. If additional `Todo items` are created for AJ after the initial load from `loadSns()`, we only see the parallel calls to SNS and DynamoDB in the trace:
+
+<span class="image fit"><a href ="/assets/images/lazy_load_sns_second.png" target="_blank"><img src="/assets/images/lazy_load_sns_second.png" alt="Lazy Load SNS Cold Start Trace, second call"></a></span>
+
+We could clean up the implementation to codify this behavior, but I think that exercise is best left to the reader.
+
 ## Wrapping up
 Keen observers would point out that the `init` portion of a Lambda execution lifecycle is free. And they're right! For now. AWS doesn't promise that the init duration is free (although this is [widely observed](https://bitesizedserverless.com/bite/when-is-the-lambda-init-phase-free-and-when-is-it-billed/) and has been for some time).
 
