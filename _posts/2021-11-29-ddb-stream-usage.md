@@ -71,7 +71,7 @@ and more!
 ## Wrapping it up
 
 DynamoDB Streams are a powerful tool you should consider anytime data processing isn't absolutely critical for an API to respond. As legendary Serverless developer and enthusiast Doug Moscrop puts it: 'Ask yourself: "What if my program just ... stopped here?"'
-<span class="image"><a href ="https://twitter.com/dougmoscrop/status/1437931070863859715" target="_blank"><img src="/assets/images/doug_tweet.png" alt ="What if my program just ... stopped here?"></a></span>
+<span class="image fit"><a href ="https://twitter.com/dougmoscrop/status/1437931070863859715" target="_blank"><img src="/assets/images/doug_tweet.png" alt ="What if my program just ... stopped here?"></a></span>
 
 Once you've started applying DynamoDB streams to your Serverless applications, you'll discover all kinds of niche applications to clean up business logic and improve performance and functionality!
 

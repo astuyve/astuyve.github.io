@@ -84,7 +84,7 @@ So we've solved the data sharing problem. But anyone who has ran `serverless dep
 Enter `serverless deploy function`. This [command](https://www.serverless.com/framework/docs/providers/aws/cli-reference/deploy-function/) makes use of the [update function code](https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionCode.html) API call to skip a full Cloud Formation deployment, and instead simply uploads a new zip file to Lambda. It's much quicker, and usually takes 3-5 seconds (depending on project size). If we modify AWS resources or function configurations, we'd will still need to perform a full `serverless deploy`, but for the quick develop, iterate, deploy cycle that we're accustomed to, `serverless deploy function` is a really great solution.
 
 Here's a demo, running with `time`:
-<img src="/assets/images/sls_deploy_function.gif">
+<span class="image fit"><a href ="/assets/images/sls_deploy_function.gif" target="_blank"><img src="/assets/images/sls_deploy_function.gif" alt="Animated gif of deploy function running in 3.09s"></a></span>
 
 There's one last piece we're missing from replicating the full offline experience - and that's streaming logs! With a local server, each request we make streams logs directly to our console.
 
