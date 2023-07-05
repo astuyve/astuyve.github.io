@@ -15,6 +15,7 @@
 							{% endif %} {% endfor %} {% for page in site.pages %} {% if page.layout == "page" %}
 							<li><a href="{{ page.url | absolute_url }}">{{ page.title }}</a></li>
 							{% endif %} {% endfor %}
+							<li><a href="{{ site.url }}/feed.xml">Feed</a></li>
 						</ul>
 					</div>
 				</li>

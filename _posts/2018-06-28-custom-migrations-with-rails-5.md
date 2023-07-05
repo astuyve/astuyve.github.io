@@ -2,7 +2,11 @@
 layout: post
 title: Custom migration types with Rails 5
 description: Leverage support for multiple databases in Rails 5 to implement custom migration types for post-deploy migrations, or for scheduled migrations.
-image: /assets/images/pic07.jpg
+categories: posts
+redirect_from:
+  - /custom-migrations-with-rails-5
+  - /custom-migrations-with-rails-5/
+image: assets/images/pic07.jpg
 ---
 
 Rails has long supported database migrations to help you evolve your database schema over time, but traditionally migrations are used strictly to alter the schema of the database.

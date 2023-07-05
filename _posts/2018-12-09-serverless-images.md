@@ -2,7 +2,11 @@
 layout: post
 title: Deploying a Serverless Image Service on AWS with CloudFront, Api Gateway, S3, AWS Lambda, and Thumbor
 description: Leverage this CloudFormation template with a few simple tweaks to deploy a cost-effective Image Service to your platform.
-image: /assets/images/pic06.jpg
+categories: posts
+redirect_from:
+  - /software-lessons-from-lego-league
+  - /software-lessons-from-lego-league/
+image: assets/images/pic06.jpg
 ---
 
 As a melting pot for all things youth sport technologies, [SportsEngine](https://sportsengine.com) has experienced a fair share of integration challenges. Aggregating and integrating player information is key to our long-term success as a company, and a significant part of that is dealing with images of athletes on the platform.

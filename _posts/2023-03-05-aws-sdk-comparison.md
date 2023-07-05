@@ -2,7 +2,11 @@
 layout: post
 title: Benchmarking the AWS SDK 
 description: Benchmarking cold start performance of the AWS SDK v2 and v3.
-image: /assets/images/aws-sdk/sdk_header_image.png
+categories: posts
+redirect_from:
+  - /aws-sdk-comparison
+  - /aws-sdk-comparison/
+image: assets/images/aws-sdk/sdk_header_image.png
 ---
 
 If you're building Serverless applications on AWS, you will likely use the AWS SDK to interact with some other service. You may be using DynamoDB to store data, or publishing events to SNS, SQS, or EventBridge.

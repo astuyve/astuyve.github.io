@@ -1,8 +1,12 @@
 ---
 layout: post
-title: That's not possible!
-description: Learning new and fun things about the Zip file data structure. Reading time - 2 minutes
-image: /assets/images/pic09.jpg
+title: Understanding Zip Files and Lambda Functions
+description: That's not possible! Learning new and fun things about the Zip file data structure. Reading time - 2 minutes
+categories: posts
+redirect_from:
+  - /impossible-assumptions
+  - /impossible-assumptions/
+image: assets/images/pic09.jpg
 ---
 
 ### That's not possible!

@@ -4,10 +4,10 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang="en">
 
 {% include head.html %}
-
+{% include analytics.html %}
 <body>
 
     {% include header.html %}
@@ -20,6 +20,7 @@
             <div class="inner">
                 <h2>{{ page.title }}</h2>
                 <p>{{ page.description }}</p>
+                <p>{{ page.date | date: "%B %-d, %Y" }}</p>
             </div>
         </section>
         <section class="wrapper style5">

@@ -2,7 +2,11 @@
 layout: post
 title: Stream your data!
 description: Leveraging DynamoDB streams to improve your API performance and service reliability - 8 minutes
-image: /assets/images/pic13.jpg
+categories: posts
+redirect_from:
+  - /ddb-stream-usage
+  - /ddb-stream-usage/
+image: assets/images/pic13.jpg
 ---
 
 DynamoDB (DDB) is a compelling datastore choice for Serverless developers for a few key reasons. Dynamo offers a HTTP API, IAM Authorization, serverless pay-per-use billing, and almost unlimited scale when used properly. But there's more to DynamoDB than a convenient way to store and fetch data for Lambda users.
@@ -67,7 +71,7 @@ and more!
 ## Wrapping it up
 
 DynamoDB Streams are a powerful tool you should consider anytime data processing isn't absolutely critical for an API to respond. As legendary Serverless developer and enthusiast Doug Moscrop puts it: 'Ask yourself: "What if my program just ... stopped here?"'
-<span class="image"><a href ="https://twitter.com/dougmoscrop/status/1437931070863859715" target="_blank"><img src="/assets/images/doug_tweet.png" alt ="What if my program just ... stopped here?"></a></span>
+<span class="image fit"><a href ="https://twitter.com/dougmoscrop/status/1437931070863859715" target="_blank"><img src="/assets/images/doug_tweet.png" alt ="What if my program just ... stopped here?"></a></span>
 
 Once you've started applying DynamoDB streams to your Serverless applications, you'll discover all kinds of niche applications to clean up business logic and improve performance and functionality!
 
