@@ -2,6 +2,7 @@
 layout: post
 title: Understanding AWS Lambda Proactive Initialization
 description: 50% or more of cold starts don't increase latency for users. In this article we'll define Proactive Initialization, observe its frequency, and help you identify invocations where your cold starts weren't really that cold.
+categories: posts
 image: 
 ---
 
@@ -132,7 +133,7 @@ def hello(event, context):
         proactive_initialization = False
         if (now - init_time) > 10_000:
             proactive_initialization = True
-        print(f'{{proactiveInitialization: {proactive_initialization}}}')
+            {% raw %}print(f'{{proactiveInitialization: {proactive_initialization}}}'){% endraw %}
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
