@@ -18,12 +18,16 @@ This update is no accident. In fact it's the result of several months I spent wo
 [1 Execution environments (see 'Init Phase' section)](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html), and [2](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html#troubleshooting-invocation-initialization-gap)
 
 ## Tracing Proactive Initialization
-This adventure began when I noticed a bug which presented a distributed trace to a user appearing to show a Lambda Function sandbox initializing several minutes before the first function invocation. This can happen with SnapStart, or Provisioned Concurrency - but this function wasn't using either of these capabilities and was otherwise entirely unremarkable.
+
+This adventure began when I noticed what appeared to be a bug in a distributed trace showing a Lambda Function sandbox initializing several minutes before the first function invocation. This can happen with SnapStart, or Provisioned Concurrency - but this function wasn't using either of these capabilities and was otherwise entirely unremarkable.
+
 
 Here's what the flamegraph looks like:
 <img src="">
 
 We can see a massive gap between function initialization and invocation - in this case the API Gateway request wasn't even made by the client until several minutes after the sandbox was warmed up.
+
+After much discussion with the AWS Lambda Service team - I learned that this was a Proactively Initialized Lambda Sandbox.
 
 It's difficult to discuss Proactive Initialization at a technical level without first defining a cold start, so let's start there.
 
@@ -43,7 +47,7 @@ Proactive Initialization occurs when a Lambda Function Sandbox is initialized wi
 
 As a developer this is desirable, because each proactively initialized sandbox means one less painful cold start which otherwise a user would experience.
 
-As a user, it's like there were never any cold starts at all.
+As a user of the application powered by Lambda, it's as if there were never any cold starts at all.
 
 It's like getting Lambda Provisioned Concurrency - for free.
 
@@ -54,7 +58,9 @@ We know that from an economic perspective, AWS Lambda wants to run as many funct
 
 Understanding the fact that cold starts absorb valuable CPU time in a shared, multi-tenant system, (time which is currently not billed) it's clear that any option AWS has to minimize this time is mutually beneficial.
 
-AWS Lambda is a distributed service. Worker fleets need to be redeployed, scaled out, scaled in, and respond to failures in the underlying hardware - [everything fails all the time]() after all. This means that even with steady-state throughput, Lambda will need to rotate function sandboxes for users over the course of hours or days. AWS does not publish minimum or maximum lease durations for a function sandbox, although in practice I've observed ~7 minutes on the low side and several hours on the high side.
+AWS Lambda is a distributed service. Worker fleets need to be redeployed, scaled out, scaled in, and respond to failures in the underlying hardware. After all - everything fails all the time.
+
+This means that even with steady-state throughput, Lambda will need to rotate function sandboxes for users over the course of hours or days. AWS does not publish minimum or maximum lease durations for a function sandbox, although in practice I've observed ~7 minutes on the low side and several hours on the high side.
 
 The service also needs to run efficiently, combining as many functions onto one machine as possible. In distributed systems parlace, this is known as `bin packing` (aka shoving as much stuff as possible into the same bucket).
 
