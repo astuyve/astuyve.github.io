@@ -85,7 +85,7 @@ On a call with the AWS Lambda Service Team, they confirmed some logical cases of
 
 Consider we're working with a function which at steady state experiences 100 concurrent invocations. When you deploy a change to your function (or function configuration), AWS can make a pretty reasonable guess that you'll continue to invoke that same function 100 times concurrently after the deployment finishes.
 
-Instead of waiting for each invocation to trigger a cold start, AWS will automatically re-provision (roughly) 100 sandboxes to absorb that load when the deployment finishes. Many users will still experience the full cold start duration, but some won't.
+Instead of waiting for each invocation to trigger a cold start, AWS will automatically re-provision (roughly) 100 sandboxes to absorb that load when the deployment finishes. Some users will still experience the full cold start duration, but some won't (depending on the request duration and when requests arrive).
 
 This can similarly occur when Lambda needs to rotate or roll out new Lambda Worker hosts.
 
