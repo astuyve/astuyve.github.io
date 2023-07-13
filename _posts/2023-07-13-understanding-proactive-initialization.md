@@ -16,8 +16,8 @@ It goes on to say:
 
 This sentence, buried in the docs, indicates something not widely known about AWS Lambda; that AWS may warm your functions to reduce the impact and frequency of cold starts, even when used on-demand!
 
-Today, July 13th - they clarified this further:
-"For example, Lambda might initialize a new execution environment to replace an execution environment that is about to be shut down. If a pre-initialized execution environment becomes available while Lambda is initializing a new execution environment to process an invocation, Lambda can use the pre-initialized execution environment."
+Today, July 13th - they clarified this [further](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html#troubleshooting-invocation-initialization-gap):
+"For functions using unreserved (on-demand) concurrency, Lambda occasionally pre-initializes execution environments to reduce the number of cold start invocations. For example, Lambda might initialize a new execution environment to replace an execution environment that is about to be shut down. If a pre-initialized execution environment becomes available while Lambda is initializing a new execution environment to process an invocation, Lambda can use the pre-initialized execution environment."
 
 This update is no accident. In fact it's the result of several months I spent working closely with the AWS Lambda service team:
 
