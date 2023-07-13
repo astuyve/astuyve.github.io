@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understanding AWS Lambda Proactive Initialization
-description: AWS Lambda warms up your functions, such that 50%-85% of cold starts don't increase latency for users. In this article we'll define Proactive Initialization, observe its frequency, and help you identify invocations where your cold starts weren't really that cold.
+description: AWS Lambda warms up your functions, such that 50%-85% of Lambda Sandbox initializations don't increase latency for users. In this article we'll define Proactive Initialization, observe its frequency, and help you identify invocations where your cold starts weren't really that cold.
 categories: posts
 image: assets/images/server_smile.png
 ---
