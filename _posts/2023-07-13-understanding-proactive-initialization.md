@@ -196,7 +196,7 @@ We can see this reflected in the cumulative sum of invocations for a one day win
 
 We can see after one day, we’ve had 63 Proactively Initialized Lambda Sandboxes, with only 11 Cold Starts. 85% of initializations were proactive!
 
-AWS Serverless Hero [Ken Collins](https://github.com/metaskills) maintains a very popular [Rails-Lambda](github.com/rails-lambda) package. After some discussion, he [added the capability](https://github.com/rails-lambda/lamby/pull/169) to track Proactive Initializations and came to a similar conclusion - in his case after a 3-day test using Ruby with a custom runtime, 80% of initializations were proactive:
+AWS Serverless Hero [Ken Collins](https://github.com/metaskills) maintains a very popular [Rails-Lambda](https://github.com/rails-lambda) package. After some discussion, he [added the capability](https://github.com/rails-lambda/lamby/pull/169) to track Proactive Initializations and came to a similar conclusion - in his case after a 3-day test using Ruby with a custom runtime, 80% of initializations were proactive:
 
 <span class="image fit"><a href ="/assets/images/proactive_init/lamby_count.png" target="_blank"><img src="/assets/images/proactive_init/lamby_count.png" alt="Count of proactively initialized Lambda Sandboxes versus cold starts for a ruby function"></a></span>
 
