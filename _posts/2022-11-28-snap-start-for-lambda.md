@@ -22,13 +22,14 @@ SnapStart is available initially for Java (Amazon Corretto 11), but given that t
 ## How does it work?
 
 Let's recall this slide from Julian Wood's 2021 re:Invent talk, [Best practices of advanced serverless developers](https://www.youtube.com/watch?v=dnFm6MlPnco):
-<span class="image"><img src="/assets/images/snapstart.jpg" alt ="Julian talking about Cold Starts"></span>
+
+<span class="image fit"><a href ="/assets/images/cold_start.jpg" target="_blank"><img src="/assets/images/cold_start.jpg" alt ="Julian talking about Cold Starts"></a></span>
 
 We see that a traditional Lambda invocation (known as an on-demand invocation) begins by the Lambda placement service creating a new execution environment. Your code (or open-container image) is downloaded to the environment, and the runtime is initialized. Then your handler is loaded, and finally your handler is executed.
 
 Now with SnapStart, a snapshot is taken after a new version of the function is created.
 
-<span class="image fit"><a href ="/assets/images/snapstart_now.jpg" target="_blank"><img src="/assets/images/snapstart_now.png" alt ="SnapStart vs Cold Start"></a></span>
+<span class="image fit"><a href ="/assets/images/snapstart_now.jpg" target="_blank"><img src="/assets/images/snapstart_now.jpg" alt ="SnapStart vs Cold Start"></a></span>
 
 Creating and publishing a new Version takes some additional time, compared to simply using `$LATEST`. Thankfully snapshots are somewhat long-lived. They are only reaped by Lambda if the function is not invoked for a couple of weeks, then the next invocation would be on-demand and generate a new snapshot.
 
