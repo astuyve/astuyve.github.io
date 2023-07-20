@@ -76,7 +76,7 @@ AWS Lambda is a distributed service. Worker fleets need to be redeployed, scaled
 
 This means that even with steady-state throughput, Lambda will need to rotate function sandboxes for users over the course of hours or days. AWS does not publish minimum or maximum lease durations for a function sandbox, although in practice I've observed ~7 minutes on the low side and several hours on the high side.
 
-The service also needs to run efficiently, combining as many functions onto one machine as possible. In distributed systems parlace, this is known as `bin packing` (aka shoving as much stuff as possible into the same bucket).
+The service also needs to run efficiently, combining as many functions onto one machine as possible. In distributed systems parlance, this is known as `bin packing` (aka shoving as much stuff as possible into the same bucket).
 
 The less time spent initializing functions which AWS *knows* will serve invocations, the better for everyone.
 
