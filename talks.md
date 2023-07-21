@@ -4,6 +4,15 @@ title: Talks & more
 description: Talks, Workshops, Podcasts, and more!
 ---
 
+##  AWS Summit Toronto
+#### June 14, 2023
+<p>Serverless developers! If you've ever been stung by a cold start and want to know what you can do about it - wonder no more!</p>
+<p>I gave a talk called "Thawing your AWS Lambda Cold Starts" at AWS Summit Toronto! The talk covers a numer of tools you can use to profile cold starts, and a few techniques to optimize them.</p>
+You can watch it now, on YouTube:
+<iframe width="420" height="315" src="https://www.youtube.com/embed/iAHUUgsL8eg" frameborder="0" allowfullscreen></iframe>
+
+---
+
 ## Ready, Set, Cloud!
 #### March 24, 2023
 <p>I sat down with AWS Serverless Hero [Allen Helton](https://www.readysetcloud.io/) to help answer the question: "Why is Serverless Observability so hard?". We covered a range of topics including continuous profilers, distributed tracing, and how to monitor end to end latency in data pipelines.</p>
