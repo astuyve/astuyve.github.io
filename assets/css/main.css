@@ -1451,7 +1451,7 @@
 
 			body, input, select, textarea {
 				font-size: 11pt;
-				letter-spacing: 0.0375em;
+				letter-spacing: 0.0275em;
 			}
 
 		}
@@ -1490,7 +1490,7 @@
 	h1, h2, h3, h4, h5, h6 {
 		color: #fff;
 		font-weight: 800;
-		letter-spacing: 0.225em;
+		letter-spacing: 0.125em;
 		line-height: 1em;
 		margin: 0 0 1em 0;
 		text-transform: uppercase;
