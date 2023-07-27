@@ -27,7 +27,7 @@ This update is no accident. In fact it's the result of several months I spent wo
 
 In this post we'll define what a Proactively Initialized Lambda Sandbox is, how they differ from cold starts, and measure how frequently they occur.
 
-## Tracing Proactive Initialization
+## Distributed Tracing & AWS Lambda Proactive Initialization
 
 This adventure began when I noticed what appeared to be a bug in a distributed trace. The trace correctly measured the Lambda initialization phase, but appeared to show the first invocation occurring several minutes after initialization. This can happen with SnapStart, or Provisioned Concurrency - but this function wasn't using either of these capabilities and was otherwise entirely unremarkable.
 
