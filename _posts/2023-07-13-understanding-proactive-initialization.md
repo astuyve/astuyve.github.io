@@ -215,4 +215,4 @@ We use Serverless services because we offload undifferentiated heavy lifting to 
 ## Wrapping it up
 I hope you enjoyed this first look at Proactive Initialization, and learned a bit more about how to observe and understand your workloads on AWS Lambda. If you want to track metrics and/or APM traces for proactively initialized functions, it's available for anyone using Datadog.
 
-This was also my first post as an [AWS Serverless Hero!](https://aws.amazon.com/developer/community/heroes/aj-stuyvenberg/), so if you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or reach out on [twitter](https://twitter.com/astuyve) with any questions.
+This was also my first post as an [AWS Serverless Hero!](https://aws.amazon.com/developer/community/heroes/aj-stuyvenberg/) So if you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or reach out on [twitter](https://twitter.com/astuyve) with any questions.
