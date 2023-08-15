@@ -94,7 +94,7 @@ The service also needs to run efficiently, combining as many functions onto one 
 The less time spent initializing functions which AWS *knows* will serve invocations, the better for everyone.
 
 ## When Lambda will Proactively Initialize your function
-There are some logical use cases for Proactive Initialization - deployments and eager assignments.
+There are some logical conditions which can lead to Proactive Initialization - deployments and eager assignments.
 
 Consider we're working with a function which at steady state experiences 100 concurrent invocations. When you deploy a change to your function (or function configuration), AWS can make a pretty reasonable guess that you'll continue to invoke that same function 100 times concurrently after the deployment finishes.
 
