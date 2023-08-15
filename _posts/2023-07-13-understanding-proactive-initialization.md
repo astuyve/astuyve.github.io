@@ -11,9 +11,7 @@ This post is both longer and more popular than I anticipated, so I've decided to
 ## TL;DR
 - Lambda occasionally pre-initializes execution environments to reduce the number of cold start invocations.
 - This does *NOT* mean you'll never have a cold start
-- The percentage of true cold start initializations to proactive
-initializations varies depending on many factors, but you can clearly
-observe it.
+- The percentage of true cold start initializations to proactive initializations varies depending on many factors, but you can clearly observe it.
 - Depending on your workload and latency tolerences, you may need Provisioned Concurrency.
 
 ## Lambda Proactive Initialization
