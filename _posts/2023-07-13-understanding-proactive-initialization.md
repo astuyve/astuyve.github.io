@@ -6,6 +6,18 @@ categories: posts
 image: assets/images/server_smile.png
 ---
 
+This post is both longer and more popular than I anticipated, so I've decided to add a quick summary:
+
+## TL;DR
+- Lambda occasionally pre-initializes execution environments to reduce the number of cold start invocations.
+- This does *NOT* mean you'll never have a cold start
+- The percentage of true cold start initializations to proactive
+initializations varies depending on many factors, but you can clearly
+observe it.
+- Depending on your workload and latency tolerences, you may need Provisioned Concurrency.
+
+## Lambda Proactive Initialization
+
 In March 2023, AWS updated the documentation for the [Lambda Function Lifecycle](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html), and included this interesting new statement:
 
 "For functions using unreserved (on-demand) concurrency, Lambda may proactively initialize a function instance, even if there's no invocation."
@@ -27,6 +39,7 @@ This update is no accident. In fact it's the result of several months I spent wo
 
 In this post we'll define what a Proactively Initialized Lambda Sandbox is, how they differ from cold starts, and measure how frequently they occur.
 
+
 ## Distributed Tracing & AWS Lambda Proactive Initialization
 
 This adventure began when I noticed what appeared to be a bug in a distributed trace. The trace correctly measured the Lambda initialization phase, but appeared to show the first invocation occurring several minutes after initialization. This can happen with SnapStart, or Provisioned Concurrency - but this function wasn't using either of these capabilities and was otherwise entirely unremarkable.
@@ -41,7 +54,7 @@ We've also observed cases where Initialization occurs several minutes before the
 
 <span class="image fit"><a href ="/assets/images/proactive_init/flamegraph_long.png" target="_blank"><img src="/assets/images/proactive_init/flamegraph_long.png" alt="Screenshot of a flamegraph showing an even larger gap between initialization and invocation"></a></span>
 
-After much discussion with the AWS Lambda Service team - I learned that I was observing a Proactively Initialized Lambda Sandbox.
+After much discussion with the AWS Lambda Support team - I learned that I was observing a Proactively Initialized Lambda Sandbox.
 
 It's difficult to discuss Proactive Initialization at a technical level without first defining a cold start, so let's start there.
 
@@ -63,10 +76,10 @@ As a developer this is desirable, because each proactively initialized sandbox m
 
 As a user of the application powered by Lambda, it's as if there were never any cold starts at all.
 
-It's like getting Lambda Provisioned Concurrency - for free.
+When a function is proactively initialized, the user making the first request to the sandbox does not experience a cold start (similar to Provisioned Concurrency, but for free).
 
 ## Aligned interests in the Shared Responsibility Model 
-According to the AWS Lambda service team, Proactive Initialization is the result of aligned interests by both the team running AWS Lambda and developers running applications on Lambda.
+Proactive Initialization serves the interests of both the team running AWS Lambda and developers running applications on Lambda.
 
 We know that from an economic perspective, AWS Lambda wants to run as many functions on the same server as possible (yes, serverless has servers...). We also know that developers want their cold starts to be as infrequent and fast as possible.
 
@@ -81,7 +94,7 @@ The service also needs to run efficiently, combining as many functions onto one 
 The less time spent initializing functions which AWS *knows* will serve invocations, the better for everyone.
 
 ## When Lambda will Proactively Initialize your function
-On a call with the AWS Lambda Service Team, they confirmed some logical cases of Proactive Initialization - deployments and eager assignments.
+There are some logical use cases for Proactive Initialization - deployments and eager assignments.
 
 Consider we're working with a function which at steady state experiences 100 concurrent invocations. When you deploy a change to your function (or function configuration), AWS can make a pretty reasonable guess that you'll continue to invoke that same function 100 times concurrently after the deployment finishes.
 
@@ -201,7 +214,7 @@ AWS Serverless Hero [Ken Collins](https://github.com/metaskills) maintains a ver
 <span class="image fit"><a href ="/assets/images/proactive_init/lamby_count.png" target="_blank"><img src="/assets/images/proactive_init/lamby_count.png" alt="Count of proactively initialized Lambda Sandboxes versus cold starts for a ruby function"></a></span>
 
 ## Confirming what we suspected 
-This post confirms what we've all speculated but never knew with certainty - AWS Lambda is warming your functions. We've demonstrated how you can observe this behavior, and even spoken with the AWS Lambda service team to confirm some triggers for this warming.
+This post confirms what we've all speculated but never knew with certainty - AWS Lambda is warming your functions. We've demonstrated how you can observe this behavior, and followed this through until the public documentation was updated.
 
 But that begs the question - what should you do about AWS Lambda Proactive Initialization?
 
