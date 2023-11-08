@@ -2524,6 +2524,7 @@
 			border-radius: 0;
 			width: 40%;
 			max-width: 600px;
+			padding: 0 10px 0 10px;
 		}
 
 			.spotlight .image img {
