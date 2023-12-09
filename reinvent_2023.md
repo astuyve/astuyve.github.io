@@ -5,6 +5,8 @@ description: COM305 - Demystifying and Mitigating AWS Lambda cold starts
 permalink: /talks/reinvent-2023
 ---
 
+<iframe width="420" height="315" src="https://www.youtube.com/embed/2EDNcPvR45w" frameborder="0" allowfullscreen></iframe>
+
 ## Talk resources
 [A closer look at AWS Lambda](https://www.youtube.com/watch?v=0_jfH6qijVY) - by Julian Wood and Chris Greenwood
 
