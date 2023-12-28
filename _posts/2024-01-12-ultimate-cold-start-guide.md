@@ -16,14 +16,13 @@ If you're new to serverless compute, the most important nuance to understand is 
 
 Serverless functions scale on demand in the face of pending customer requests, so your application must now initialize as quickly as possible. This tradeoff isn't inherently good or bad, but it is something we can manage.
 
-
-With that in mind, let's examine the most common cause of cold starts
+With that in mind, let's examine the most common cause of cold starts, and how to prevent them.
 
 ## Know and Reduce the Code you Load
 By far the single most common cause of unnecessarily slow cold starts is *unknowingly* loading dependencies which are *not* needed to serve incoming requests.
 
-This is common as most users build their first functions by *migrating* existing applications into Lambda. They bring all of the existing dependencies, many of which they don't need. This includes
-
+This is common as most users build their first functions by *migrating* existing applications into Lambda. They bring all of the existing dependencies, many of which they don't need or even use.
+Usually caused when developers import the "junk drawer" libraries, which may include multiple other libraries unknowingly.
 
 ### Remove unused code
 - Best thing to do here is delete code you don't use
