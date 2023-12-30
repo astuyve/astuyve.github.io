@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The compelling case for Containers on Lambda 
+title: It's time to use containers on Lambda (now with a 15x faster cold starts)
 description: Lambda recently improved the cold start performance of container images by up to 15x, but this isn't the only reason you should use them. The tooling, ecosystem, and entire developer culture has moved to container images and you should too.
 categories: posts
 image: assets/images/lambda_layers/lambda_layers_title.png
@@ -43,7 +43,7 @@ Not to mention all of the code in your app which you copied from Chat GPT (like 
 The reality is that we're all shipping ~80% of the same code.
 
 ## Deterministic serialization onto ext4
-Container images are stacks of tarballs, layered on top of eachother to form a filesystem like the one on your own computer. This process is typically done at container runtime, using a [storage driver](https://docs.docker.com/storage/storagedriver/) like [overlayfs](https://docs.docker.com/storage/storagedriver/overlayfs-driver/).
+Container images are stacks of tarballs, layered on top of each other to form a filesystem like the one on your own computer. This process is typically done at container runtime, using a [storage driver](https://docs.docker.com/storage/storagedriver/) like [overlayfs](https://docs.docker.com/storage/storagedriver/overlayfs-driver/).
 
 <span class="image fit"><a href ="/assets/images/lambda_containers/container_layers.png" target="_blank"><img src="/assets/images/lambda_containers/container_layers.png" alt="Containers are layers of tarballs"></a></span>
 
@@ -130,6 +130,10 @@ If all of your functions are under 30mb and you're team is comfortable with zip 
 For me personally, all new Lambda-backed APIs I create are based on container images using the Lambda web adapter.
 
 ## Wrapping up
-The whole paper is excellent and includes many other interesting topics like cache eviction, and how this was implemented (in Rust!).
+The whole paper is excellent and includes many other interesting topics like cache eviction, and how this was implemented (in Rust!), so I suggest you [read the full paper](https://arxiv.org/abs/2305.13162) to learn more.
+
+It's interesting to me that the Fargate team went a totally different direction here with [SOCI](https://aws.amazon.com/about-aws/whats-new/2023/07/aws-fargate-container-startup-seekable-oci/). My understanding is that SOCI is less effective for images smaller than 1GB, so I'd be curious if some lessons from this paper could further improve Fargate launches.
+
+At the same time, I'm curious if this type of multi-tenant cache would make sense to improve launch performance of something like GCP Cloud Run, or Azure Container Instances.
 
 If you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or reach out on [twitter](https://twitter.com/astuyve) with any questions. You can also ask me questions directly if I'm [streaming on Twitch](twitch.tv/aj_stuyvenberg) or [YouTube](https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw).
