@@ -73,7 +73,10 @@ The answer is something called Convergent Encryption, which sounds scarier than 
 
 These chunks are then de-duplicated and stored in a s3 when a Lambda function is created.
 
-Now that each block is hashed and encrypted, they can be efficiently de-duplicated and shared across customers. The manifest and chunk key list are decrypted by the Lambda worker during a cold start, and only chunks matching those keys are downloaded and decrypted. This is safe because for any customer's manifest to list a sha256 hash (and the key derived) in the manifest file, it must have been derived from a chunk which is entirely identical.
+Now that each block is hashed and encrypted, they can be efficiently de-duplicated and shared across customers. The manifest and chunk key list are decrypted by the Lambda worker during a cold start, and only chunks matching those keys are downloaded and decrypted.\
+This is safe because for any customer's manifest to contain a chunk hash (and the key derived from it) in the manifest file, that customer's function must have created and sent that chunk of bytes to Lambda.
+
+Put another way, all users with an identical chunk of bytes also all share the identical key.
 
 This is key to sharing chunks of container images without trust. Now if you and I both run a node20.x container on Lambda, the bytes for nodejs itself (and it's dependencies like libuv) can be shared, so they may already be on the worker before my function runs or is even created!
 
