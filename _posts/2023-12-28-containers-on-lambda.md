@@ -1,6 +1,6 @@
 ---
 layout: post
-title: It's time to use containers on Lambda (now with a 15x faster cold starts)
+title: It's time to use containers on Lambda (now 15x faster cold starts)
 description: Lambda recently improved the cold start performance of container images by up to 15x, but this isn't the only reason you should use them. The tooling, ecosystem, and entire developer culture has moved to container images and you should too.
 categories: posts
 image: assets/images/lambda_layers/lambda_layers_title.png
