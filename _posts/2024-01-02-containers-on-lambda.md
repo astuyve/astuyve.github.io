@@ -78,6 +78,8 @@ Pros:
 Cons:
 - To update dependencies managed by Lambda runtimes, you'll need to re-build your container image and re-deploy your function occasionally. This is something dependabot can easily do, but it could be painful if you have thousands of functions. These updates come free with managed runtimes anyway.
 - You do pay for the init duration. Today, Lambda documentation claims that init duration is [always billed](https://aws.amazon.com/lambda/pricing/), but in practice we see that init duration for managed runtimes is not included in the billed duration, logged in the REPORT log line at the end of every execution.
+- Slower deployment speeds
+- The very first cold start for a new function or function update seems to be quite slow. To me, the iterate + test loop can feel slow. In any production environment, this should be mitigated by invoking an alias (other than `$LATEST`). In practice I've noticed this goes away if I wait a bit between deployment and invocation. This isn't ideal and ideally the Lambda team fixes it soon, but in production it shouldn't be a problem.
 
 If all of your functions are under 30mb and you're team is comfortable with zip files, then it may be worth continuing with zip files.
 For me personally, all new Lambda-backed APIs I create are based on container images using the Lambda web adapter.
