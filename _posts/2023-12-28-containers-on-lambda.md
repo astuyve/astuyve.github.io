@@ -1,9 +1,9 @@
 ---
 layout: post
-title: You should use containers on Lambda now  (with benchmarks)
+title: The case for containers on Lambda (with benchmarks) 
 description: Lambda recently improved the cold start performance of container images by up to 15x, but this isn't the only reason you should use them. The tooling, ecosystem, and entire developer culture has moved to container images and you should too.
 categories: posts
-image: assets/images/lambda_layers/lambda_layers_title.png
+image: assets/images/lambda_containers/containers_on_lambda.png
 ---
 
 When AWS Lambda first introduced support for container-based functions, the initial reactions from the community were mostly negative. Lambda isn't meant to run large applications, it is meant to run small bits of code, scaled widely by executing many functions simultaneously.
@@ -14,7 +14,7 @@ If we're being honest, I think the **biggest roadblock to adoption** was the col
 
 Fast forward to 2023, and things have changed. The AWS Lambda team put in tremendous amounts of work and improved the cold-start times by a shocking **15x**, according to the paper and [talk given by Marc Brooker](https://www.youtube.com/watch?v=Wden61jKWvs).
 
-This post focuses on analyzing the performance of container-based Lambda functions with simple, reproducible tests. The next post will delve into how the Lambda team pulled off this performance win. If you don't want to wait, you can watch my summary on [youtube](todo) now.
+This post focuses on analyzing the performance of container-based Lambda functions with simple, reproducible tests. The next post will delve into how the Lambda team pulled off this performance win.
 
 ## Performance Tests
 I set off to test this new container image strategy by creating several identical functions across zip and container-based packaging schemes. These varied from 0mb of additional dependencies, up to the 250mb limit of zip-based Lambda functions. I'm **not** directly comparing the size of the final image with the size of the zip file, because containers include an OS and system libraries, so they are natively much larger than zip files.
@@ -82,7 +82,7 @@ Cons:
 If all of your functions are under 30mb and you're team is comfortable with zip files, then it may be worth continuing with zip files.
 For me personally, all new Lambda-backed APIs I create are based on container images using the Lambda web adapter.
 
-Ultimately your team and anyone you hire likely **knows how to use containers** already. Containers are as fast or faster than zip functions, have more powerful build configurations, and more easily support existing workflows.
+Ultimately your team and anyone you hire likely **already knows how to use containers**. Containers start as fast or faster than zip functions, have more powerful build configurations, and more easily support existing workflows. Finally, containers make it easy to optionally move your application to something like Fargate or AppRunner if costs become a primary concern.
 
 It's time to use containers on Lambda.
 
