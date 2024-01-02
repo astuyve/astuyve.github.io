@@ -14,7 +14,7 @@ If we're being honest, I think the **biggest roadblock to adoption** was the col
 
 The AWS Lambda team put in tremendous amounts of work and improved the cold-start times by a shocking **15x**, according to the paper and [talk given by Marc Brooker](https://www.youtube.com/watch?v=Wden61jKWvs).
 
-This post focuses on analyzing the performance of container-based Lambda functions with simple, reproducible tests. The next post will delve into how the Lambda team pulled off this performance win.
+This post focuses on analyzing the performance of container-based Lambda functions with simple, reproducible tests. It also lays out the pros and cons for containers on Lambda. The next post will delve into how the Lambda team pulled off this performance win.
 
 ## Performance Tests
 I set off to test this new container image strategy by creating several identical functions across zip and container-based packaging schemes. These varied from 0mb of additional dependencies, up to the 250mb limit of zip-based Lambda functions. I'm **not** directly comparing the size of the final image with the size of the zip file, because containers include an OS and system libraries, so they are natively much larger than zip files.
@@ -74,12 +74,13 @@ Pros:
 - Containers allow support larger functions, up to 10gb
 - You can use custom runtimes like Bun, Deno, as well as use new runtime versions more easily
 - Using the excellent [Lambda web adapter extension](https://github.com/awslabs/aws-lambda-web-adapter) with a container, you can very easily move a function from Lambda to Fargate or Apprunner if cost becomes an issue. This optionality is of high value, and shouldn't be overlooked.
+- AWS and the broader software development community continues to invest heavily in the container image standard. These improvements to Lambda represent the result of this investment, and I expect that to continue.
 
 Cons:
 - To update dependencies managed by Lambda runtimes, you'll need to re-build your container image and re-deploy your function occasionally. This is something dependabot can easily do, but it could be painful if you have thousands of functions. These updates come free with managed runtimes anyway.
 - You do pay for the init duration. Today, Lambda documentation claims that init duration is [always billed](https://aws.amazon.com/lambda/pricing/), but in practice we see that init duration for managed runtimes is not included in the billed duration, logged in the REPORT log line at the end of every execution.
 - Slower deployment speeds
-- The very first cold start for a new function or function update seems to be quite slow. To me, the iterate + test loop can feel slow. In any production environment, this should be mitigated by invoking an alias (other than `$LATEST`). In practice I've noticed this goes away if I wait a bit between deployment and invocation. This isn't ideal and ideally the Lambda team fixes it soon, but in production it shouldn't be a problem.
+- The very first cold start for a new function or function update seems to be quite slow (p99 ~5+ seconds for a large function). This makes the iterate + test loop feel slow. In any production environment, this should be mitigated by invoking an alias (other than `$LATEST`). In practice I've noticed this goes away if I wait a bit between deployment and invocation. This isn't great and ideally the Lambda team fixes it soon, but in production it shouldn't be a problem.
 
 If all of your functions are under 30mb and you're team is comfortable with zip files, then it may be worth continuing with zip files.
 For me personally, all new Lambda-backed APIs I create are based on container images using the Lambda web adapter.
