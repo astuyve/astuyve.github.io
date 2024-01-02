@@ -17,7 +17,7 @@ Fast forward to 2023, and things have changed. The AWS Lambda team put in tremen
 This post focuses on analyzing the performance of container-based Lambda functions with simple, reproducible tests. The next post will delve into how the Lambda team pulled off this performance win. If you don't want to wait, you can watch my summary on [youtube](todo) now.
 
 ## Performance Tests
-I set off to test this new container image strategy by creating several identical functions across zip and container-based packaging schemes. These varied from 0mb of additional dependencies, up to the 250mb limit of zip-based Lambda functions.
+I set off to test this new container image strategy by creating several identical functions across zip and container-based packaging schemes. These varied from 0mb of additional dependencies, up to the 250mb limit of zip-based Lambda functions. I'm **not** directly comparing the size of the final image with the size of the zip file, because containers include an OS and system libraries, so they are natively much larger than zip files.
 
 As usual, I'm testing the **round trip** request time for a cold start from within the same region. I'm not using init duration, which [does not include the time to load bytes into the function sandbox](https://youtu.be/2EDNcPvR45w?t=1421).
 
@@ -49,6 +49,8 @@ For NodeJS, beyond ~30mb, container images *outperform* zip based Lambda functio
 
 For Python, container images **vastly outperform** zip based Lambda functions beyond 200mb in size.
 
+This result is incredible, because Lambda container images (in total) are much much larger than the comparative zip files.
+
 I want to stress that the size of dependencies is only one factor that plays into cold starts. Besides size, other factors impact static initialization time including:
 - Size and number of heap allocations
 - Computations performed during init
@@ -67,7 +69,7 @@ While it's technically true that container images are objectively less efficient
 Pros:
 - Containers are ubiquitous in software development, and so many tools and developer workflows already revolve around them. It's easy to find and hire developers who already know how to use containers.
 - Multi-stage builds are clear and easy to understand, allowing you easily create the lightest and smallest image possible.
-- Graviton on Lambda is quickly becoming the preferred architecture, and container images make x86/ARM cross-compliation easy. This is even more relevant now, as Apple silicon becomes a popular choice for developers. 
+- Graviton on Lambda is quickly becoming the preferred architecture, and container images make x86/ARM cross-compilation easy. This is even more relevant now, as Apple silicon becomes a popular choice for developers. 
 - Base images for Lambda are updated frequently, and it's easy enough to auto-deploy the latest image version containing security updates
 - Containers allow support larger functions, up to 10gb
 - You can use custom runtimes like Bun, Deno, as well as use new runtime versions more easily
@@ -85,4 +87,6 @@ Ultimately your team and anyone you hire likely **knows how to use containers** 
 It's time to use containers on Lambda.
 
 ## Thanks for reading!
+The next post in this series explores how this performance improvement was designed. It's an example of excellent systems engineering work, and it represents why I'm so bullish on serverless in the long term.
+
 If you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or reach out on [twitter](https://twitter.com/astuyve) with any questions. You can also ask me questions directly if I'm [streaming on Twitch](twitch.tv/aj_stuyvenberg) or [YouTube](https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw).
