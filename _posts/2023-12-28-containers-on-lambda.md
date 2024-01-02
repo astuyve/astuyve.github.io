@@ -10,9 +10,9 @@ When AWS Lambda first introduced support for container-based functions, the init
 
 Containers were not only antithetical to the philosophy of Lambda and the serverless mindset writ large, they were also far slower to initialize (or cold start) compared with their zip-based function counterparts.
 
-If we're being honest, I think the **biggest roadblock to adoption** was the cold start performance penalty associated with using containers.
+If we're being honest, I think the **biggest roadblock to adoption** was the cold start performance penalty associated with using containers. That penalty has now all but evaporated.
 
-Fast forward to 2023, and things have changed. The AWS Lambda team put in tremendous amounts of work and improved the cold-start times by a shocking **15x**, according to the paper and [talk given by Marc Brooker](https://www.youtube.com/watch?v=Wden61jKWvs).
+The AWS Lambda team put in tremendous amounts of work and improved the cold-start times by a shocking **15x**, according to the paper and [talk given by Marc Brooker](https://www.youtube.com/watch?v=Wden61jKWvs).
 
 This post focuses on analyzing the performance of container-based Lambda functions with simple, reproducible tests. The next post will delve into how the Lambda team pulled off this performance win.
 
