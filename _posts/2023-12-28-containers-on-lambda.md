@@ -55,6 +55,7 @@ I want to stress that the size of dependencies is only one factor that plays int
 - Network requests made during init
 
 These nuances are covered in my [talk at AWS re:Invent](https://youtu.be/2EDNcPvR45w) if you want to dig deeper on the topic of cold starts.
+All of these individual projects are [available on GitHub](https://github.com/astuyve/benchmarks).
 
 ## Should you use containers on Lambda?
 I am not advocating that you choose containers as a packaging mechanism for your Lambda function based *solely* on cold start performance.
