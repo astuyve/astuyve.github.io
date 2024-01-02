@@ -37,12 +37,12 @@ The second test was similar and performed with Python functions running Python 3
 and here is the p50:
 <span class="image fit"><a href ="/assets/images/lambda_containers/python_container_p50.png" target="_blank"><img src="/assets/images/lambda_containers/python_container_p50.png" alt="Round trip cold start request time for python functions, p50"></a></span>
 
-In chart form, we can see the closer variance at the 100mb and 150mb marks. For the 150mb test I was using Pandas, Flask, and PsycoPG as dependencies. I'm not familiar with the internals of these libraries, so I don't want to speculate on why these results are slightly unexpected.
-
-My simplest answer is that this is a "real world" test using real dependencies. On top of a managed service like Lambda as well as some amount of network latency in a shared multi-tenant system - many variables could be confounding here.
-
 Here it is in chart form, once again looking at p99 over a week:
 <span class="image fit"><a href ="/assets/images/lambda_containers/python_rtt_chart.png" target="_blank"><img src="/assets/images/lambda_containers/python_rtt_chart.png" alt="Round trip cold start request time for python functions, p99, in chart form"></a></span>
+
+We can see the closer variance at the 100mb and 150mb marks. For the 150mb test I was using Pandas, Flask, and PsycoPG as dependencies. I'm not familiar with the internals of these libraries, so I don't want to speculate on why these results are slightly unexpected.
+
+My simplest answer is that this is a "real world" test using real dependencies. On top of a managed service like Lambda as well as some amount of network latency in a shared multi-tenant system - many variables could be confounding here.
 
 ## Performance Takeaways
 For NodeJS, beyond ~30mb, container images *outperform* zip based Lambda functions in cold start performance.
