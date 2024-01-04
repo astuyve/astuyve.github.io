@@ -25,8 +25,9 @@ I created a cold start by updating the function configuration (setting a new env
 
 These results were based on the p99 response time, but I've included the p50 times for python below.
 
-This first test contains a set of NodeJS functions running Node18.x. After several days and thousands of invocations, we see the final result. The top row represents container-based Lambda functions, and the bottom row reports zip-based Lambda functions (lower is better):
+This first test contains a set of NodeJS functions running Node18.x. After several days and thousands of invocations, we see the final result. The top row represents zip-based Lambda functions, and the bottom row reports container-based Lambda functions (lower is better):
 <span class="image fit"><a href ="/assets/images/lambda_containers/container_metrics.png" target="_blank"><img src="/assets/images/lambda_containers/container_metrics.png" alt="Round trip cold start request time for thousands of invocations over several days"></a></span>
+An earlier version of this post reversed the rows. I've changed this to be consistent with the python result format. Thanks to those who corrected me!
 
 It's easier to read a bar chart:
 <span class="image fit"><a href ="/assets/images/lambda_containers/container_bar_chart.png" target="_blank"><img src="/assets/images/lambda_containers/container_bar_chart.png" alt="Round trip cold start request time for thousands of invocations over several days, as a bar chart"></a></span>
