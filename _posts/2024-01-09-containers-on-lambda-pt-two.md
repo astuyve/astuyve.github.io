@@ -1,41 +1,32 @@
 ---
 layout: post
-title: How Lambda reduced container cold starts by 15x (and why you should probably use containers now)
-description: Lambda recently improved the cold start performance of container images by up to 15x, but this isn't the only reason you should use them. The tooling, ecosystem, and entire developer culture has moved to container images and you should too.
+title: How Lambda starts containers 15x faster (deep dive)
+description: We've seen how containers on Lambda initialize as fast or faster than their zip-based counterparts. This post examines exactly how the Lambda team did this, and the performance advantages of everyone shipping the same code.
 categories: posts
-image: assets/images/lambda_layers/lambda_layers_title.png
+image: assets/images/lambda_containers/containers_deep_dive.png
 ---
 
-When AWS Lambda first introduced support for container-based functions, the initial reactions from the community were mostly negative. Lambda isn't meant to run large applications, it is meant to run small bits of code, scaled widely by executing many functions simultaneously.
+In the [first post](https://aaronstuyvenberg.com/posts/containers-on-lambda) of this series, we demonstrated that container-based Lambda functions can initialize as fast or faster than zip-based functions. This is counterintuitive as zip-based functions are usually much smaller (up to 250mb), while container images typically contain far more data and are supported up 10gb in size. So how is this technically possible?
 
-Containers were not only antithetical to the philosophy of Lambda and the serverless mindset writ large, they were also far slower to initialize compared with their zip-based function counterparts.
+"On demand container loading on AWS Lambda" was [published](https://arxiv.org/abs/2305.13162) on May 23rd, 2023 by Marc Brooker et al. I suggest you read the full paper, as it's quite approachable and extremely interesting, but I'll break it down here.
 
-But if we're being honest, I think the biggest roadblock to adoption was the cold start performance penalty associated with using containers.
+The key to this performance improvement can be summarized in four steps, all performed during **function creation**.
 
-Fast forward to 2023, and things have changed. The AWS Lambda team put in tremendous amounts of work and improved the cold-start times by a shocking **15x**, according to the paper and [talk given by Marc Brooker](https://www.youtube.com/watch?v=Wden61jKWvs), a Distinguished Engineer on the Lambda team.
-
-Let's start with pragmatic advice, detailing what you should know about using containers with Lambda. The second half of this post will dive into the internal details of Lambda based on the paper, and help you understand how this performance feat was achieved.
-
-"On demand container loading on AWS Lambda" was published on May 23rd, 2023. I suggest you [read the full paper](https://arxiv.org/abs/2305.13162), as it's quite approachable and extremely interesting, but I'll break it down here.
-
-The key to this performance improvement can be summed up in four steps.
 1. Deterministically serialize container layers (which are tar.gz files) onto an ext4 file system
 2. Divide filesystem into 512kb chunks
 3. Encrypt each chunk
 4. Cache the chunks and share them _across all customers_
 
-But how can you safely encrypt, cache, and share bits of a container image *between* users?!
-
-Read on, and find out.
+But how can one safely encrypt, cache, and share actual bits of a container image *between* users?!
 
 ## Container images are sparse
 One interesting fact about container images is that they're an objectively inefficient method for distributing software applications. It's true!
 
 Container images are sparse blobs, with only a fraction of the contained bytes required to actually run the packaged application. [Harter et al](https://www.usenix.org/conference/fast16/technical-sessions/presentation/harter) found that only 6.5% of bytes on average were needed at startup.
 
-When we consider a collection of container images, the frequency and number of similar bytes is very high. This means there are lots of duplicated bytes copied over the wire every time you push or pull an image!
+When we consider a collection of container images, the frequency and quantity of similar bytes is very high between images. This means there are lots of duplicated bytes copied over the wire every time you push or pull an image!
 
-This is attributed to the fact that container images include a ton of stuff that doesn't vary, things like the kernel, the operating system, system libraries like libc or curl, and runtimes like the jvm, python, or nodejs.
+This is attributed to the fact that container images include a ton of stuff that doesn't vary between us as users. These are things like the kernel, the operating system, system libraries like libc or curl, and runtimes like the jvm, python, or nodejs.
 
 Not to mention all of the code in your app which you copied from Chat GPT (like everyone else).
 
@@ -103,7 +94,7 @@ This leads to a staggering statistic. If (after subscribing and sharing this pos
 AWS has seen the code and dependencies you are likely to deploy before you have even deployed it.
 
 ## Wrapping up
-The whole paper is excellent and includes many other interesting topics like cache eviction, and how this was implemented (in Rust!), so I suggest you [read the full paper](https://arxiv.org/abs/2305.13162) to learn more.
+The whole paper is excellent and includes many other interesting topics like cache eviction, and how this was implemented (in Rust!), so I suggest you [read the full paper](https://arxiv.org/abs/2305.13162) to learn more. The Lambda team even had to contend with some cache fragements being **too popular**, so they had to salt the chunk hashes!
 
 It's interesting to me that the Fargate team went a totally different direction here with [SOCI](https://aws.amazon.com/about-aws/whats-new/2023/07/aws-fargate-container-startup-seekable-oci/). My understanding is that SOCI is less effective for images smaller than 1GB, so I'd be curious if some lessons from this paper could further improve Fargate launches.
 
