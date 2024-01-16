@@ -59,7 +59,7 @@ The answer is something called Convergent Encryption, which sounds scarier than 
 1. Hash each 512kb chunk, and from that, derive an encryption key.
 2. Encrypt each block with the derived key.
 3. Create a manifest file containing a SHA256 hash of each chunk, the key, and file offset for the chunk.
-4. Encrypt the keys for the manifest file using a per-customer key managed by KMS.
+4. Encrypt the keys list in the manifest file using a per-customer key managed by KMS.
 
 <span class="image fit"><a href ="/assets/images/lambda_containers/encrypted_manifest.png" target="_blank"><img src="/assets/images/lambda_containers/encrypted_manifest.png" alt="The encrypted chunks and manifest file for a Lambda container function"></a></span>
 
