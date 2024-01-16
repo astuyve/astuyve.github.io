@@ -17,6 +17,8 @@ The key to this performance improvement can be summarized in four steps, all per
 3. Encrypt each chunk
 4. Cache the chunks and share them _across all customers_
 
+With these chunks stored and shared safely in a multi-tier cache, they can be fetched more quicky during **function cold start**.
+
 But how can one safely encrypt, cache, and share actual bits of a container image *between* users?!
 
 ## Container images are sparse
