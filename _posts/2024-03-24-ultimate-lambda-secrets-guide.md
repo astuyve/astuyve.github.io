@@ -53,7 +53,7 @@ However one common misconception is that environment variables are `stored as pl
 
 Lambda environment variables are [encrypted at rest](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html), and only decrypted when the Lambda Function initializes, or you take an action resulting in a call to `GetFunctionConfiguration`. This includes visiting the `Environment Variables` section of the Lambda page in the AWS Console. It startles some people to see their secrets on this page, but you can easily prevent this by removing `GetFunctionConfiguration` permissions from your AWS console user.
 
-One unfortunate risk is that you may accidentally share your screen while viewing or modifying a Lambda environment variable. It's unfortunate that AWS automatically decrypts and displays these values in plain text. AWS has no excuse for this, and should absolutely hide environment variable values unless toggled on, which is how Parameter Store and Secrets Manager both work.
+One risk is that you may accidentally leak a secret when sharing your screen while viewing or modifying a Lambda environment variable. It's unfortunate that AWS automatically decrypts and displays these values in plain text. AWS has no excuse for this, and should absolutely hide environment variable values unless toggled on, which is how Parameter Store and Secrets Manager both work.
 
 Auditability is another challenge of Lambda environment variables. For the principle of least privilege to be effective, we should limit access to secrets only to when they are needed. To ensure this is followed, or investigate and remediate a leaked secret, we need to know which Lambda function used a specific secret and at what time.
 
