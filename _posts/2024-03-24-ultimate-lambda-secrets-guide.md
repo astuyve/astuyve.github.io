@@ -13,7 +13,7 @@ Managing and securing secrets in your applications have similar dimensions! As a
 This work is a fundamental requirement for any production-quality software system. Unfortunately, AWS doesn't make it easy to select a secrets management tool within their ecosystem. For Serverless developers, this is even more difficult! Lambda is simply one service in a constellation of multiple supporting services which you can use to control application secrets. This guide lays out the most common ways to store and manage secrets for Lambda, and a framework for considering your specific use cases.
 
 ## Quick best practices primer
-Secrets should **NEVER** be hardcoded in your application code or source control. Typically you want to follow the `principle of least privilege` and limit the access of any runtime secret to only the runtime environment (Lambda, in this case).
+Plaintext secrets should **NEVER** be hardcoded in your application code or source control. Typically you want to follow the `principle of least privilege` and limit the access of any runtime secret to only the runtime environment (Lambda, in this case).
 
 This means passing _references_ or _encrypted_ data to configuration files or infrastructure as code tools whenever possible. It also means that decrypting or fetching secrets from a secure storage system at runtime will be the most secure option. This post is geared to deploying your Lambda applications along this dimension.
 
@@ -51,7 +51,7 @@ Environment variables in Lambda are where most folks start out in their journey.
 
 However one common misconception is that environment variables are `stored as plain text` by AWS Lambda. This is **false**.
 
-Lambda environment variables are [encrypted at rest](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html), and only decrypted when the Lambda Function initializes, or you take an action resulting in a call to `GetFunctionConfiguration`. This includes visiting the `Environment Variables` section of the Lambda page in the AWS Console. It startles some people to see their secrets on this page, but you can easily prevent this by removing `GetFunctionConfiguration` permissions from your AWS console user.
+Lambda environment variables are [encrypted at rest](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html), and only decrypted when the Lambda Function initializes, or you take an action resulting in a call to `GetFunctionConfiguration`. This includes visiting the `Environment Variables` section of the Lambda page in the AWS Console. It startles some people to see their secrets on this page, but you can easily prevent this by denying `lambda:GetFunctionConfiguration`, or `kms:Decrypt` permissions from your AWS console user.
 
 One risk is that you may accidentally leak a secret when sharing your screen while viewing or modifying a Lambda environment variable. It's unfortunate that AWS automatically decrypts and displays these values in plain text. AWS has no excuse for this, and should absolutely hide environment variable values unless toggled on, which is how Parameter Store and Secrets Manager both work.
 
@@ -61,7 +61,7 @@ Environment variables are automatically decrypted and injected into every functi
 
 If you're in a regulated environment, or otherwise distrust Amazon; you can create a Consumer-Managed Key (CMK) and use that to encrypt your environment variables instead.
 
-It's important to note that when you update environment variables while invoking the `$LATEST` function alias, your function sandbox is automatically shut down permanently. When a new request arrives, you will experience a cold start and that sandbox will pull the latest environment variables into scope.
+It's important to note that when you update environment variables, you will trigger a cold start (as long as you're using the `$LATEST` function alias). Your function sandbox is automatically shut down permanently. Then when a new request arrives, you will experience a cold start and that sandbox will pull the latest environment variables into scope.
 
 Environment variables are also the best-performing option. Systems Manager Parameter Store, Secrets Manager, Lambda environment variables, and KMS all fundamentally rely on a call to `kms:Decrypt`, which is usually about 100ms end-to-end.
 
@@ -143,17 +143,17 @@ The downside is that your secrets are still viewable via `lambda:GetFunctionConf
 ### Envelope Encryption
 Consider a case where you may have ~100kb of secrets to store. A handful of signing keys, a couple tokens, maybe an mTLS certificate. Here's where you can use a technique called [envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) to secure your data. First, you can generate something like a 256-bit AES key. Use that key to encrypt a file containing all of your secrets and add that file to your function ZIP payload. Finally, use KMS to encrypt the AES key and inject the ciphertext as an environment variable.
 
-You've just encrypted an envelope, and stored the encrypted key in a couple bytes! This also helps save money on KMS keys, as you can re-use one KMS key for multiple AES keys. This pattern is also useful if you need to secure keys for customers in a multi-tenant environment, but laying that out is beyond the scope of this post.
+You've just encrypted an envelope, and passed the encrypted key to your Lambda Function securely! This also helps save money on KMS keys, as you can re-use one KMS key for multiple AES keys. This pattern is also useful if you need to secure keys for customers in a multi-tenant environment, but laying that out is beyond the scope of this post.
 
 ## Sensitive Data Exercise
 We've covered the fundamental building blocks for securing sensitive information within AWS and using it within Lambda. We've also composed a few patterns you can use to reduce costs or handle specific use cases.
 
 Now, let's consider 4 common secrets used in Lambda and think about how best to secure them.
 
-### Datadog/Sentry/telemetry API Key
-First up is a telemetry API key. Consider something like a Datadog or Sentry API key. These keys are free to create, so it's often best to create one key per application to better track costs. Telemetry keys are are also usually write-only. Leaking this key can only cause an attacker to send additional data to the API.
+### Telemetry API Key
+First up is a telemetry API key. Consider something like a Datadog or Sentry API key. These keys are free to create, so it's best to create one key per application to limit blast radius and, as a bonus - better track costs. Telemetry keys are also usually write-only. Leaking this key can only cause an attacker to send additional data to the API.
 
-With this in mind, *environment variables* are likely a good option here. They have minimal performance overhead, no cost, and minimal blast radius.
+With this in mind, *environment variables* are likely a good enough option here. They have minimal performance overhead, no cost, and minimal blast radius.
 
 Keys can be easily created for exactly one Lambda function, or CloudFormation stack. If someone peers over your shoulder at a coffee shop, or inadvertently leaks the environment variable - it's simple to change with a few clicks and a re-deploy.
 
@@ -197,6 +197,6 @@ At the same time, AWS should do more to restrict the values of environment varia
 
 This post would not exist without [David Behroozi](https://speedrun.nobackspacecrew.com/blog/index.html) challenging me to finish it, and helping out with his CloudTrail digging. You should follow him on [twitter](https://twitter.com/rooToTheZ). Thanks, David!
 
-[Nick Frichette](https://twitter.com/Frichette_n), [Alex DeBrie](https://twitter.com/alexbdebrie), and Aidan Steele also helped review this, thanks friends! 
+[Nick Frichette](https://twitter.com/Frichette_n), [Alex DeBrie](https://twitter.com/alexbdebrie), and [Aidan Steele](http://awsteele.com/) also helped review this, thanks friends! 
 
 If you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or reach out on [twitter](https://twitter.com/astuyve) with any questions. You can also ask me questions directly if I'm [streaming on Twitch](twitch.tv/aj_stuyvenberg) or [YouTube](https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw).
