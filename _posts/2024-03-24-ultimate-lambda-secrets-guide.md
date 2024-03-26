@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ultimate guide to secrets in Lambda 
-description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables. Then it lays out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
+description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables for handling your secrets in Lambda. Then it lays out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
 categories: posts
 image: assets/images/secrets/secrets_in_lambda.png
 ---
@@ -43,8 +43,8 @@ Then, we'll consider several example secrets with various blast radii, and decid
 | [Environment Variables](#lambda-environment-variables) | Easiest | **Free!** | Poor | Requires UpdateFunctionConfiguration or deployment | Encrypted at rest Decrypted when getFunctionConfiguration called.<br> Limited to 4KB total |
 | [Parameter Store Standard](#aws-systems-manager-parameter-store) | Some assembly required | **Free storage**<br><br>Free calls up to 40 calls/second.<br>$0.05/10,000 calls after | Good | Easy manual rotation, not automatic | 4KB size limit |
 | [Parameter Store Advanced](#aws-systems-manager-parameter-store) | Some assembly required | $0.05 per month per secret.<br><br>$0.05/10,000 calls | Good | Easy manual rotation, not automatic | Supports TTL for secrets. 8KB size limit |
-| [Secrets Manager](#aws-secrets-manager) | Some assembly required | $0.40 per secret per month $0.05/10,000 calls | Good | Easiest & Automatic - Built into the product | Largest binary size, 65KB |
-| [Key Management Service](#key-management-service) (KMS) | Most work | $1 per key per month $0.03/10,000 requests | Good | Depends on ciphertext storage. Easy with DynamoDB/S3, more manual with env vars. | Most flexible option.<br> 4KB per `encrypt` operation.<br>Binary size is limited by storage mechanism.<br>Roll your own Secrets Manager or Parameter Store. |
+| [Secrets Manager](#aws-secrets-manager) | Some assembly required | $0.40 per secret per month $0.05/10,000 calls | Good | Easiest & Automatic<br>Built into the product | Largest binary size, 65KB |
+| [Key Management Service](#key-management-service) (KMS) | Most work | $1 per key per month $0.03/10,000 requests | Good | Depends on ciphertext storage.<br>Easy with DynamoDB/S3, more manual with env vars. | Most flexible option.<br> 4KB per `encrypt` operation.<br>Binary size is limited by storage mechanism.<br>Roll your own Secrets Manager or Parameter Store. |
 
 ## Lambda Environment Variables
 Environment variables in Lambda are where most folks start out in their journey. They're baked right in, and can be fetched easily (using something like `process.env.MY_SECRET` for Node or `os.environ.get('MY_SECRET')` for Python). Unfortunately they are not the *most* secure option.
@@ -161,17 +161,16 @@ Now your secret will land safely encrypted at rest in a Lambda environment varia
 
 Standard Parameters are free to store and free to use under 40 req/s, if you're only fetching secrets at deploy time via CloudFormation references, you'll likely never receive a bill for these secrets.
 
-The downside is that your secrets are still viewable via `lambda:GetFunctionConfiguration`, and if you update your secret in Parameter Store, it won't be updated in Lambda until you redeploy your functions.
+The downside is that your secrets are still viewable in the Lambda Console via `lambda:GetFunctionConfiguration`, and if you update your secret in Parameter Store, it won't be updated in Lambda until you redeploy your functions.
 
 ### Envelope Encryption
 Consider a case where you may have ~100kb of secrets to store. A handful of signing keys, a couple tokens, maybe an mTLS certificate. Here's where you can use a technique called [envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) to secure your data.
 
-First, you can generate something like a 256-bit AES key. Use that key to encrypt a file containing all of your secrets and add that file to your function ZIP payload. Finally, use KMS to encrypt the AES key and inject the ciphertext as an environment variable.
-
-1. Create KMS key
-2. Generate AES key for each customer, application, or secrets payload
-3. Encrypt secrets payload with the AES key. Include the encrypted secrets in your function zip.
-4. Finally, encrypt the AES key with your KMS key
+1. Create a KMS key
+2. Generate 256-bit AES key for each customer, application, or secrets payload
+3. Encrypt all of your secrets with the AES key. This is the "envelope"
+4. Include the encrypted secrets in your function zip.
+5. Finally, encrypt the AES key with your KMS key
 
 You've just encrypted an envelope, and passed the encrypted key to your Lambda Function securely! This also helps save money on KMS keys, as you can re-use one KMS key for multiple AES keys. This pattern is also useful if you need to secure keys for customers in a multi-tenant environment, but laying that out is beyond the scope of this post.
 
@@ -229,4 +228,4 @@ This post would not exist without [David Behroozi](https://speedrun.nobackspacec
 
 [Nick Frichette](https://twitter.com/Frichette_n), [Alex DeBrie](https://twitter.com/alexbdebrie), and [Aidan Steele](http://awsteele.com/) also helped review this, thanks friends! 
 
-If you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or reach out on [twitter](https://twitter.com/astuyve) with any questions. You can also ask me questions directly if I'm [streaming on Twitch](twitch.tv/aj_stuyvenberg) or [YouTube](https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw).
+If you like this type of content please subscribe to my [blog](https://aaronstuyvenberg.com) or follow me on [twitter](https://twitter.com/astuyve) and send me any questions or comments. You can also ask me questions directly if I'm [streaming on Twitch](twitch.tv/aj_stuyvenberg) or [YouTube](https://www.youtube.com/channel/UCsWwWCit5Y_dqRxEFizYulw).
