@@ -6,7 +6,7 @@ categories: posts
 image: assets/images/secrets/secrets_in_lambda.png
 ---
 
-We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so huge we don't even want to think about them (_serverless actually has servers_).
+We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so sensitive that we don't even want to think about them (<span class="spoiler">_serverless actually has servers_</span>).
 
 Managing and securing secrets in your applications have similar dimensions! As a result, handling a random 3rd party API key is different from handling the root signing key for an operating system or nuclear launch codes.
 
