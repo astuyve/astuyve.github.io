@@ -3,7 +3,7 @@ layout: post
 title: Ultimate guide to secrets in Lambda 
 description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables. Then it lays out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
 categories: posts
-image: assets/images/lambda_containers/containers_deep_dive.png
+image: assets/images/secrets/secrets_in_lambda.png
 ---
 
 We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so huge we don't even want to think about them (_serverless actually has servers_).
@@ -44,7 +44,7 @@ Then, we'll consider several example secrets with various blast radii, and decid
 | [Parameter Store Standard](#aws-systems-manager-parameter-store) | Some assembly required | **Free storage**<br><br>Free calls up to 40 calls/second.<br>$0.05/10,000 calls after | Good | Easy manual rotation, not automatic | 4KB size limit |
 | [Parameter Store Advanced](#aws-systems-manager-parameter-store) | Some assembly required | $0.05 per month per secret.<br><br>$0.05/10,000 calls | Good | Easy manual rotation, not automatic | Supports TTL for secrets. 8KB size limit |
 | [Secrets Manager](#aws-secrets-manager) | Some assembly required | $0.40 per secret per month $0.05/10,000 calls | Good | Easiest & Automatic - Built into the product | Largest binary size, 65KB |
-| [Key Management Service](#key-management-service) (KMS) | Most work | $1 per key per month $0.03/10,000 requests | Good | Depends on ciphertext storage. Easy with DynamoDB/S3, more manual with env vars. | Most flexible option.<br>Binary size is limited by storage mechanism.<br>Roll your own Secrets Manager or Parameter Store. |
+| [Key Management Service](#key-management-service) (KMS) | Most work | $1 per key per month $0.03/10,000 requests | Good | Depends on ciphertext storage. Easy with DynamoDB/S3, more manual with env vars. | Most flexible option.<br> 4KB per `encrypt` operation.<br>Binary size is limited by storage mechanism.<br>Roll your own Secrets Manager or Parameter Store. |
 
 ## Lambda Environment Variables
 Environment variables in Lambda are where most folks start out in their journey. They're baked right in, and can be fetched easily (using something like `process.env.MY_SECRET` for Node or `os.environ.get('MY_SECRET')` for Python). Unfortunately they are not the *most* secure option.
@@ -63,9 +63,9 @@ If you're in a regulated environment, or otherwise distrust Amazon; you can crea
 
 It's important to note that when you update environment variables, you will trigger a cold start (as long as you're using the `$LATEST` function alias). Your function sandbox is automatically shut down permanently. Then when a new request arrives, you will experience a cold start and that sandbox will pull the latest environment variables into scope.
 
-Environment variables are also the best-performing option. Systems Manager Parameter Store, Secrets Manager, Lambda environment variables, and KMS all fundamentally rely on a call to `kms:Decrypt`, which is usually about 100ms end-to-end.
+Environment variables are also the best-performing option. Systems Manager Parameter Store, Secrets Manager, Lambda environment variables, and KMS all fundamentally rely on KMS and thus a call to `kms:Decrypt` at some point.
 
-Lambda Function environment variables add around 25ms, according to an article David Behroozi [just wrote](https://speedrun.nobackspacecrew.com/blog/2024/03/13/lambda-environment-variables-impact-on-coldstarts.html). These calls are logged in CloudTrail whenever your function starts.
+Lambda Function environment variables add around 25ms to your cold start duration, according to an article David Behroozi [just wrote](https://speedrun.nobackspacecrew.com/blog/2024/03/13/lambda-environment-variables-impact-on-coldstarts.html). These calls are logged in CloudTrail whenever your function starts.
 
 However, purely storing secrets as environment variables is not the most secure option. Although they are encrypted at rest, environment variables and `lambda:GetFunctionConfiguration` permissions are treated by Lambda as part of the `ReadOnly` policy used by AWS internally, auditors, and cloud security SaaS products. This broadens your risk for a vendor or 3rd party auditor becoming compromised and leaking your secrets.
 
@@ -86,9 +86,16 @@ Standard parameters are limited to 4KB in size (each), with 10,000 total per reg
 
 Standard Parameters are free up to 40 requests per second (for the entire service). Beyond that, the cost is $0.05 per 10,000 Parameter Store API Interactions. Advanced Parameters are always billed at $0.05/10,000 requests. Fetching each parameter counts as an interaction, so 10 parameters triggers 10 interactions. Parameters are individually versioned, and you can fetch by version or `$LATEST`.
 
-Historically one major advantage of Secrets Manager over Parameter Store is the ability to share secrets across AWS accounts using a resource-based policy. This is now [supported by Parameter Store](https://aws.amazon.com/about-aws/whats-new/2024/02/aws-systems-manager-parameter-store-cross-account-sharing/) as well.
+Historically one major advantage of Secrets Manager over Parameter Store is the ability to share secrets across AWS accounts using a resource-based policy. This is now [supported by Parameter Store for Advanced Parameters](https://aws.amazon.com/about-aws/whats-new/2024/02/aws-systems-manager-parameter-store-cross-account-sharing/) as well.
 
 Finally, individual Parameter calls are auditable in CloudTrail so you can prove who accessed a Parameter and when.
+
+### Performance
+For a new TCP connection, Parameter Store fetched a parameter in around 217ms, including 99ms to set up the connection itself:
+<span class="image fit"><a href="/assets/images/secrets/ssm_cold.png" target="_blank"><img src="/assets/images/secrets/ssm_cold.png" alt="Systems Manager Parameter Store cold request"></a></span>
+
+With an existing connection, fetching the parameter took around 39.3ms:
+<span class="image fit"><a href="/assets/images/secrets/ssm_warm.png" target="_blank"><img src="/assets/images/secrets/ssm_warm.png" alt="Systems Manager Parameter Store warm request"></a></span>
 
 ## AWS Secrets Manager
 Secrets Manager is purpose-built for encrypting and storing secrets for your application. It also has the largest cost at $0.40 per secret per month. This cost is multiplied by the number of regions you choose to replicate each secret to, so this can add up quickly.
@@ -97,6 +104,13 @@ The big features you'll gain over Parameter Store are the ability to automatical
 
 Secret values can be up to 65KB in size, which is far larger than environment variables or Parameter Store. Like Parameter Store, calls for `GetSecretValue` are logged in CloudTrail. The big advantage Secrets have over Parameter Store is the ability to simply rotate or change a secret everywhere it's used. You can do this on a schedule if you're in an environment which demands this, or ad-hoc.
 
+### Performance
+Similar to Parameter Store, it takes Secrets Manager a bit to warm up. 177ms was the duration to create this TCP connection and make the request:
+<span class="image fit"><a href="/assets/images/secrets/secrets_manager_cold.png" target="_blank"><img src="/assets/images/secrets/secrets_manager_cold.png" alt="Secrets Manager cold request"></a></span>
+
+With a warm connection, fetching a secret from Secrets Manager took only 29.4ms:
+<span class="image fit"><a href="/assets/images/secrets/secrets_manager_warm.png" target="_blank"><img src="/assets/images/secrets/secrets_manager_warm.png" alt="Secrets Manager warm request"></a></span>
+
 ## Key Management Service
 AWS Key Management Service (KMS) is the system which underpins _all of these other services_. If you look carefully at either the documentation or CloudTrail logs, you'll see KMS!
 
@@ -104,13 +118,22 @@ KMS allows us to create an encryption key, securely store it within AWS, and the
 
 Storing and fetching the ciphertext can be implemented many ways, and should generally track the size of the encrypted blob. Small strings can be easily encrypted and stored as environment variables. If you need to share the same secret, you can store the ciphertext in DynamoDB. For large shared secrets, ciphertexts can be stored in S3.
 
-Most often these secrets are decrypted during the initialization phase of a Lambda function. Fun fact, you don't need to store or pass the ID of the key used to encrypt data. That key ID is encoded right along with the encrypted data in the ciphertext! Simply call `kms:Decrypt` on the blob, and KMS takes care of the rest. Neat!
+Most often these secrets are decrypted during the initialization phase of a Lambda function. Fun fact, you don't need to store or pass the ID of the key used to encrypt data. That key ID is [encoded](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html) right along with the encrypted data in the ciphertext! Simply call `kms:Decrypt` on the blob, and KMS takes care of the rest. Neat!
 
 KMS bills $1 per key per month. There is no charge for the keys created and used by Parameter Store, Secrets Manager, or AWS Lambda. You're also charged $0.03 per 10,000 requests to `kms:Decrypt` (or other API actions). These calls are individually auditable in CloudTrail.
 
 You'll have to implement rotation yourself, but if you store ciphertexts in DynamoDB, this can be relatively straightforward and cheaper than either Parameter Store or Secrets Manager, especially if you want to distribute a secret across multiple regions.
 
 I see KMS used most frequently to encrypt slowly changing items like certificates, .PEM files, or to securely store signing keys.
+
+### Performance
+Decrypting one small (~200b) ciphertext with KMS is notably faster than Parameter Store or Secrets Manager. This request took 64.4ms, including creating the TCP connection:
+<span class="image fit"><a href="/assets/images/secrets/kms_cold.png" target="_blank"><img src="/assets/images/secrets/kms_cold.png" alt="KMS cold request"></a></span>
+
+With a warm connection, KMS decrypted my secret in a blistering **6.45ms**: 
+<span class="image fit"><a href="/assets/images/secrets/kms_warm.png" target="_blank"><img src="/assets/images/secrets/kms_warm.png" alt="KMS warm request"></a></span>
+
+Presumably a big advantage here is that my ciphertext was already present in Lambda (as an environment variable) and didn't need to be fetched from a remote datastore call. KMS merely needed to decrypt the ciphertext and return!
 
 ## AWS Parameter and Secrets Lambda Extension
 To more easily use either Parameter Store or Secrets Manager in Lambda, AWS has published a [Lambda extension](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_lambda.html) which handles API calls to the underlying services for you, along with caching and refreshing secrets. You can [tune](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_lambda.html) these parameters to your liking as well.
@@ -141,7 +164,14 @@ Standard Parameters are free to store and free to use under 40 req/s, if you're 
 The downside is that your secrets are still viewable via `lambda:GetFunctionConfiguration`, and if you update your secret in Parameter Store, it won't be updated in Lambda until you redeploy your functions.
 
 ### Envelope Encryption
-Consider a case where you may have ~100kb of secrets to store. A handful of signing keys, a couple tokens, maybe an mTLS certificate. Here's where you can use a technique called [envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) to secure your data. First, you can generate something like a 256-bit AES key. Use that key to encrypt a file containing all of your secrets and add that file to your function ZIP payload. Finally, use KMS to encrypt the AES key and inject the ciphertext as an environment variable.
+Consider a case where you may have ~100kb of secrets to store. A handful of signing keys, a couple tokens, maybe an mTLS certificate. Here's where you can use a technique called [envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) to secure your data.
+
+First, you can generate something like a 256-bit AES key. Use that key to encrypt a file containing all of your secrets and add that file to your function ZIP payload. Finally, use KMS to encrypt the AES key and inject the ciphertext as an environment variable.
+
+1. Create KMS key
+2. Generate AES key for each customer, application, or secrets payload
+3. Encrypt secrets payload with the AES key. Include the encrypted secrets in your function zip.
+4. Finally, encrypt the AES key with your KMS key
 
 You've just encrypted an envelope, and passed the encrypted key to your Lambda Function securely! This also helps save money on KMS keys, as you can re-use one KMS key for multiple AES keys. This pattern is also useful if you need to secure keys for customers in a multi-tenant environment, but laying that out is beyond the scope of this post.
 
