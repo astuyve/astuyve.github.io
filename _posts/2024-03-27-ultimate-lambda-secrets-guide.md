@@ -1,16 +1,16 @@
 ---
 layout: post
 title: Ultimate guide to secrets in Lambda 
-description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables for handling your secrets in Lambda. Then it lays out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
+description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables for handling your secrets in Lambda. We'll cover costs, features, performance, and more. Then it lays out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
 categories: posts
 image: assets/images/secrets/secrets_in_lambda.png
 ---
 
-We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so sensitive that we don't even want to think about them (<span class="spoiler">_serverless actually has servers_</span>).
+We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so sensitive that we don't even want to think about them <span class="spoiler">(_serverless actually has servers_)</span>.
 
 Managing and securing secrets in your applications have similar dimensions! As a result, handling a random 3rd party API key is different from handling the root signing key for an operating system or nuclear launch codes.
 
-This work is a fundamental requirement for any production-quality software system. Unfortunately, AWS doesn't make it easy to select a secrets management tool within their ecosystem. For Serverless developers, this is even more difficult! Lambda is simply one service in a constellation of multiple supporting services which you can use to control application secrets. This guide lays out the most common ways to store and manage secrets for Lambda, and a framework for considering your specific use cases.
+This work is a fundamental requirement for any production-quality software system. Unfortunately, AWS doesn't make it easy to select a secrets management tool within their ecosystem. For Serverless developers, this is even more difficult! Lambda is simply one service in a constellation of multiple supporting services which you can use to control application secrets. This guide lays out the most common ways to store and manage secrets for Lambda, the performance impacts of each option, and a framework for considering your specific use cases.
 
 ## Quick best practices primer
 Plaintext secrets should **NEVER** be hardcoded in your application code or source control. Typically you want to follow the `principle of least privilege` and limit the access of any runtime secret to only the runtime environment (Lambda, in this case).
