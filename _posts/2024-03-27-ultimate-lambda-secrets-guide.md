@@ -142,9 +142,10 @@ Your function interacts with this extension via a lightweight API running on `lo
 
 Furthermore, this extension isn't open source. Because extensions are indistinguishable from your own function code, it leaves a bit of a foul taste in my mouth that I'm completely blessing a random extension with carte-blanche access to both my function code and secrets.
 
-I'm of the firm opinion that we as users shouldn't seriously consider any Lambda Extension unless the code is open source (and can be built/published to my own account if I choose).
+I'm of the firm opinion that we as users shouldn't seriously consider any Lambda Extension unless the code is open source (and can be built/published to my own account if I choose). If AWS changes this behavior, I'll happily update the post.
 
-For these reasons, I prefer interacting with the Parameter Store or Secrets Manager APIs instead, using the `aws-sdk`. If AWS changes this behavior, I'll happily update the post.
+For these reasons, I prefer interacting with the Parameter Store or Secrets Manager APIs instead, using the `aws-sdk`. The (excellent) AWS Lambda [PowerTools project](https://github.com/aws-powertools) also supports fetching parameters from [multiple sources](https://docs.powertools.aws.dev/lambda/python/latest/utilities/parameters/) and is absolutely worth considering. 
+
 
 Now let's consider three example secrets. We'll look at the attack vectors, the blast radius for a leak/compromise, and identify the best cost/benefit solution for each.
 
