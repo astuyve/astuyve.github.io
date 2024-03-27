@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Ultimate guide to secrets in Lambda 
-description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables for handling your secrets in Lambda. We'll cover costs, features, performance, and more. Then it lays out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
+description: Securing your API Keys, database passwords, or SSH keys for Lambda Functions is tricky. This post compares Systems Manager, Secrets Manager, Key Management Service, and environment variables for handling your secrets in Lambda. We'll cover costs, features, performance, and more. Then we'll lay out a framework for considering the risk of your particular secret, so that you know what's best for your application's secrets.
 categories: posts
 image: assets/images/secrets/secrets_in_lambda.png
 ---
 
-We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so sensitive that we don't even want to think about them <span class="spoiler">(_serverless actually has servers_)</span>.
+We all have secrets. Some are small secrets which we barely hide (sometimes I roll through stop signs on my bike). Others are so sensitive that we don't even want to think about them <span class="spoiler">(_serverless actually has servers_).</span>
 
 Managing and securing secrets in your applications have similar dimensions! As a result, handling a random 3rd party API key is different from handling the root signing key for an operating system or nuclear launch codes.
 
@@ -43,7 +43,7 @@ Then, we'll consider several example secrets with various blast radii, and decid
 | [Environment Variables](#lambda-environment-variables) | Easiest | **Free!** | Poor | Requires UpdateFunctionConfiguration or deployment | Encrypted at rest Decrypted when getFunctionConfiguration called.<br> Limited to 4KB total |
 | [Parameter Store Standard](#aws-systems-manager-parameter-store) | Some assembly required | **Free storage**<br><br>Free calls up to 40 calls/second.<br>$0.05/10,000 calls after | Good | Easy manual rotation, not automatic | 4KB size limit |
 | [Parameter Store Advanced](#aws-systems-manager-parameter-store) | Some assembly required | $0.05 per month per secret.<br><br>$0.05/10,000 calls | Good | Easy manual rotation, not automatic | Supports TTL for secrets. 8KB size limit |
-| [Secrets Manager](#aws-secrets-manager) | Some assembly required | $0.40 per secret per month $0.05/10,000 calls | Good | Easiest & Automatic<br>Built into the product | Largest binary size, 65KB |
+| [Secrets Manager](#aws-secrets-manager) | Some assembly required | $0.40 per secret per month $0.05/10,000 calls.<br>30 day free tier. | Good | Easiest & Automatic<br>Built into the product | Largest binary size, 65KB per secret |
 | [Key Management Service](#key-management-service) (KMS) | Most work | $1 per key per month $0.03/10,000 requests | Good | Depends on ciphertext storage.<br>Easy with DynamoDB/S3, more manual with env vars. | Most flexible option.<br> 4KB per `encrypt` operation.<br>Binary size is limited by storage mechanism.<br>Roll your own Secrets Manager or Parameter Store. |
 
 ## Lambda Environment Variables
@@ -84,7 +84,7 @@ Parameter Store offers the choice between Standard and Advanced Parameters. Stan
 
 Standard parameters are limited to 4KB in size (each), with 10,000 total per region. Advanced Parameters have higher limits of 8KB per item and 100,000 total per region. They come with the bonus of attaching [Parameter Policies](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html), which are effectively TTLs for a given parameter.
 
-Standard Parameters are free up to 40 requests per second (for the entire service). Beyond that, the cost is $0.05 per 10,000 Parameter Store API Interactions. Advanced Parameters are always billed at $0.05/10,000 requests. Fetching each parameter counts as an interaction, so 10 parameters triggers 10 interactions. Parameters are individually versioned, and you can fetch by version or `$LATEST`.
+Standard Parameters are free up to 40 requests per second (for all values stored in Parameter Store). Beyond that, the cost is $0.05 per 10,000 Parameter Store API Interactions. Advanced Parameters are always billed at $0.05/10,000 requests. Fetching each parameter counts as an interaction, so 10 parameters triggers 10 interactions. Parameters are individually versioned, and you can fetch by version or `$LATEST`.
 
 Historically one major advantage of Secrets Manager over Parameter Store is the ability to share secrets across AWS accounts using a resource-based policy. This is now [supported by Parameter Store for Advanced Parameters](https://aws.amazon.com/about-aws/whats-new/2024/02/aws-systems-manager-parameter-store-cross-account-sharing/) as well.
 
@@ -98,7 +98,7 @@ With an existing connection, fetching the parameter took around 39.3ms:
 <span class="image fit"><a href="/assets/images/secrets/ssm_warm.png" target="_blank"><img src="/assets/images/secrets/ssm_warm.png" alt="Systems Manager Parameter Store warm request"></a></span>
 
 ## AWS Secrets Manager
-Secrets Manager is purpose-built for encrypting and storing secrets for your application. It also has the largest cost at $0.40 per secret per month. This cost is multiplied by the number of regions you choose to replicate each secret to, so this can add up quickly.
+Secrets Manager is purpose-built for encrypting and storing secrets for your application. It also has the largest cost at $0.40 per secret per month. This cost is multiplied by the number of regions you choose to replicate each secret to, so this can add up quickly. Fetching a secret costs $0.05 per 10,000 API calls, and there is a free 30-day trial.
 
 The big features you'll gain over Parameter Store are the ability to automatically replicate secrets across regions, automatically (or manually) rotate secrets. This feature often satisfies requirements for applications subject to regulations like PCI-DSS or HIPAA. If these are must-have features for your application, it makes sense to use Secrets Manager.
 
@@ -186,7 +186,9 @@ With this in mind, *environment variables* are likely a good enough option here.
 
 Keys can be easily created for exactly one Lambda function, or CloudFormation stack. If someone peers over your shoulder at a coffee shop, or inadvertently leaks the environment variable - it's simple to change with a few clicks and a re-deploy.
 
-If your application doesn't have any users, Parameter Store would also be a good option as it would likely be free.
+You can also use [dynamic references](#safely-securing-environment-variables) and limit the read permissions for console users or 3rd party roles to further prevent access.
+
+Using a SecureString with Parameter Store would also be a good option as it would likely be free - especially if your application doesn't have any users.
 
 In this case, the blast-radius is small, the rotation complexity is easy, and a key encrypted at rest is likely more than suitable for our use case.
 
