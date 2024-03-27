@@ -53,8 +53,6 @@ However one common misconception is that environment variables are `stored as pl
 
 Lambda environment variables are [encrypted at rest](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html), and only decrypted when the Lambda Function initializes, or you take an action resulting in a call to `GetFunctionConfiguration`. This includes visiting the `Environment Variables` section of the Lambda page in the AWS Console. It startles some people to see their secrets on this page, but you can easily prevent this by denying `lambda:GetFunctionConfiguration`, or `kms:Decrypt` permissions from your AWS console user.
 
-One risk is that you may accidentally leak a secret when sharing your screen while viewing or modifying a Lambda environment variable. It's unfortunate that AWS automatically decrypts and displays these values in plain text. AWS has no excuse for this, and should absolutely hide environment variable values unless toggled on, which is how Parameter Store and Secrets Manager both work.
-
 Auditability is another challenge of Lambda environment variables. For the principle of least privilege to be effective, we should limit access to secrets only to when they are needed. To ensure this is followed, or investigate and remediate a leaked secret, we need to know which Lambda function used a specific secret and at what time.
 
 Environment variables are automatically decrypted and injected into every function sandbox upon initialization. Given that CloudTrail reflects one call to `kms:Decrypt`, I presume the entire 4KB environment variable package is encrypted together. This means you lack the ability to audit an individual secret - it's all or nothing.
@@ -68,6 +66,8 @@ Environment variables are also the best-performing option. Systems Manager Param
 Lambda Function environment variables add around 25ms to your cold start duration, according to an article David Behroozi [just wrote](https://speedrun.nobackspacecrew.com/blog/2024/03/13/lambda-environment-variables-impact-on-coldstarts.html). These calls are logged in CloudTrail whenever your function starts.
 
 However, purely storing secrets as environment variables is not the most secure option. Although they are encrypted at rest, environment variables and `lambda:GetFunctionConfiguration` permissions are treated by Lambda as part of the `ReadOnly` policy used by AWS internally, auditors, and cloud security SaaS products. This broadens your risk for a vendor or 3rd party auditor becoming compromised and leaking your secrets.
+
+One risk is that you may accidentally leak a secret when sharing your screen while viewing or modifying a Lambda environment variable. It's unfortunate that AWS automatically decrypts and displays these values in plain text. AWS has no excuse for this, and should absolutely hide environment variable values unless toggled on, which is how Parameter Store and Secrets Manager both work.
 
 Furthermore, CloudFormation treats environment variables as regular parts of a template, so they are available when looking at the full template or historical templates for a given stack. Additionally, AWS does not recommend storing [anything secret in an environment variable](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 
@@ -191,7 +191,7 @@ If your application doesn't have any users, Parameter Store would also be a good
 In this case, the blast-radius is small, the rotation complexity is easy, and a key encrypted at rest is likely more than suitable for our use case.
 
 ### Database Username and Password
-Traditional RDBMs offerings may only allow one username and password string, to be shared across all applications. If you're not using a stateful connection pooler (like `pgbouncer`), you may need to share this secret with all your functions.
+Your RDBMs may only allow one username and password string, to be shared across all applications - or maybe you just need to share a secret for the sake of simplicity. If you're not using a stateful connection pooler (like `pgbouncer`), you may need to share this secret with all your functions.
 
 Here's where Parameter Store is probably also a great fit. If you ever have to change it, your functions can reference an unversioned Parameter and get the latest key. For one key, it's pretty affordable. However this math changes if you have a larger bundle of secrets, which exceed the 4KB or 8KB size limits of Parameter Store.
 
