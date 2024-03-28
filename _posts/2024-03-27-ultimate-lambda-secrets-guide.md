@@ -165,13 +165,13 @@ Standard Parameters are free to store and free to use under 40 req/s, if you're 
 The downside is that your secrets are still viewable in the Lambda Console via `lambda:GetFunctionConfiguration`, and if you update your secret in Parameter Store, it won't be updated in Lambda until you redeploy your functions.
 
 ### Envelope Encryption
-Consider a case where you may have ~100kb of secrets to store. A handful of signing keys, a couple tokens, maybe an mTLS certificate. Here's where you can use a technique called [envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html) to secure your data.
+Consider a case where you may have ~100kb of secrets to store. A handful of signing keys, a couple tokens, maybe an mTLS certificate. Here's where you can use a technique called [envelope encryption](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping) to secure your data.
 
 1. Create a KMS key
 2. Generate 256-bit AES key for each customer, application, or secrets payload
 3. Encrypt all of your secrets with the AES key. This is the "envelope"
 4. Include the encrypted secrets in your function zip.
-5. Finally, encrypt the AES key with your KMS key
+5. Finally, encrypt the AES key with your KMS key and pass the encrypted key to your function in an environment variable.
 
 You've just encrypted an envelope, and passed the encrypted key to your Lambda Function securely! This also helps save money on KMS keys, as you can re-use one KMS key for multiple AES keys. This pattern is also useful if you need to secure keys for customers in a multi-tenant environment, but laying that out is beyond the scope of this post.
 
