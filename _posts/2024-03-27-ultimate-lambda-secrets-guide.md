@@ -181,7 +181,7 @@ We've covered the fundamental building blocks for securing sensitive information
 Now, let's consider 4 common secrets used in Lambda and think about how best to secure them.
 
 ### Telemetry API Key
-First up is a telemetry API key. Consider something like a Datadog or Sentry API key. These keys are free to create, so it's best to create one key per application to limit blast radius and, as a bonus - better track costs. Telemetry keys are also usually write-only. Leaking this key can only cause an attacker to send additional data to the API.
+First up is a telemetry API key. Consider an ELK stack, or any provider you prefer. These keys are free to create, so it's best to create one key per application to limit blast radius and, as a bonus - better track costs. Telemetry keys are also usually write-only. Leaking this key can only cause an attacker to send additional data to the API.
 
 With this in mind, *environment variables* are likely a good enough option here. They have minimal performance overhead, no cost, and minimal blast radius.
 
