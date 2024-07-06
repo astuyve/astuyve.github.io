@@ -2007,6 +2007,16 @@
 			.image.fit img {
 				width: 100%;
 			}
+		.image.half {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 50%;
+		}
+
+			.image.half img {
+				width: 100%;
+			}
 
 /* List */
 
