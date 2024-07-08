@@ -6,7 +6,7 @@ categories: posts
 image: assets/images/backups/backups_post.png
 ---
 
-If you mostly know me because of this blog or my [cloud talks](https://www.youtube.com/watch?v=2EDNcPvR45w), it may surprise you to learn that I'm also an avid parachutist. I've been skydiving since 2010 and BASE jumping since 2012, and have more than 1200 combined jumps all over the world. It's a neat hobby!
+If you mostly know me because of this blog or my [cloud talks](https://www.youtube.com/watch?v=2EDNcPvR45w), it may surprise you to learn that I'm also an avid parachutist. I've been skydiving since 2010 and BASE jumping since 2012, and have more than 1200 combined jumps all over the world. It's a neat hobby! Contrary to popular belief, it's not as dangerous as you might think.
 
 <span class="image half"><a href="/assets/images/backups/gopro_1.jpg" target="_blank"><img src="/assets/images/backups/gopro_1.jpg" alt="Me with an early GoPro"></a></span>
 
@@ -50,7 +50,13 @@ After backing up everything, the costs rolled in. It cost me around $9 to initia
 I want to take a minute to cover Erasure Coding and why it helps make the web work so well. Building reliable systems means having fault-tolerant systems. For data systems, this means ensuring that the inevitable failing hard drive won't lead to data loss. But it's both inefficient and risky to have multiple complete backups of data around. A drive could be stolen or lost in a move, leading to data leaking. And maintaining these complete copies is expensive.
 
 ## How Erasure Coding works
-Enter [Erasure Coding](https://en.wikipedia.org/wiki/Erasure_code). Erasure coding allows us to divide a piece of data like my video files into `N` slices (or shards in distributed systems parlance). Then instead of backing up each shard (thus increasing the backup size by 2x or 3x), we can transform each shard of `N` into a slice of data with size `1/K` using an encoding function. Now, the original file can be recomposed to `N` with `N-K` shards! For a `[3, 2]` code, this means we can fetch 2 slices from any of the 3 to full retrieve our data. This example is dramatically simplified, to learn more I'd suggest this excellent post on [Toward Data Science](https://towardsdatascience.com/erasure-coding-for-the-masses-2c23c74bf87e).
+Enter [Erasure Coding](https://en.wikipedia.org/wiki/Erasure_code). Erasure coding allows us to divide a piece of data like my video files into `N` slices (or shards in distributed systems parlance). Then instead of backing up each shard (thus increasing the backup size by 2x or 3x), we can transform each shard of `N` into a slice of data with size `1/K` using an encoding function. Now, the original file can be recomposed to `N` with `N-K` shards!
+
+For a `[3, 2]` code, this means we can fetch 2 slices from any of the 3 to full retrieve our data. This is helps improve the tail latency performance of distributed systems, as we can make 3 requests across each of the 3 nodes, but only need 2 to succeed to get the data back.
+
+This example is dramatically simplified, to learn more I'd suggest this excellent post on [Toward Data Science](https://towardsdatascience.com/erasure-coding-for-the-masses-2c23c74bf87e).
+
+If you want to learn more about S3 itself - I highly recommend Andy Warfield's talk from FAST'23: [Building and Operating a Pretty Big Storage System](https://www.youtube.com/watch?v=sc3J4McebHE).
 
 Erasure coding is a powerful concept because our backup system can withstand losing an entire storage node and still maintain a full copy of the data. It pairs very nicely with the fact that distributed systems increase reliability exponentially while costs increase linearly. [It's true!](https://brooker.co.za/blog/2023/09/08/exponential.html). This is how AWS can run S3 with [11 9's](https://docs.aws.amazon.com/AmazonS3/latest/userguide/DataDurability.html) of durability!
 
