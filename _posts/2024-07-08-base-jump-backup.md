@@ -65,7 +65,6 @@ At any rate, you can skip this step because I've done it for you. Here is the fu
                 "glacier:UploadMultipartPart",
                 "glacier:CompleteMultipartUpload",
                 "glacier:InitiateMultipartUpload",
-                "glacier:UploadMultipartPart"
             ],
             "Resource": "*"
         }
