@@ -45,7 +45,9 @@ Luckily, Synology provides an out-of-the box package for Glacier support. Settin
 
 <span class="image fit"><a href="/assets/images/backups/glacier_backup.png" target="_blank"><img src="/assets/images/backups/glacier_backup.png" alt="Screenshot of the Glacier package successfully creating an archive from my DSM"></a></span>
 
-After the backup finished, I consulted CloudTrail to get the specific permissions required. You'll notice that two archives are created, with one specifically called a `mapping` archive. I suspect this holds metadata about the backup itself. Here is the full IAM policy for the Synology Glacier backup package:
+After the backup finished, I consulted CloudTrail to get the specific permissions required. You'll notice that two archives are created, with one specifically called a `mapping` archive. I suspect this holds metadata about the backup itself.
+
+At any rate, you can skip this step because I've done it for you. Here is the full IAM policy for the Synology Glacier backup package:
 
 ```json
 {
