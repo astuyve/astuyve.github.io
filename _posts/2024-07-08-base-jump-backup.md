@@ -41,7 +41,39 @@ AWS has a dizzying number of storage options, but after some careful thought I r
 
 Because I already have local copies of my data, if I wanted to watch some videos or edit a new one, I wouldn't need to use my cloud backup. This meant that Glacier was the right choice for my use case.
 
-Luckily, Synology provides an out-of-the box package for Glacier support. Setting it up was pretty easy, my one complaint here is that the Glacier package on Synology could be a bit more user-friendly in terms of setting up the IAM policy. I ended up granting pretty broad Glacier access via IAM. I'm not too worried though. I only leaked the key 5-6 times live on stream! (and rotated it, of course).
+Luckily, Synology provides an out-of-the box package for Glacier support. Setting it up was pretty easy, my one complaint here is that the Glacier package on Synology could be a bit more user-friendly in terms of setting up the IAM policy. To start I ended up granting pretty broad Glacier access via IAM. I'm not too worried though. I only leaked the key 5-6 times live on stream! (and rotated it, of course).
+
+<span class="image fit"><a href="/assets/images/backups/glacier_backup.png" target="_blank"><img src="/assets/images/backups/glacier_backup.png" alt="Screenshot of the Glacier package successfully creating an archive from my DSM"></a></span>
+
+After the backup finished, I consulted CloudTrail to get the specific permissions required. You'll notice that two archives are created, with one specifically called a `mapping` archive. I suspect this holds metadata about the backup itself. Here is the full IAM policy for the Synology Glacier backup package:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "glacier:GetJobOutput",
+                "glacier:InitiateJob",
+                "glacier:UploadArchive",
+                "glacier:ListVaults",
+                "glacier:DeleteArchive",
+                "glacier:UploadMultipartPart",
+                "glacier:CompleteMultipartUpload",
+                "glacier:InitiateMultipartUpload",
+                "glacier:UploadMultipartPart"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+You can further limit the two resources to `arn:aws:glacier:us-west-2:123456789012:vaults/your-vault-name` and `arn:aws:glacier:us-west-2:123456789012:vaults/your-vault-name_mapping` if you want to be more specific, but I don't believe you can specify the vault name so you'll need to use a wildcard to start.
+
+<span class="image fit"><a href="/assets/images/backups/glacier_mappings.png" target="_blank"><img src="/assets/images/backups/glacier_mappings.png" alt="Glacier archive and archive mapping"></a></span>
 
 After backing up everything, the costs rolled in. It cost me around $9 to initially back up the data, and will be about $4/month to store it.
 
