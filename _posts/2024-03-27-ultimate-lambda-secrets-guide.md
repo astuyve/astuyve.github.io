@@ -140,11 +140,12 @@ To more easily use either Parameter Store or Secrets Manager in Lambda, AWS has 
 
 Your function interacts with this extension via a lightweight API running on `localhost`. It's reasonably well designed, although I find it a bit clumsy overall. This really feels like the type of feature Lambda should implement themselves, and then `magically` make secrets appear in your function runtime. In contrast, ECS [has this behavior built in](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) and I find the experience far superior compared to Lambda.
 
-Furthermore, this extension isn't open source. Because extensions are indistinguishable from your own function code, it leaves a bit of a foul taste in my mouth that I'm completely blessing a random extension with carte-blanche access to both my function code and secrets.
+### Update July 11th, 2024
+An earlier version of this post recommended avoiding the then closed-source version of the Parameter and Secrets Lambda Extension.
 
-I'm of the firm opinion that we as users shouldn't seriously consider any Lambda Extension unless the code is open source (and can be built/published to my own account if I choose). If AWS changes this behavior, I'll happily update the post.
+I'm very pleased to share that AWS has [announced](https://aws.amazon.com/about-aws/whats-new/2024/07/aws-secrets-manager-open-source-secrets-manager-agent/) that the source code for the Parameter and Secrets Lambda Extension is now available on GitHub! This is a welcome step forward in transparency for Lambda users, and I'm glad to see AWS make the right decision here. You can find the code in the [AWS Secrets Manager Agent](https://github.com/aws/aws-secretsmanager-agent) repository.
 
-For these reasons, I prefer interacting with the Parameter Store or Secrets Manager APIs instead, using the `aws-sdk`. The (excellent) AWS Lambda [PowerTools project](https://github.com/aws-powertools) also supports fetching parameters from [multiple sources](https://docs.powertools.aws.dev/lambda/python/latest/utilities/parameters/) and is absolutely worth considering. 
+The (excellent) AWS Lambda [PowerTools project](https://github.com/aws-powertools) also supports fetching parameters from [multiple sources](https://docs.powertools.aws.dev/lambda/python/latest/utilities/parameters/) and is absolutely worth considering.
 
 
 Now let's consider three example secrets. We'll look at the attack vectors, the blast radius for a leak/compromise, and identify the best cost/benefit solution for each.
