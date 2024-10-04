@@ -27,7 +27,7 @@ Let's consider a Lambda function serving an API with a 3 second timeout configur
 But now imagine that function crashes on the next invocation. Maybe it times out, or runs out of memory.
 <span class="image half"><a href="/assets/images/doom_loop/doom_loop_crash.png" target="_blank"><img src="/assets/images/doom_loop/doom_loop_crash.png" alt="Part two - the function crashes"></a></span>
 
-When Lambda re-initializes your function under a suppressed init, it won't complete re-initialization before the timeout arrives, and it's now **permanently** stuck in a retry loop.
+When Lambda re-initializes your function under a suppressed init, it won't complete re-initialization before the timeout arrives, and it's now **permanently** stuck in a retry loop. **Function invocations will fail until Lambda decides to kill the sandbox and start a new one.**
 
 <span class="image half"><a href="/assets/images/doom_loop/doom_loop_suppressed.png" target="_blank"><img src="/assets/images/doom_loop/doom_loop_suppressed.png" alt="Part three - the function crashes permanently"></a></span>
 
