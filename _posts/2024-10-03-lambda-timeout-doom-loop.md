@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Avoiding the Lambda Doom Loop 
-description: Heads up serverless developers! A recent change in the Lambda sandbox environment changes how timeouts are handled, potentially causing your function to ender a permanent doom loop. This post will explain the change, how to spot it, and how to avoid the doom loop.
+description: Heads up serverless developers! A recent change in the Lambda sandbox environment changes how timeouts are handled, potentially causing your function to enter a permanent doom loop. This post will explain the change, how to spot it, and how to avoid the doom loop.
 categories: posts
 image: assets/images/doom_loop/doom_loop_logo.png
 ---
