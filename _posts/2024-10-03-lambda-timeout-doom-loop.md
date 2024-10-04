@@ -8,7 +8,7 @@ image: assets/images/doom_loop/doom_loop_logo.png
 
 There have been a number of recent changes in the Lambda sandbox environment, mostly transparent ones like changing the [Runtime API IP address and port](https://x.com/astuyve/status/1825676633673769334) to a link-local IP. But recently I noticed a change in how Lambda handles function crashes and re-initialization, and after confirming this behavior with the Lambda team I wanted to take some time to help explain how it works now and why.
 
-In a [previous post](https://aaronstuyvenberg.com/posts/ice-cold-starts) I've demonstrated how not all cold starts are identical. Specifically, cold starts after a runtime crash, function timeout, or out-of-memory error cause the Lambda function to re-initialize and cause a `mini cold start`, which AWS calls a [suppressed init](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html#runtimes-lifecycle-invoke-with-errors). It's this case that we're going to focus on today. As of October 4th, 2024 this is now [documented in the AWS docs](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html#troubleshooting-timeouts).
+In a [previous post](https://aaronstuyvenberg.com/posts/ice-cold-starts) I've demonstrated how not all cold starts are identical. Specifically, cold starts after a runtime crash, function timeout, or out-of-memory error cause the Lambda function to re-initialize and cause a `mini cold start`, which AWS calls a [suppressed init](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-environment.html#runtimes-lifecycle-invoke-with-errors). It's this case that we're going to focus on today. As of October 4th, 2024 this is now [documented on AWS as well](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html#troubleshooting-timeouts).
 
 If your Lambda functions have an especially short `timeout` configuration, you'll want to pay close attention.
 
@@ -73,7 +73,8 @@ Ultimately avoiding this is simple and there are several options.
 3. Optimize your function initialization! I gave a long talk about this at [re:Invent 2023](https://www.youtube.com/watch?v=2EDNcPvR45w), check it out for specific tips and be sure to consider [lazy-loading](https://aaronstuyvenberg.com/posts/lambda-lazy-loading)!
 4. Finally modify your function code so that a timeout won't cause the environment to error (and thus re-initialize). You can do this by racing the deadline provided by `getRemainingTimeInMillis()` method on the [context object](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html).
 
-Although it's unfortunate this couldn't be factored in for us when creating Lambda functions, it seems this change is a critical component of some internal Lambda's re-architecting, so it's one we'll need to live with.
+These tips are in the [help docs](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html#troubleshooting-timeouts) as well.
+Although it's unfortunate this couldn't be factored in for us when creating Lambda functions, it seems this change is a deeply tied to other intractable changes underpinning Lambda - so it's one we'll need to live with.
 
 ## Key takeaways
 If you've [followed me](https://twitter.com/astuyve) for any period of time I hope I've given you the tools necessary to minimize the impact of cold starts, but the fact remains that some initialization time is necessary.
