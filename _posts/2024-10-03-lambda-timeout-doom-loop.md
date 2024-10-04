@@ -73,7 +73,7 @@ Ultimately avoiding this is simple and there are several options.
 3. Optimize your function initialization! I gave a long talk about this at [re:Invent 2023](), check it out for specific tips and be sure to consider [lazy-loading](https://aaronstuyvenberg.com/posts/lambda-lazy-loading)!
 4. Finally modify your function code so that a timeout won't cause the environment to error (and thus re-initialize). You can do this by racing the deadline provided by `getRemainingTimeInMillis()` method on the [context object](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html).
 
-Although it's unfortunate this couldn't be factored in for us when creating Lambda functions, it seems this change is a critical component of Lambda's internal re-architecting, so it's one we'll need to live with.
+Although it's unfortunate this couldn't be factored in for us when creating Lambda functions, it seems this change is a critical component of some internal Lambda's re-architecting, so it's one we'll need to live with.
 
 ## Key takeaways
 If you've [followed me](https://twitter.com/astuyve) for any period of time I hope I've given you the tools necessary to minimize the impact of cold starts, but the fact remains that some initialization time is necessary.
