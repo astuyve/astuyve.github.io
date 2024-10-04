@@ -70,7 +70,7 @@ Ultimately avoiding this is simple and there are several options.
 
 1. Increase the timeout value so it covers the longest possible function execution _plus_ your expected Init Duration time.
 2. If your function initialization is mostly caused by interpreting code, you can increase the configured memory size up to 1769MB, where you'll receive one full vCPU.
-3. Optimize your function initialization! I gave a long talk about this at [re:Invent 2023](), check it out for specific tips and be sure to consider [lazy-loading](https://aaronstuyvenberg.com/posts/lambda-lazy-loading)!
+3. Optimize your function initialization! I gave a long talk about this at [re:Invent 2023](https://www.youtube.com/watch?v=2EDNcPvR45w), check it out for specific tips and be sure to consider [lazy-loading](https://aaronstuyvenberg.com/posts/lambda-lazy-loading)!
 4. Finally modify your function code so that a timeout won't cause the environment to error (and thus re-initialize). You can do this by racing the deadline provided by `getRemainingTimeInMillis()` method on the [context object](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html).
 
 Although it's unfortunate this couldn't be factored in for us when creating Lambda functions, it seems this change is a critical component of some internal Lambda's re-architecting, so it's one we'll need to live with.
