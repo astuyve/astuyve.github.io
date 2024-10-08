@@ -76,6 +76,8 @@ Ultimately avoiding this is simple and there are several options.
 These tips are in the [help docs](https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting-invocation.html#troubleshooting-timeouts) as well.
 Although it's unfortunate this couldn't be factored in for us when creating Lambda functions, it seems this change is a deeply tied to other intractable changes underpinning Lambda - so it's one we'll need to live with.
 
+It's important to note that this behavior of a suppressed initialization _did_ already exist in some cases earlier. Specifically, beginning around 2021 with functions configured with a Lambda Extension or SnapStart. Now it's a default behavior for all functions.
+
 ## Key takeaways
 If you've [followed me](https://twitter.com/astuyve) for any period of time I hope I've given you the tools necessary to minimize the impact of cold starts, but the fact remains that some initialization time is necessary.
 
