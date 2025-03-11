@@ -152,15 +152,9 @@ Now let's consider three example secrets. We'll look at the attack vectors, the 
 ## Patterns and Practices
 
 ### Safely securing environment variables
-The biggest issue storing sensitive data in environment variables isn't Lambda itself - it's CloudFormation (and your CI pipeline)! When your stack is created or updated, those environment variables **are** plaintext values in the CloudFormation stack template. Templates are also stored and retrievable in the CloudFormation UI.
+Given that AWS Lambda environment variables are encrypted at rest - the biggest issue storing sensitive data in environment variables isn't Lambda itself - it's the AWS Console and CloudFormation (and your CI pipeline)! When your stack is created or updated, those environment variables **are** plaintext values in the CloudFormation stack template. Templates are also stored and retrievable in the CloudFormation UI, as well as in the AWS Lambda console.
 
-To avoid using sensitive information in your CloudFormation Template but avoid the cost overhead of Parameter Store being used **at function runtime**, you can adopt the following strategy:
-1. Store your secrets as SecureStrings in [Systems Manager Parameter Store](#aws-systems-manager-parameter-store).
-2. Use CloudFormation [dynamic references](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html) to pass a _reference_ to your secret to CloudFormation.
-
-Now your secret will land safely encrypted at rest in a Lambda environment variable, and never be visible in CloudFormation.
-
-Standard Parameters are free to store and free to use under 40 req/s, if you're only fetching secrets at deploy time via CloudFormation references, you'll likely never receive a bill for these secrets.
+Unfortunately you're not able to use [dynamic references](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html) to pass a _reference_ to your secret to CloudFormation, because they aren't yet supported by Lambda environment variables. You should complain about this to your AWS TAM.
 
 The downside is that your secrets are still viewable in the Lambda Console via `lambda:GetFunctionConfiguration`, and if you update your secret in Parameter Store, it won't be updated in Lambda until you redeploy your functions.
 
