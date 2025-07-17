@@ -143,7 +143,7 @@ export const handler = awslambda.streamifyResponse(async (event, responseStream,
 
 This works great, but there's an even easier way with
 
-2. Use a custom runtime.
+## Use a custom runtime.
 You can fork the `runtime-interface-client` and then drive your async tasks to completion after providing the response via `/response` but before calling the `/next` endpoint. Bref, the extremely popular PHP runtime for Lambda, already supports this out of the box. [Here](https://github.com/brefphp/bref/blob/4272eebda4933b729a9c3af384c2e84488f72d7b/src/Runtime/LambdaRuntime.php#L81-L122) we can see that Bref will get the response from next, return the result (via `sendResponse`), and then call the `afterInvoke` hooks to run any async work you may have queued up:
 
 ```php
@@ -199,7 +199,7 @@ This technique looks quite simple, but of course the downside is that you're res
 
 **I'd like to see AWS offer this natively.**
 
-3. Use an extension
+## Use an extension
 Lambda Extensions offer a relatively low lift way to add async processing to your Lambda function. You can use an internal or external extension, and AWS recommends an internal extension in their [post](https://aws.amazon.com/blogs/compute/running-code-after-returning-a-response-from-an-aws-lambda-function/), but the rest is pretty straightforward.
 
 Configure the handler, and provide an in-memory queue to pass jobs between the handler and the job runner:
