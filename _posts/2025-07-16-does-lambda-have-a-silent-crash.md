@@ -5,7 +5,7 @@ description: Understanding what's happening in the "AWS Lambda Silent Crash" blo
 categories: posts
 image: assets/images/silent_crash/silent_crash_header.png
 ---
-A recent [blog post](https://web.archive.org/web/20250707165527/https://lyons-den.com/whitepapers/aws-lambda-silent-crash.pdf) went very viral in the AWS space recently which asserts that there's a silent crash in AWS Lambda's NodeJS runtime when HTTP calls are made from a Lambda function. The post is nearly 23 pages long and mostly pertains to the handling of the issue by AWS (which seems like it could have been better), but ultimately my focus here is on the technical aspects of the post.
+A [blog post](https://web.archive.org/web/20250707165527/https://lyons-den.com/whitepapers/aws-lambda-silent-crash.pdf) went very viral in the AWS space recently which asserts that there's a silent crash in AWS Lambda's NodeJS runtime when HTTP calls are made from a Lambda function. The post is nearly 23 pages long and mostly pertains to the handling of the issue by AWS (which seems like it could have been better), but ultimately my focus here is on the technical aspects of the post.
 
 This post has been updated to the archive link, as the original has been experiencing a hug of death and is [unavailable](https://lyons-den.com/whitepapers/aws-lambda-silent-crash.pdf) at the time of publishing.
 
