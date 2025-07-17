@@ -28,7 +28,7 @@ Here's the first snippet of code they provide. The author states this is a nestj
 async sendTestEmail() {
   this.eventEmitter.emit(events.USER_REGISTERED, {
     name: Joe Bloggs,
-    email: 'email@foo.com, // legitimate email was used for testing
+    email: 'email@foo.com', // legitimate email was used for testing
     token: 'dummy-token-123',
   });
   return { message: 'Manual test triggered' };
