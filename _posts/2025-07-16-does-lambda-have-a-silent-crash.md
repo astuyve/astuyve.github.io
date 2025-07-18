@@ -65,7 +65,7 @@ Lambda is famous for "scaling to zero", where your function code is executed whe
 
 After some amount of time, number of invocations, or for any number of possible reasons Lambda will shutdown the sandbox and reap its resources back into the worker pool. 
 
-The issue described by the author is rooted in how Lambda handles this lifecycle, specifically the invoke phase. There are two parts to disambiguate here, the Lambda managed runtime (which is nodejs in this case), and Lambda's Runtime API. We'll start by examining the runtime API
+The issue described by the author is rooted in how Lambda handles this lifecycle, specifically the invoke phase. There are two parts to disambiguate here, the Lambda managed runtime (which is nodejs in this case), and Lambda's Runtime API. We'll start by examining the Runtime API.
 
 ## The Runtime API
 Lambda exposes an HTTP-based Runtime API, hosted at the link-local address found in the `AWS_LAMBDA_RUNTIME_API` environment variable. This is a local server which provides the incoming event or request to the Lambda function in JSON format and receives the response from the function once it's complete. Two of the endpoints are relevant here:
@@ -79,7 +79,7 @@ Lambda operates as a state machine. Functions call the `/next` endpoint to recei
 
 The call to `/next` has three possible return states:
 1. You receive an invocation response containing a request payload.
-2. You receive the shutdown event, indicating the sandbox will shut down (only applies to extensions, not your handler, but it is part of the runtime API)
+2. You receive the shutdown event, indicating the sandbox will shut down (only applies to extensions, not your handler, but it is part of the Runtime API)
 or possibly
 3. **Lambda freezes the CPU because there are no pending requests**
 When a request arrives, the runtime will thaw the CPU and return a result to `/next`.
@@ -89,9 +89,9 @@ This is easy to see in the state machine image for Extension development. For no
 <span class="image half"><a href="/assets/images/silent_crash/freeze.png" target="_blank"><img src="/assets/images/silent_crash/freeze.png" alt="Lambda's runtime lifecycle"></a></span>
 
 ## Lambda's Node runtime
-The NodeJS runtime isn't really much of a secret, you can either extract it from the container base images they publish [like this](https://gist.github.com/astuyve/d6052a696658214de98f7ebe91daf0bd), or you can read the [runtime interface client](https://github.com/aws/aws-lambda-nodejs-runtime-interface-client) code, which interacts with the runtime API.
+The NodeJS runtime isn't really much of a secret, you can either extract it from the container base images they publish [like this](https://gist.github.com/astuyve/d6052a696658214de98f7ebe91daf0bd), or you can read the [runtime interface client](https://github.com/aws/aws-lambda-nodejs-runtime-interface-client) code, which interacts with the Runtime API.
 
-When you provide a nodejs function, Lambda looks for it based on the handler method configured for the function. Then it imports your function, and passes it the runtime events from the runtime API. Then it's effectively acting as a state machine, ferrying requests to your code, awaiting the result, and sending them back to the runtime.
+When you provide a nodejs function, Lambda looks for it based on the handler method configured for the function. Then it imports your function, and passes it the runtime events from the Runtime API. Then it's effectively acting as a state machine, ferrying requests to your code, awaiting the result, and sending them back to the runtime.
 
 ## Putting it all together
 So here is how the Node runtime executes your function
