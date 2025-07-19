@@ -61,7 +61,7 @@ Before we move on, I want to add that **this is exactly what I'd expect to happe
 ## The lifecycle of Lambda
 So what's happening here? And why is it expected?
 
-Lambda is famous for "scaling to zero", where your function code is executed when a request is made, and then "freeze" when the response is completed and there are no other requests to serve. Today, a sandbox can only serve one request at a time, and may be reused for subsequent invocations.
+Lambda is famous for "scaling to zero", where your function code is executed when a request is made, and then "frozen" when the response is completed and there are no other requests to serve. It's "thawed" again when a new request arrives. Today, a sandbox can only serve one request at a time, and may be reused for subsequent invocations.
 
 After some amount of time, number of invocations, or for any number of possible reasons Lambda will shutdown the sandbox and reap its resources back into the worker pool. 
 
