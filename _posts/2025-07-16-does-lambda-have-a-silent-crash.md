@@ -69,7 +69,7 @@ The issue described by the author is rooted in how Lambda handles this lifecycle
 
 ## The Runtime API
 Lambda exposes an HTTP-based Runtime API, hosted at the link-local address found in the `AWS_LAMBDA_RUNTIME_API` environment variable. This is a local server which provides the incoming event or request to the Lambda function in JSON format and receives the response from the function once it's complete. Two of the endpoints are relevant here:
-`/runtime/invocation/next`)
+`/runtime/invocation/next`
 and
 `/runtime/invocation/<AwsRequestId>/response`.
 
