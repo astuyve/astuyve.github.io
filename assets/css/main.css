@@ -5096,3 +5096,33 @@ body.landing .wrapper.style1 {
 	color: var(--color-fg) !important;
 }
 
+
+/* Seamless opacity overlay for smooth scrolling transition */
+body.landing #banner,
+body.landing .wrapper.style1 {
+	position: relative;
+	background: url("../../assets/images/banner.jpg") !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+.opacity-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: white;
+	opacity: 0.50;
+	pointer-events: none;
+	z-index: 0;
+	transition: opacity 0.1s linear;
+}
+
+body.landing #banner > *:not(.opacity-overlay),
+body.landing .wrapper.style1 > *:not(.opacity-overlay) {
+	position: relative;
+	z-index: 1;
+}
