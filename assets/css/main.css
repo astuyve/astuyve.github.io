@@ -3424,6 +3424,10 @@
 				opacity: 0;
 			}
 
+			#header.alt nav > ul > li > a.menuToggle:after {
+				filter: brightness(0) saturate(100%) invert(10%) sepia(10%) saturate(1000%) hue-rotate(180deg) brightness(95%) contrast(95%);
+			}
+
 /* Banner */
 
 	#banner {
@@ -4622,17 +4626,26 @@ body:not(.landing) #header h1 a {
 
 body:not(.landing) #header nav > ul > li > a {
 	color: var(--color-fg-bold) !important;
+	display: flex !important;
+	align-items: center !important;
 }
 
 body:not(.landing) #header nav > ul > li > a.menuToggle:after {
-	filter: none;
+	background-image: url("images/bars.svg");
+	background-position: right center;
+	background-repeat: no-repeat;
+	content: '';
+	display: inline-block;
+	height: 3.75em;
+	vertical-align: top;
+	width: 2em;
+	filter: brightness(0) saturate(100%) invert(13%) sepia(8%) saturate(2449%) hue-rotate(174deg) brightness(95%) contrast(92%);
 }
 
 /* Fix menu button alignment */
 #header nav > ul > li > a.menuToggle {
 	display: flex !important;
 	align-items: center !important;
-	gap: 0.5em;
 }
 
 #header nav > ul > li > a.menuToggle:after {
@@ -4643,6 +4656,7 @@ body:not(.landing) #header nav > ul > li > a.menuToggle:after {
 }
 
 #header nav > ul > li > a.menuToggle span {
+	display: none;
 	line-height: 1 !important;
 }
 
@@ -4993,7 +5007,7 @@ body.landing #header nav > ul > li > a {
 }
 
 body.landing #header nav > ul > li > a.menuToggle:after {
-	filter: none;
+	filter: brightness(0) saturate(100%) invert(20%) sepia(5%) saturate(500%) hue-rotate(180deg);
 }
 
 /* Update banner for white background */
