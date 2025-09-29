@@ -3221,7 +3221,7 @@
 		right: 0;
 		top: 0;
 		width: 20em;
-		z-index: 10002;
+		z-index: 10003;
 	}
 
 		#menu ul {
@@ -3312,7 +3312,7 @@
 		position: fixed;
 		top: 0;
 		width: 100%;
-		z-index: 10000;
+		z-index: 10002;
 	}
 
 		#header h1 {
@@ -4971,6 +4971,8 @@ body.landing #header {
 	background: rgba(255, 255, 255, 0.95) !important;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	position: fixed;
+	z-index: 10002;
 }
 
 body.landing #header h1 a {
