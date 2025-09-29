@@ -5128,3 +5128,63 @@ body.landing .wrapper.style1 > *:not(.opacity-overlay) {
 	position: relative;
 	z-index: 1;
 }
+
+/* Fix CTA section for landing page with white background */
+body.landing #cta,
+body.landing .wrapper.style4 {
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+	color: white !important;
+}
+
+body.landing #cta h2,
+body.landing .wrapper.style4 h2 {
+	color: white !important;
+}
+
+body.landing #cta p,
+body.landing .wrapper.style4 p {
+	color: rgba(255, 255, 255, 0.9) !important;
+}
+
+body.landing #cta header p {
+	color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Mobile visibility fixes */
+@media screen and (max-width: 736px) {
+	body.landing #header h1 a {
+		color: #1e293b !important;
+	}
+
+	body.landing #header nav > ul > li > a {
+		color: #1e293b !important;
+	}
+
+	body.landing #header nav > ul > li > a.menuToggle:after {
+		filter: brightness(0) saturate(100%) invert(13%) sepia(8%) saturate(2449%) hue-rotate(174deg) brightness(95%) contrast(92%) !important;
+	}
+
+	body:not(.landing) #header h1 a {
+		color: #1e293b !important;
+	}
+
+	body:not(.landing) #header nav > ul > li > a {
+		color: #1e293b !important;
+	}
+
+	body:not(.landing) #header nav > ul > li > a.menuToggle:after {
+		filter: brightness(0) saturate(100%) invert(13%) sepia(8%) saturate(2449%) hue-rotate(174deg) brightness(95%) contrast(92%) !important;
+	}
+
+	#footer .copyright {
+		color: #94a3b8 !important;
+	}
+
+	#footer .copyright li {
+		color: #94a3b8 !important;
+	}
+
+	#footer .copyright li a {
+		color: #94a3b8 !important;
+	}
+}
