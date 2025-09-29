@@ -3940,3 +3940,1189 @@
 .highlight .vg { color: #008080 } /* Name.Variable.Global */
 .highlight .vi { color: #008080 } /* Name.Variable.Instance */
 .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+/* ========================================
+   MODERN REDESIGN OVERRIDES
+   ======================================== */
+
+/* Modern Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* Root Variables for Modern Design */
+:root {
+	--color-bg: #ffffff;
+	--color-fg: #1a1a1a;
+	--color-fg-bold: #0a0a0a;
+	--color-fg-light: #666666;
+	--color-border: #e5e5e5;
+	--color-border-bg: #f8f9fa;
+	--color-primary: #3b82f6;
+	--color-primary-hover: #2563eb;
+	--color-secondary: #8b5cf6;
+	--color-dark: #0f172a;
+	--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+	--font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+/* Modern Body Styles */
+body {
+	background: #0f172a !important;
+}
+
+body, input, select, textarea {
+	color: var(--color-fg);
+	font-family: var(--font-family);
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: -0.011em;
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Modern Typography */
+h1, h2, h3, h4, h5, h6 {
+	color: var(--color-fg-bold);
+	font-weight: 700;
+	letter-spacing: -0.022em;
+	line-height: 1.2;
+	margin: 0 0 1rem 0;
+	text-transform: none !important;
+}
+
+h2 {
+	font-size: 2em;
+	line-height: 1.3;
+	margin: 1.5em 0 0.75em 0;
+}
+
+h3 {
+	font-size: 1.5em;
+	line-height: 1.4;
+	margin: 1.25em 0 0.5em 0;
+}
+
+/* Modern Links */
+a {
+	color: var(--color-primary);
+	text-decoration: none;
+	border-bottom: none !important;
+	transition: opacity 0.2s ease;
+}
+
+a:hover {
+	opacity: 0.8;
+}
+
+/* Modern Header */
+#header {
+	background: rgba(15, 23, 42, 0.95) !important;
+	backdrop-filter: blur(10px);
+	height: 4.5em !important;
+	line-height: 4.5em !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+#header h1 {
+	left: 2em !important;
+	font-weight: 700;
+	font-size: 1.1em;
+	opacity: 1 !important;
+	pointer-events: auto !important;
+}
+
+#header h1 a {
+	color: white !important;
+}
+
+#header.alt {
+	background: rgba(15, 23, 42, 0.95) !important;
+	backdrop-filter: blur(10px);
+}
+
+#header.alt h1 {
+	opacity: 1 !important;
+	pointer-events: auto !important;
+}
+
+#header nav > ul > li > a {
+	color: white !important;
+}
+
+#header nav > ul > li > a.menuToggle:after {
+	filter: brightness(0) invert(1);
+}
+
+#page-wrapper {
+	padding-top: 4.5em !important;
+}
+
+/* Modern Hero Banner */
+#banner {
+	height: 90vh !important;
+	min-height: 600px !important;
+	background: transparent !important;
+}
+
+#banner .inner {
+	background: rgba(15, 23, 42, 0.5);
+	backdrop-filter: blur(10px);
+	padding: 3em 2em;
+	border-radius: 16px;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+#banner h2 {
+	font-size: 3.5em !important;
+	font-weight: 700 !important;
+	color: white !important;
+	letter-spacing: -0.02em !important;
+	margin-bottom: 0.3em !important;
+	text-transform: none !important;
+	text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+#banner h2:before,
+#banner h2:after {
+	display: none !important;
+}
+
+#banner p {
+	letter-spacing: 0.02em !important;
+	text-transform: none !important;
+	font-size: 1.35em !important;
+	color: white !important;
+	font-weight: 400 !important;
+	text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+}
+
+#banner p a {
+	color: white !important;
+	border-bottom: 2px solid rgba(255,255,255,0.7) !important;
+	padding-bottom: 2px;
+}
+
+#banner p a:hover {
+	border-bottom-color: white !important;
+}
+
+/* Profile Section */
+.wrapper.style1 {
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+	color: #e2e8f0 !important;
+}
+
+.wrapper.style1 h2,
+.wrapper.style1 h3,
+.wrapper.style1 h4,
+.wrapper.style1 h5,
+.wrapper.style1 h6 {
+	color: white !important;
+}
+
+.wrapper.style1 p {
+	color: #cbd5e1 !important;
+}
+
+.wrapper.style1 a {
+	color: #93c5fd !important;
+}
+
+.wrapper.style1 a:hover {
+	color: #60a5fa !important;
+}
+
+section.special {
+	text-align: center;
+	padding: 4em 2em !important;
+}
+
+.profile-image {
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 1.5em;
+	box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+	border: 5px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modern Icons */
+.icon.major {
+	transform: none !important;
+	border-radius: 12px !important;
+	border: none !important;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+	font-size: 1.5em !important;
+	height: 4em !important;
+	line-height: 4em !important;
+	width: 4em !important;
+	color: white !important;
+	box-shadow: 0 4px 15px rgba(102,126,234,0.3) !important;
+}
+
+.icon.major:before {
+	transform: none !important;
+	font-size: 1.3em !important;
+}
+
+.icon.style1 {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+	color: white !important;
+}
+
+.icon.style2 {
+	background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+	color: white !important;
+}
+
+.icon.style3 {
+	background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+	color: white !important;
+}
+
+.icon.banner-icon {
+	color: white !important;
+	font-size: 1.5em;
+	transition: all 0.3s ease;
+}
+
+.icon.banner-icon:hover {
+	transform: scale(1.1);
+	opacity: 1 !important;
+}
+
+/* Modern Blog Post Cards */
+.spotlight {
+	background: white !important;
+	border-radius: 16px !important;
+	margin: 2em auto !important;
+	max-width: 1200px !important;
+	overflow: hidden !important;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.08) !important;
+	transition: all 0.3s ease !important;
+}
+
+.spotlight:hover {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 20px 30px rgba(0,0,0,0.12) !important;
+	transform: translateY(-4px) !important;
+}
+
+.spotlight .image {
+	width: 45% !important;
+	overflow: hidden !important;
+}
+
+.spotlight .image img {
+	transition: transform 0.3s ease !important;
+	object-fit: cover !important;
+	height: 100% !important;
+}
+
+.spotlight .image:hover img {
+	transform: scale(1.05) !important;
+}
+
+.spotlight .content {
+	padding: 3em 3.5em !important;
+	width: 55% !important;
+}
+
+.spotlight .content h2 {
+	margin-top: 0 !important;
+	font-size: 1.75em !important;
+}
+
+.spotlight .content h2 a {
+	color: var(--color-fg-bold) !important;
+}
+
+.spotlight .content h2 a:hover {
+	color: var(--color-primary) !important;
+}
+
+.spotlight .content p {
+	color: var(--color-fg-light) !important;
+	line-height: 1.7 !important;
+}
+
+/* Modern Buttons */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
+	background-color: var(--color-primary) !important;
+	border-radius: 8px !important;
+	border: 0 !important;
+	box-shadow: 0 2px 4px rgba(59,130,246,0.2) !important;
+	color: white !important;
+	font-size: 0.95em !important;
+	font-weight: 600 !important;
+	height: auto !important;
+	letter-spacing: -0.01em !important;
+	line-height: 1 !important;
+	padding: 0.9em 2em !important;
+	text-transform: none !important;
+	transition: all 0.2s ease !important;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+button:hover,
+.button:hover {
+	background-color: var(--color-primary-hover) !important;
+	box-shadow: 0 4px 8px rgba(59,130,246,0.3) !important;
+	transform: translateY(-1px) !important;
+}
+
+.button.special {
+	background-color: var(--color-secondary) !important;
+	box-shadow: 0 2px 4px rgba(139,92,246,0.2) !important;
+}
+
+.button.special:hover {
+	background-color: #7c3aed !important;
+	box-shadow: 0 4px 8px rgba(139,92,246,0.3) !important;
+}
+
+/* Modern Code Blocks */
+code {
+	background: var(--color-border-bg) !important;
+	border-radius: 6px !important;
+	font-family: var(--font-family-mono) !important;
+	font-size: 0.875em !important;
+	padding: 0.2em 0.5em !important;
+	border: 1px solid var(--color-border) !important;
+	margin: 0 0.15em !important;
+}
+
+pre {
+	border-radius: 8px !important;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+	margin: 1.5em 0 !important;
+}
+
+pre code {
+	background: var(--color-dark) !important;
+	color: #e2e8f0 !important;
+	padding: 1.25em 1.5em !important;
+	border: none !important;
+	line-height: 1.6 !important;
+}
+
+/* Modern Blockquotes */
+blockquote {
+	border-left: solid 4px var(--color-primary) !important;
+	margin: 2em 0 !important;
+	padding: 1.25em 0 1.25em 2em !important;
+	background: var(--color-border-bg) !important;
+	border-radius: 0 8px 8px 0 !important;
+	color: #475569 !important;
+}
+
+/* Modern Images */
+.image {
+	border-radius: 12px !important;
+	overflow: hidden !important;
+}
+
+.image img {
+	border-radius: 12px !important;
+}
+
+/* Modern Wrappers */
+.wrapper {
+	padding: 5em 2em !important;
+}
+
+.wrapper > .inner {
+	width: 1200px !important;
+	max-width: 100% !important;
+	margin: 0 auto !important;
+}
+
+.wrapper.style2 {
+	background-color: white !important;
+}
+
+.wrapper.alt {
+	padding: 4em 0 !important;
+	background: var(--color-border-bg) !important;
+}
+
+.wrapper.style5 {
+	background-color: white !important;
+	padding: 4em 2em !important;
+}
+
+/* Modern Footer */
+#footer {
+	padding: 4em 2em !important;
+	background-color: var(--color-dark) !important;
+	color: #94a3b8 !important;
+}
+
+#footer .icons {
+	font-size: 1.35em !important;
+	margin-bottom: 1.5em !important;
+}
+
+#footer .icons a {
+	color: #94a3b8 !important;
+	transition: color 0.2s ease !important;
+}
+
+#footer .icons a:hover {
+	color: white !important;
+}
+
+#footer .copyright {
+	color: #64748b !important;
+	font-size: 0.9em !important;
+	letter-spacing: 0 !important;
+	text-transform: none !important;
+}
+
+/* Landing Page Styles */
+body.landing #page-wrapper {
+	padding-top: 0 !important;
+	background-image: linear-gradient(to top, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), url("../../assets/images/banner.jpg") !important;
+	background-attachment: fixed !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	animation: fadeInBackground 1.5s ease-in-out;
+}
+
+@keyframes fadeInBackground {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+body.landing #page-wrapper > * {
+	position: relative;
+	z-index: 1;
+}
+
+body.landing #footer {
+	background-color: rgba(15, 23, 42, 0.95) !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Modern Main Article Header */
+#main > header {
+	padding: 8em 2em !important;
+	position: relative;
+	color: white !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+#main > header:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, rgba(102, 126, 234, 0.75) 0%, rgba(118, 75, 162, 0.75) 100%);
+	z-index: 1;
+}
+
+#main > header > * {
+	position: relative;
+	z-index: 2;
+}
+
+#main > header h2 {
+	font-size: 2.75em !important;
+	margin: 0 0 0.5em 0 !important;
+	color: white !important;
+	font-weight: 700 !important;
+	letter-spacing: -0.02em !important;
+	text-transform: none !important;
+}
+
+#main > header p {
+	color: rgba(255,255,255,0.9) !important;
+	letter-spacing: 0 !important;
+	text-transform: none !important;
+	font-size: 1.15em !important;
+	max-width: 800px !important;
+	margin: 0 auto !important;
+}
+
+#main > header p a {
+	color: white !important;
+	border-bottom: 2px solid rgba(255,255,255,0.5) !important;
+}
+
+#main > header p a:hover {
+	border-bottom-color: white !important;
+}
+
+#main .post.title {
+	background: white !important;
+	border-bottom: 1px solid var(--color-border) !important;
+}
+
+#main .post.title .inner {
+	max-width: 800px !important;
+	margin: 0 auto !important;
+	padding: 3em 2em !important;
+}
+
+#main .post.title .inner h2 {
+	margin-top: 0 !important;
+	color: var(--color-fg-bold) !important;
+}
+
+#main .post.title .inner p {
+	color: var(--color-fg-light) !important;
+	margin: 0.5em 0 !important;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1280px) {
+	body, input, select, textarea {
+		font-size: 15px;
+	}
+	
+	#banner h2 {
+		font-size: 2.75em !important;
+	}
+	
+	.spotlight .content {
+		padding: 2.5em 2.5em !important;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	.wrapper {
+		padding: 3.5em 1.5em !important;
+	}
+	
+	#banner .inner {
+		padding: 2.5em 1.75em !important;
+	}
+	
+	#banner h2 {
+		font-size: 2.5em !important;
+	}
+	
+	.spotlight {
+		display: block !important;
+		margin: 1.5em 1em !important;
+	}
+	
+	.spotlight .image {
+		width: 100% !important;
+		height: 300px !important;
+	}
+	
+	.spotlight .content {
+		padding: 2.5em 2em !important;
+		width: 100% !important;
+	}
+	
+	#main > header {
+		padding: 5em 1.5em !important;
+	}
+	
+	#main > header h2 {
+		font-size: 2.25em !important;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body, input, select, textarea {
+		font-size: 14px;
+	}
+	
+	h2 {
+		font-size: 1.75em !important;
+	}
+	
+	h3 {
+		font-size: 1.35em !important;
+	}
+	
+	#banner .inner {
+		padding: 2em 1.5em !important;
+	}
+	
+	#banner h2 {
+		font-size: 2em !important;
+	}
+	
+	#banner p {
+		font-size: 1.1em !important;
+	}
+	
+	.spotlight {
+		border-radius: 12px !important;
+		margin: 1em 0.5em !important;
+	}
+	
+	.spotlight .image {
+		height: 220px !important;
+	}
+	
+	.spotlight .content {
+		padding: 2em 1.5em !important;
+	}
+	
+	.spotlight .content h2 {
+		font-size: 1.5em !important;
+	}
+	
+	.wrapper {
+		padding: 2.5em 1.25em !important;
+	}
+	
+	#main > header {
+		padding: 4em 1.25em !important;
+	}
+	
+	#main > header h2 {
+		font-size: 1.85em !important;
+	}
+	
+	#main > header p {
+		font-size: 1em !important;
+	}
+	
+	.icon.major {
+		font-size: 1.2em !important;
+		height: 3.5em !important;
+		width: 3.5em !important;
+	}
+}
+
+/* Header on non-landing pages (blog posts, etc) */
+body:not(.landing) #header {
+	background: rgba(255, 255, 255, 0.95) !important;
+	border-bottom: 1px solid rgba(0,0,0,0.08);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+body:not(.landing) #header h1 a {
+	color: var(--color-fg-bold) !important;
+}
+
+body:not(.landing) #header nav > ul > li > a {
+	color: var(--color-fg-bold) !important;
+}
+
+body:not(.landing) #header nav > ul > li > a.menuToggle:after {
+	filter: none;
+}
+
+/* Fix menu button alignment */
+#header nav > ul > li > a.menuToggle {
+	display: flex !important;
+	align-items: center !important;
+	gap: 0.5em;
+}
+
+#header nav > ul > li > a.menuToggle:after {
+	height: 1.5em !important;
+	width: 1.5em !important;
+	vertical-align: middle !important;
+	background-size: contain !important;
+}
+
+#header nav > ul > li > a.menuToggle span {
+	line-height: 1 !important;
+}
+
+/* Make entire blog card clickable */
+.spotlight {
+	position: relative;
+	cursor: pointer;
+}
+
+.spotlight .content h2 a.link {
+	position: relative;
+	z-index: 2;
+}
+
+.spotlight .content h2 a.link::before {
+	content: '';
+	position: absolute;
+	top: -3em;
+	left: -3.5em;
+	right: -3.5em;
+	bottom: -3em;
+	z-index: -1;
+}
+
+/* Extend clickable area to cover entire card on all screen sizes */
+@media screen and (max-width: 980px) {
+	.spotlight .content h2 a.link::before {
+		top: -2.5em;
+		left: -2em;
+		right: -2em;
+		bottom: calc(-100% - 2.5em - 300px);
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.spotlight .content h2 a.link::before {
+		top: -2em;
+		left: -1.5em;
+		right: -1.5em;
+		bottom: calc(-100% - 2em - 220px);
+	}
+}
+
+/* Remove pointer events from other links so card link takes precedence */
+.spotlight .image a {
+	pointer-events: none;
+}
+
+/* Restore pointer on image link for accessibility */
+.spotlight:hover .image a {
+	pointer-events: auto;
+}
+
+/* Faster fade-in animations */
+body.landing #page-wrapper {
+	animation: fadeInBackground 0.6s ease-in-out !important;
+}
+
+@keyframes fadeInBackground {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+#banner h2 {
+	transition: transform 0.4s ease, opacity 0.4s ease !important;
+}
+
+#banner h2:before,
+#banner h2:after {
+	transition: width 0.5s ease !important;
+	transition-delay: 0.1s !important;
+}
+
+#banner:after {
+	transition: opacity 0.8s ease-in-out !important;
+	transition-delay: 0.3s !important;
+}
+
+#banner .more {
+	transition: transform 0.5s ease, opacity 0.5s ease !important;
+	transition-delay: 0.5s !important;
+}
+
+#banner .inner,
+#banner p,
+#banner .icons {
+	animation: fadeInContent 0.6s ease-out;
+	animation-fill-mode: both;
+}
+
+#banner .inner {
+	animation-delay: 0.2s;
+}
+
+#banner h2 {
+	animation-delay: 0.3s;
+}
+
+#banner p {
+	animation-delay: 0.4s;
+}
+
+#banner .icons {
+	animation-delay: 0.5s;
+}
+
+@keyframes fadeInContent {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Prevent white flash on page load */
+body.landing.is-loading #page-wrapper {
+	opacity: 0;
+	background-color: #0f172a;
+}
+
+body.landing #page-wrapper {
+	opacity: 1;
+}
+
+/* Ensure banner content starts invisible */
+body.is-loading #banner .inner,
+body.is-loading #banner p,
+body.is-loading #banner .icons {
+	opacity: 0 !important;
+}
+
+/* Remove the banner overlay that causes flash */
+#banner:after {
+	display: none !important;
+	background: transparent !important;
+}
+
+body.is-loading #banner:after {
+	display: none !important;
+	background: transparent !important;
+	opacity: 0 !important;
+}
+
+/* Set body background to dark on landing page to prevent flash */
+body.landing {
+	background: #0f172a !important;
+}
+
+body.landing.is-loading {
+	background: #0f172a !important;
+}
+
+html {
+	background: #0f172a;
+}
+
+/* Keep white background for non-landing pages */
+body:not(.landing) {
+	background: #ffffff !important;
+}
+
+/* Remove all animations for instant page load */
+body.landing #page-wrapper {
+	animation: none !important;
+	opacity: 1 !important;
+}
+
+#banner h2 {
+	transition: none !important;
+	animation: none !important;
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+#banner h2:before,
+#banner h2:after {
+	transition: none !important;
+	animation: none !important;
+}
+
+#banner .more {
+	transition: none !important;
+	animation: none !important;
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+#banner .inner,
+#banner p,
+#banner .icons {
+	animation: none !important;
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+body.is-loading #banner h2,
+body.is-loading #banner .inner,
+body.is-loading #banner p,
+body.is-loading #banner .icons,
+body.is-loading #banner .more {
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+body.is-loading #page-wrapper {
+	opacity: 1 !important;
+}
+
+/* Better approach: Make entire card clickable with stretched link */
+.spotlight .content h2 a.link::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+.spotlight .content h2 {
+	position: relative;
+}
+
+.spotlight .content h2 a.link::after {
+	top: -100vh;
+	bottom: -100vh;
+	left: -100vw;
+	right: -100vw;
+}
+
+@media screen and (min-width: 981px) {
+	.spotlight .content h2 a.link::after {
+		top: calc(-3em - 3em);
+		left: calc(-3.5em - 45%);
+		right: -3.5em;
+		bottom: -3em;
+	}
+}
+
+@media screen and (max-width: 980px) {
+	.spotlight .content h2 a.link::after {
+		top: calc(-2.5em - 300px);
+		left: -2em;
+		right: -2em;
+		bottom: -2.5em;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	.spotlight .content h2 a.link::after {
+		top: calc(-2em - 220px);
+		left: -1.5em;
+		right: -1.5em;
+		bottom: -2em;
+	}
+}
+
+/* Fix CTA section text colors */
+.wrapper.style4 {
+	background: transparent !important;
+}
+
+#cta,
+.wrapper.style4 {
+	color: white !important;
+}
+
+#cta h2,
+.wrapper.style4 h2 {
+	color: white !important;
+}
+
+#cta p,
+.wrapper.style4 p {
+	color: rgba(255, 255, 255, 0.9) !important;
+}
+
+#cta header p {
+	color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Clean up card clickable styles - use JS instead */
+.spotlight .content h2 a.link::before {
+	display: none !important;
+}
+
+.spotlight .content h2 a.link::after {
+	display: none !important;
+}
+
+.spotlight .image a {
+	pointer-events: auto !important;
+}
+
+.spotlight:hover .image a {
+	pointer-events: auto !important;
+}
+
+/* Change landing page to white background with dark text */
+body.landing {
+	background: #ffffff !important;
+}
+
+body.landing.is-loading {
+	background: #ffffff !important;
+}
+
+html {
+	background: #ffffff;
+}
+
+body.landing #page-wrapper {
+	background-image: none !important;
+	background: #ffffff !important;
+}
+
+/* Update header for landing page to match white background */
+body.landing #header {
+	background: rgba(255, 255, 255, 0.95) !important;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.landing #header h1 a {
+	color: var(--color-fg-bold) !important;
+}
+
+body.landing #header.alt {
+	background: rgba(255, 255, 255, 0.95) !important;
+}
+
+body.landing #header.alt h1 {
+	opacity: 1 !important;
+	pointer-events: auto !important;
+}
+
+body.landing #header nav > ul > li > a {
+	color: var(--color-fg-bold) !important;
+}
+
+body.landing #header nav > ul > li > a.menuToggle:after {
+	filter: none;
+}
+
+/* Update banner for white background */
+body.landing #banner {
+	background: #ffffff !important;
+}
+
+body.landing #banner .inner {
+	background: transparent;
+	backdrop-filter: none;
+}
+
+body.landing #banner h2 {
+	color: var(--color-fg-bold) !important;
+	text-shadow: none;
+}
+
+body.landing #banner p {
+	color: var(--color-fg) !important;
+	text-shadow: none;
+}
+
+body.landing #banner p a {
+	color: var(--color-primary) !important;
+	border-bottom: 2px solid var(--color-primary) !important;
+}
+
+body.landing #banner p a:hover {
+	border-bottom-color: var(--color-primary-hover) !important;
+	opacity: 0.8;
+}
+
+body.landing #banner .icon.banner-icon {
+	color: var(--color-fg-bold) !important;
+}
+
+/* Update footer for landing page */
+body.landing #footer {
+	background-color: #0f172a !important;
+	border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Add background image back to banner section */
+body.landing #banner {
+	background: linear-gradient(rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.50)), url("../../assets/images/banner.jpg") !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+/* Update profile section to light background with dark text */
+body.landing .wrapper.style1 {
+	background: linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.90)), url("../../assets/images/banner.jpg") !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+	color: var(--color-fg) !important;
+}
+
+body.landing .wrapper.style1 h2,
+body.landing .wrapper.style1 h3,
+body.landing .wrapper.style1 h4,
+body.landing .wrapper.style1 h5,
+body.landing .wrapper.style1 h6 {
+	color: var(--color-fg-bold) !important;
+}
+
+body.landing .wrapper.style1 p {
+	color: var(--color-fg) !important;
+}
+
+body.landing .wrapper.style1 a {
+	color: var(--color-primary) !important;
+}
+
+body.landing .wrapper.style1 a:hover {
+	color: var(--color-primary-hover) !important;
+}
+
+body.landing .profile-image {
+	border: 5px solid rgba(255, 255, 255, 0.5);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient transition from banner (50% opacity) to profile section (90% opacity) */
+body.landing #banner {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.75)), url("../../assets/images/banner.jpg") !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+body.landing .wrapper.style1 {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.95)), url("../../assets/images/banner.jpg") !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+	color: var(--color-fg) !important;
+}
+
+
+/* Seamless opacity overlay for smooth scrolling transition */
+body.landing #banner,
+body.landing .wrapper.style1 {
+	position: relative;
+	background: url("../../assets/images/banner.jpg") !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-attachment: fixed !important;
+}
+
+.opacity-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: white;
+	opacity: 0.50;
+	pointer-events: none;
+	z-index: 0;
+	transition: opacity 0.1s linear;
+}
+
+body.landing #banner > *:not(.opacity-overlay),
+body.landing .wrapper.style1 > *:not(.opacity-overlay) {
+	position: relative;
+	z-index: 1;
+}

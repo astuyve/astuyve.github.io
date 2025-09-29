@@ -2,7 +2,7 @@
 @import 'libs/functions';
 @import 'libs/mixins';
 @import 'font-awesome.min.css';
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
 /*
 	Spectral by HTML5 UP
@@ -43,36 +43,41 @@
 		}
 	}
 
+	* {
+		box-sizing: border-box;
+	}
+
 	body, input, select, textarea {
 		color: _palette(fg);
 		font-family: _font(family);
-		font-size: 15pt;
+		font-size: 16px;
 		font-weight: _font(weight);
-		letter-spacing: _size(letter-spacing);
-		line-height: 1.65em;
+		letter-spacing: -0.011em;
+		line-height: 1.7;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 
 		@include breakpoint(xlarge) {
-			font-size: 13pt;
+			font-size: 16px;
 		}
 
 		@include breakpoint(large) {
-			font-size: 12pt;
+			font-size: 15px;
 		}
 
 		@include breakpoint(small) {
-			font-size: 11pt;
-			letter-spacing: _size(letter-spacing) * 0.5;
+			font-size: 14px;
 		}
 	}
 
 	a {
-		@include vendor('transition', ('color #{_duration(transitions)} ease', 'border-bottom-color #{_duration(transitions)} ease'));
-		border-bottom: dotted 1px;
-		color: inherit;
+		@include vendor('transition', ('color 0.2s ease', 'opacity 0.2s ease'));
+		border-bottom: none;
+		color: #3b82f6;
 		text-decoration: none;
 
 		&:hover {
-			border-bottom-color: transparent;
+			opacity: 0.8;
 		}
 	}
 
@@ -92,10 +97,10 @@
 	h1, h2, h3, h4, h5, h6 {
 		color: _palette(fg-bold);
 		font-weight: _font(weight-extrabold);
-		letter-spacing: _size(letter-spacing-alt);
-		line-height: 1em;
-		margin: 0 0 (_size(element-margin) * 0.5) 0;
-		text-transform: uppercase;
+		letter-spacing: -0.022em;
+		line-height: 1.2;
+		margin: 0 0 1rem 0;
+		text-transform: none;
 
 		a {
 			color: inherit;
@@ -104,22 +109,22 @@
 	}
 
 	h2 {
-		font-size: 1.35em;
-		line-height: 1.75em;
+		font-size: 2em;
+		line-height: 1.3;
+		margin: 1.5em 0 0.75em 0;
 
 		@include breakpoint(small) {
-			font-size: 1.1em;
-			line-height: 1.65em;
+			font-size: 1.75em;
 		}
 	}
 
 	h3 {
-		font-size: 1.15em;
-		line-height: 1.75em;
+		font-size: 1.5em;
+		line-height: 1.4;
+		margin: 1.25em 0 0.5em 0;
 
 		@include breakpoint(small) {
-			font-size: 1em;
-			line-height: 1.65em;
+			font-size: 1.35em;
 		}
 	}
 
@@ -161,33 +166,42 @@
 	}
 
 	blockquote {
-		border-left: solid 4px _palette(border);
+		border-left: solid 4px #3b82f6;
 		font-style: italic;
-		margin: 0 0 _size(element-margin) 0;
-		padding: 0.5em 0 0.5em 2em;
+		margin: 2em 0;
+		padding: 1.25em 0 1.25em 2em;
+		background: #f8fafc;
+		border-radius: 0 8px 8px 0;
+		color: #475569;
 	}
 
 	code {
 		background: _palette(border-bg);
-		border-radius: 3px;
+		border-radius: 6px;
 		font-family: _font(family-fixed);
-		font-size: 0.9em;
+		font-size: 0.875em;
 		letter-spacing: 0;
-		margin: 0 0.25em;
-		padding: 0.25em 0.65em;
+		margin: 0 0.15em;
+		padding: 0.2em 0.5em;
+		border: 1px solid _palette(border);
 	}
 
 	pre {
 		-webkit-overflow-scrolling: touch;
 		font-family: _font(family-fixed);
-		font-size: 0.9em;
-		margin: 0 0 _size(element-margin) 0;
+		font-size: 0.875em;
+		margin: 1.5em 0;
+		border-radius: 8px;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
 		code {
 			display: block;
-			line-height: 1.75em;
-			padding: 1em 1.5em;
+			line-height: 1.6;
+			padding: 1.25em 1.5em;
 			overflow-x: auto;
+			border: none;
+			background: #0f172a;
+			color: #e2e8f0;
 		}
 	}
 
@@ -208,7 +222,19 @@
 	section, article {
 		&.special {
 			text-align: center;
+			padding: 4em 2em;
+			background: white;
 		}
+	}
+
+	.profile-image {
+		width: 180px;
+		height: 180px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin-bottom: 1.5em;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		border: 5px solid white;
 	}
 
 	header {
@@ -463,50 +489,67 @@
 		}
 
 		&.major {
-			@include vendor('transform', 'rotate(-45deg)');
-			border-radius: 3px;
-			border: solid 2px _palette(border);
+			@include vendor('transform', 'none');
+			border-radius: 12px;
+			border: none;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			display: inline-block;
-			font-size: 1.35em;
-			height: calc(3em + 2px);
-			line-height: 3em;
+			font-size: 1.5em;
+			height: 4em;
+			line-height: 4em;
 			text-align: center;
-			width: calc(3em + 2px);
+			width: 4em;
+			color: white;
+			box-shadow: 0 4px 15px rgba(102,126,234,0.3);
 
 			&:before {
-				@include vendor('transform', 'rotate(45deg)');
+				@include vendor('transform', 'none');
 				display: inline-block;
-				font-size: 1.5em;
+				font-size: 1.3em;
 			}
 
 			@include breakpoint(small) {
-				font-size: 1em;
+				font-size: 1.2em;
+				height: 3.5em;
+				width: 3.5em;
 			}
 		}
 
 		&.style1 {
-			color: _palette(accent2, bg);
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 		}
 
 		&.style2 {
-			color: _palette(accent3, bg);
+			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 		}
 
 		&.style3 {
-			color: _palette(accent4, bg);
+			background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+		}
+
+		&.banner-icon {
+			color: white;
+			font-size: 1.5em;
+			transition: all 0.3s ease;
+
+			&:hover {
+				transform: scale(1.1);
+				opacity: 1;
+			}
 		}
 	}
 
 /* Image */
 
 	.image {
-		border-radius: 3px;
+		border-radius: 12px;
 		border: 0;
 		display: inline-block;
 		position: relative;
+		overflow: hidden;
 
 		img {
-			border-radius: 3px;
+			border-radius: 12px;
 			display: block;
 		}
 
@@ -802,33 +845,36 @@
 	button,
 	.button {
 		@include vendor('appearance', 'none');
-		@include vendor('transition', ('background-color #{_duration(transitions)} ease-in-out', 'color #{_duration(transitions)} ease-in-out'));
-		background-color: transparent;
-		border-radius: 3px;
+		@include vendor('transition', 'all 0.2s ease');
+		background-color: #3b82f6;
+		border-radius: 8px;
 		border: 0;
-		box-shadow: inset 0 0 0 2px _palette(border);
-		color: _palette(fg-bold);
+		box-shadow: 0 2px 4px rgba(59,130,246,0.2);
+		color: white;
 		cursor: pointer;
 		display: inline-block;
-		font-size: 0.8em;
-		font-weight: _font(weight-bold);
-		height: 3.125em;
-		letter-spacing: _size(letter-spacing-alt);
-		line-height: 3.125em;
-		padding: 0 2.75em;
+		font-size: 0.95em;
+		font-weight: 600;
+		height: auto;
+		letter-spacing: -0.01em;
+		line-height: 1;
+		padding: 0.9em 2em;
 		text-align: center;
 		text-decoration: none;
-		text-transform: uppercase;
+		text-transform: none;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 
 		&:hover {
-			background-color: _palette(border-bg);
+			background-color: #2563eb;
+			box-shadow: 0 4px 8px rgba(59,130,246,0.3);
+			transform: translateY(-1px);
 		}
 
 		&:active {
-			background-color: _palette(border2-bg);
+			transform: translateY(0);
+			box-shadow: 0 2px 4px rgba(59,130,246,0.2);
 		}
 
 		&.icon {
@@ -852,16 +898,17 @@
 		}
 
 		&.special {
-			background-color: _palette(accent6, bg);
-			box-shadow: none !important;
-			color: _palette(accent6, fg-bold) !important;
+			background-color: #8b5cf6;
+			box-shadow: 0 2px 4px rgba(139,92,246,0.2) !important;
+			color: white !important;
 
 			&:hover {
-				background-color: lighten(_palette(accent6, bg), 5) !important;
+				background-color: #7c3aed !important;
+				box-shadow: 0 4px 8px rgba(139,92,246,0.3) !important;
 			}
 
 			&:active {
-				background-color: darken(_palette(accent6, bg), 5) !important;
+				background-color: #6d28d9 !important;
 			}
 		}
 
@@ -957,35 +1004,65 @@
 	.spotlight {
 		@include vendor('align-items', 'center');
 		@include vendor('display', 'flex');
+		background: white;
+		border-radius: 16px;
+		margin: 2em auto;
+		max-width: 1200px;
+		overflow: hidden;
+		box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.08);
+		transition: all 0.3s ease;
+
+		&:hover {
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 20px 30px rgba(0,0,0,0.12);
+			transform: translateY(-4px);
+		}
 
 		.image {
 			@include vendor('order', '1');
 			border-radius: 0;
-			width: 40%;
+			width: 45%;
+			overflow: hidden;
 
 			img {
 				border-radius: 0;
 				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+
+			&:hover img {
+				transform: scale(1.05);
 			}
 		}
 
 		.content {
-			@include padding(2em, 4em);
+			@include padding(3em, 3.5em);
 			@include vendor('order', '2');
-			max-width: 48em;
-			width: 60%;
+			max-width: none;
+			width: 55%;
+
+			h2 {
+				margin-top: 0;
+				font-size: 1.75em;
+				
+				a {
+					color: _palette(fg-bold);
+					
+					&:hover {
+						color: #3b82f6;
+					}
+				}
+			}
+
+			p {
+				color: _palette(fg-light);
+				line-height: 1.7;
+			}
 		}
 
 		&:nth-child(2n) {
 			@include vendor('flex-direction', 'row-reverse');
-		}
-
-		@for $i from 1 through _misc(max-spotlights) {
-			$j: 0.075 * $i;
-
-			&:nth-child(#{$i}) {
-				background-color: rgba(0,0,0, $j);
-			}
 		}
 
 		@include breakpoint(large) {
@@ -995,11 +1072,13 @@
 
 			.content {
 				width: 55%;
+				@include padding(2.5em, 2.5em);
 			}
 		}
 
 		@include breakpoint(medium) {
 			display: block;
+			margin: 1.5em 1em;
 
 			br {
 				display: none;
@@ -1007,19 +1086,31 @@
 
 			.image {
 				width: 100%;
+				height: 300px;
 			}
 
 			.content {
-				@include padding(4em, 3em);
+				@include padding(2.5em, 2em);
 				max-width: none;
-				text-align: center;
+				text-align: left;
 				width: 100%;
 			}
 		}
 
 		@include breakpoint(small) {
+			border-radius: 12px;
+			margin: 1em 0.5em;
+
+			.image {
+				height: 220px;
+			}
+
 			.content {
-				@include padding(3em, 2em);
+				@include padding(2em, 1.5em);
+
+				h2 {
+					font-size: 1.5em;
+				}
 			}
 		}
 	}
@@ -1214,14 +1305,15 @@
 	}
 
 	.wrapper {
-		@include padding(6em, 0);
+		@include padding(5em, 2em);
 
 		> .inner {
-			width: 60em;
+			width: 1200px;
+			max-width: 100%;
 			margin: 0 auto;
 
 			@include breakpoint(large) {
-				width: 90%;
+				width: 95%;
 			}
 
 			@include breakpoint(medium) {
@@ -1230,7 +1322,8 @@
 		}
 
 		&.alt {
-			padding: 0;
+			padding: 4em 0;
+			background: #f8fafc;
 		}
 
 		&.style1 {
@@ -1238,7 +1331,7 @@
 		}
 
 		&.style2 {
-			background-color: _palette(bg);
+			background-color: white;
 		}
 
 		&.style3 {
@@ -1251,14 +1344,15 @@
 
 		&.style5 {
 			@include wrapper(accent7);
+			padding: 4em 2em;
 		}
 
 		@include breakpoint(medium) {
-			@include padding(4em, 3em);
+			@include padding(3.5em, 1.5em);
 		}
 
 		@include breakpoint(small) {
-			@include padding(3em, 2em);
+			@include padding(2.5em, 1.25em);
 		}
 	}
 
@@ -1267,7 +1361,7 @@
 	#page-wrapper {
 		@include vendor('transition', 'opacity #{_duration(menu)} ease');
 		opacity: 1;
-		padding-top: 3em;
+		padding-top: 4.5em;
 
 		&:before {
 			background: rgba(0,0,0,0);
@@ -1368,32 +1462,38 @@
 /* Header */
 
 	#header {
-		@include vendor('transition', 'background-color #{_duration(transitions)} ease');
-		background: _palette(bg);
-		height: 3em;
+		@include vendor('transition', 'all 0.3s ease');
+		background: rgba(255, 255, 255, 0.95);
+		backdrop-filter: blur(10px);
+		height: 4.5em;
 		left: 0;
-		line-height: 3em;
+		line-height: 4.5em;
 		position: fixed;
 		top: 0;
 		width: 100%;
 		z-index: _misc(z-index-base);
+		border-bottom: 1px solid rgba(0,0,0,0.08);
+		box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 
 		h1 {
 			@include vendor('transition', 'opacity #{_duration(transitions)} ease');
 			height: inherit;
-			left: 1.25em;
+			left: 2em;
 			line-height: inherit;
 			position: absolute;
 			top: 0;
+			font-weight: 700;
+			font-size: 1.1em;
 
 			a {
 				border: 0;
 				display: block;
 				height: inherit;
 				line-height: inherit;
+				color: _palette(fg-bold);
 
 				@include breakpoint(small) {
-					font-size: 0.8em;
+					font-size: 0.9em;
 				}
 			}
 		}
@@ -1477,50 +1577,55 @@
 		@include vendor('flex-direction', 'column');
 		@include vendor('justify-content', 'center');
 		cursor: default;
-		height: 100vh;
-		min-height: 35em;
+		height: 90vh;
+		min-height: 600px;
 		overflow: hidden;
 		position: relative;
 		text-align: center;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 
 		h2 {
 			@include vendor('transform', 'scale(1)');
 			@include vendor('transition', ('transform 0.5s ease', 'opacity 0.5s ease'));
 			display: inline-block;
-			font-size: 1.75em;
+			font-size: 3.5em;
+			font-weight: 700;
 			opacity: 1;
-			padding: 0.35em 1em;
+			padding: 0.2em 0.5em;
 			position: relative;
 			z-index: 1;
+			color: white;
+			letter-spacing: -0.02em;
+			margin-bottom: 0.3em;
 
-			&:before, &:after {
-				@include vendor('transition', 'width 0.85s ease');
-				@include vendor('transition-delay', '0.25s');
-				background: _palette(fg-bold);
-				content: '';
-				display: block;
-				height: 2px;
-				position: absolute;
-				width: 100%;
+			@include breakpoint(medium) {
+				font-size: 2.75em;
 			}
 
-			&:before {
-				top: 0;
-				left: 0;
-			}
-
-			&:after {
-				bottom: 0;
-				right: 0;
+			@include breakpoint(small) {
+				font-size: 2em;
 			}
 		}
 
 		p {
-			letter-spacing: _size(letter-spacing-alt);
-			text-transform: uppercase;
+			letter-spacing: 0.02em;
+			text-transform: none;
+			font-size: 1.35em;
+			color: rgba(255,255,255,0.9);
+			font-weight: 400;
+
+			@include breakpoint(small) {
+				font-size: 1.1em;
+			}
 
 			a {
-				color: inherit;
+				color: white;
+				border-bottom: 2px solid rgba(255,255,255,0.5);
+				padding-bottom: 2px;
+
+				&:hover {
+					border-bottom-color: white;
+				}
 			}
 		}
 
@@ -1668,48 +1773,85 @@
 
 	#main {
 		> header {
-			@include padding(12em, 0);
-			@include vendor('background-image', ('linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5))', 'url("../../assets/images/banner.jpg")'));
-			background-attachment: fixed;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-size: cover;
+			@include padding(8em, 2em);
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			text-align: center;
+			color: white;
 
 			h2 {
-				font-size: 1.75em;
-				margin: 0 0 (_size(element-margin) * 0.25) 0;
+				font-size: 2.75em;
+				margin: 0 0 0.5em 0;
+				color: white;
+				font-weight: 700;
+				letter-spacing: -0.02em;
 			}
 
 			p {
-				color: inherit;
-				letter-spacing: _size(letter-spacing-alt);
-				text-transform: uppercase;
+				color: rgba(255,255,255,0.9);
+				letter-spacing: 0;
+				text-transform: none;
 				top: 0;
+				font-size: 1.15em;
+				max-width: 800px;
+				margin: 0 auto;
 
 				a {
-					color: inherit;
+					color: white;
+					border-bottom: 2px solid rgba(255,255,255,0.5);
+					
+					&:hover {
+						border-bottom-color: white;
+					}
 				}
 			}
 
 			@include breakpoint(xlarge) {
-				@include padding(10em, 0);
+				@include padding(7em, 2em);
 			}
 
 			@include breakpoint(large) {
-				@include padding(8em, 3em);
+				@include padding(6em, 2em);
 			}
 
 			@include breakpoint(medium) {
-				@include padding(10em, 3em);
+				@include padding(5em, 1.5em);
+				
+				h2 {
+					font-size: 2.25em;
+				}
 			}
 
 			@include breakpoint(small) {
-				@include padding(5em, 3em);
+				@include padding(4em, 1.25em);
 
 				h2 {
-					font-size: 1.25em;
-					margin: 0 0 (_size(element-margin) * 0.5) 0;
+					font-size: 1.85em;
+					margin: 0 0 0.5em 0;
+				}
+
+				p {
+					font-size: 1em;
+				}
+			}
+		}
+
+		.post.title {
+			background: white;
+			border-bottom: 1px solid #e2e8f0;
+
+			.inner {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 3em 2em;
+
+				h2 {
+					margin-top: 0;
+					color: _palette(fg-bold);
+				}
+
+				p {
+					color: _palette(fg-light);
+					margin: 0.5em 0;
 				}
 			}
 		}
@@ -1726,29 +1868,32 @@
 /* Footer */
 
 	#footer {
-		@include padding(6em, 0);
-		background-color: darken(_palette(bg), 8);
+		@include padding(4em, 2em);
+		background-color: #0f172a;
 		text-align: center;
+		color: #94a3b8;
 
 		.icons {
-			font-size: 1.25em;
+			font-size: 1.35em;
+			margin-bottom: 1.5em;
 
 			a {
-				color: _palette(fg-light);
+				color: #94a3b8;
+				transition: color 0.2s ease;
 
 				&:hover {
-					color: _palette(fg);
+					color: white;
 				}
 			}
 		}
 
 		.copyright {
-			color: _palette(fg-light);
-			font-size: 0.8em;
-			letter-spacing: _size(letter-spacing-alt);
+			color: #64748b;
+			font-size: 0.9em;
+			letter-spacing: 0;
 			list-style: none;
 			padding: 0;
-			text-transform: uppercase;
+			text-transform: none;
 
 			li {
 				border-left: solid 1px _palette(fg-light);
@@ -1794,16 +1939,13 @@
 
 	body.landing {
 		#page-wrapper {
-			@include vendor('background-image', ('linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5))', 'url("../../assets/images/banner.jpg")'));
-			background-attachment: fixed;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-size: cover;
+			background: _palette(bg);
 			padding-top: 0;
 		}
 
 		#footer {
-			background-color: darken(transparentize(_palette(bg), 0.1), 8);
+			background-color: #f8fafc;
+			border-top: 1px solid #e2e8f0;
 		}
 	}
 
