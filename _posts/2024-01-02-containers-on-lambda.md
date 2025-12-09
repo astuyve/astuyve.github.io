@@ -6,6 +6,8 @@ categories: posts
 image: assets/images/lambda_containers/containers_on_lambda.png
 ---
 
+Note: the second part of this post is available [here](https://aaronstuyvenberg.com/posts/containers-on-lambda-pt-two).
+
 When AWS Lambda first introduced support for container-based functions, the initial reactions from the community were mostly negative. Lambda isn't meant to run large applications, it is meant to run small bits of code, scaled widely by executing many functions simultaneously.
 
 Containers were not only antithetical to the philosophy of Lambda and the serverless mindset writ large, they were also far slower to initialize (or cold start) compared with their zip-based function counterparts.
