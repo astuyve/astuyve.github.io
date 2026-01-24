@@ -14,7 +14,7 @@ It's also typically a low-trust endeavor. Manufacturers change incentives every 
 So when my family needed to replace our trusty old Subaru, I thought it'd be a good opportunity to say "Claude, take the wheel" and handed over the keys for my digital life to a chatbot.
 
 ## Clawdbot
-[Clawdbot](https://clawd.bot) is the internet's latest obsession after Claude Code. It's an [open source]() project which pairs an LLM with long running processes to do things like read and write email (and monitor for replies), manage your calendar, and drive a browser with great effect. Unlike ChatGPT or Claude Code, Clawdbot does not start with a blank memory every time it starts. It saves files, breadcrumbs, and your chat histories so it can handle tasks which can take a few days without much issue:
+[Clawdbot](https://clawd.bot) is the internet's latest obsession after Claude Code. It's an [open source](https://github.com/clawdbot/clawdbot) project which pairs an LLM with long running processes to do things like read and write email (and monitor for replies), manage your calendar, and drive a browser with great effect. Unlike ChatGPT or Claude Code, Clawdbot does not start with a blank memory every time it starts. It saves files, breadcrumbs, and your chat histories so it can handle tasks which can take a few days without much issue:
 
 <span class="image half"><a href="/assets/images/clawd_car/clawd_bot.png" target="_blank"><img src="/assets/images/clawd_car/clawd_bot.png" alt="Clawdbot logo"></a></span>
 
