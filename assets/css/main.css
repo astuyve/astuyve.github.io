@@ -75,7 +75,7 @@
 	}
 
 	.header.accent {
-		color: #e67700
+		color: #e67700 !important;
 	}
 
 /* Grid */
@@ -3972,6 +3972,246 @@
 	--font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 }
 
+/* Dark Mode Variables */
+body.dark-mode {
+	--color-bg: #1a1a1a;
+	--color-fg: #e5e5e5;
+	--color-fg-bold: #ffffff;
+	--color-fg-light: #a0a0a0;
+	--color-border: #404040;
+	--color-border-bg: #2a2a2a;
+	--color-primary: #60a5fa;
+	--color-primary-hover: #93c5fd;
+	--color-secondary: #a78bfa;
+}
+
+body.dark-mode {
+	background: #1a1a1a !important;
+}
+
+body.dark-mode .wrapper.style5 {
+	background-color: #1a1a1a !important;
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode .wrapper.style5 strong,
+body.dark-mode .wrapper.style5 b,
+body.dark-mode .wrapper.style5 h2,
+body.dark-mode .wrapper.style5 h3,
+body.dark-mode .wrapper.style5 h4,
+body.dark-mode .wrapper.style5 h5,
+body.dark-mode .wrapper.style5 h6 {
+	color: #ffffff !important;
+}
+
+body.dark-mode .wrapper.style5 header p,
+body.dark-mode .wrapper.style5 header.major p {
+	color: #a0a0a0 !important;
+}
+
+body.dark-mode .wrapper.style5 hr {
+	border-color: #404040 !important;
+}
+
+body.dark-mode .wrapper.style5 blockquote {
+	border-left-color: var(--color-primary) !important;
+	background: #2a2a2a !important;
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode .wrapper.style5 code {
+	background: #2a2a2a !important;
+	border-color: #404040 !important;
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode #main .post.title {
+	background: #1a1a1a !important;
+	border-bottom-color: #404040 !important;
+}
+
+body.dark-mode #main .post.title .inner h2,
+body.dark-mode #main .post.title .inner p {
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode pre code {
+	background: #0f172a !important;
+}
+
+body.dark-mode a {
+	color: var(--color-primary) !important;
+}
+
+body.dark-mode a:hover {
+	color: var(--color-primary-hover) !important;
+}
+
+body.dark-mode #header {
+	background: #000000 !important;
+}
+
+body.dark-mode #header h1 a {
+	color: #ffffff !important;
+}
+
+body.dark-mode #header h1 a span.header.accent {
+	color: #e67700 !important;
+}
+
+body.dark-mode #header nav > ul > li > a {
+	color: #ffffff !important;
+}
+
+body.dark-mode:not(.landing) #header {
+	background: #000000 !important;
+	border-bottom-color: rgba(255,255,255,0.1) !important;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+body.dark-mode:not(.landing) #header h1 a {
+	color: #ffffff !important;
+}
+
+body.dark-mode:not(.landing) #header nav > ul > li > a {
+	color: #ffffff !important;
+}
+
+body.dark-mode #menu {
+	background: #1a1a1a !important;
+}
+
+body.dark-mode #menu ul li a {
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode #menu ul li a:hover {
+	color: var(--color-primary) !important;
+}
+
+body.dark-mode #menu ul li {
+	border-color: #404040 !important;
+}
+
+body.dark-mode #main > header:before {
+	background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%) !important;
+}
+
+body.dark-mode #main > header h2 {
+	color: #ffffff !important;
+}
+
+body.dark-mode #main > header p {
+	color: rgba(255,255,255,0.9) !important;
+}
+
+body.dark-mode #footer {
+	background: #0f0f0f !important;
+	color: #a0a0a0 !important;
+}
+
+body.dark-mode #footer h2,
+body.dark-mode #footer h3 {
+	color: #ffffff !important;
+}
+
+body.dark-mode #footer a {
+	color: #a0a0a0 !important;
+}
+
+body.dark-mode #footer a:hover {
+	color: var(--color-primary) !important;
+}
+
+body.dark-mode .spotlight {
+	background: #2a2a2a !important;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.3), 0 10px 15px rgba(0,0,0,0.4) !important;
+}
+
+body.dark-mode .spotlight:hover {
+	box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 20px 30px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .spotlight .content h2,
+body.dark-mode .spotlight .content h2 a {
+	color: #ffffff !important;
+}
+
+body.dark-mode .spotlight .content h2 a:hover {
+	color: var(--color-primary) !important;
+}
+
+body.dark-mode .spotlight .content p {
+	color: #a0a0a0 !important;
+}
+
+body.dark-mode table thead {
+	background: #2a2a2a !important;
+	color: #ffffff !important;
+}
+
+body.dark-mode table tbody tr {
+	border-color: #404040 !important;
+}
+
+body.dark-mode table tbody tr:nth-child(2n + 1) {
+	background: #2a2a2a !important;
+}
+
+body.dark-mode #banner {
+	background: #1a1a1a !important;
+}
+
+body.dark-mode #banner h2 {
+	color: #ffffff !important;
+}
+
+body.dark-mode #banner p {
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode.landing #header {
+	background: #000000 !important;
+}
+
+body.dark-mode.landing #header h1 a {
+	color: #ffffff !important;
+}
+
+body.dark-mode.landing #header nav > ul > li > a {
+	color: #ffffff !important;
+}
+
+body.dark-mode .wrapper.alt {
+	background: #0f0f0f !important;
+}
+
+body.dark-mode .wrapper.spotlight {
+	background: #1a1a1a !important;
+}
+
+body.dark-mode .wrapper.spotlight .spotlight {
+	background: #2a2a2a !important;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="email"],
+body.dark-mode select,
+body.dark-mode textarea {
+	background: #2a2a2a !important;
+	border-color: #404040 !important;
+	color: #e5e5e5 !important;
+}
+
+body.dark-mode input[type="text"]:focus,
+body.dark-mode input[type="password"]:focus,
+body.dark-mode input[type="email"]:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+	border-color: var(--color-primary) !important;
+}
+
 /* Modern Body Styles */
 body {
 	background: #0f172a !important;
@@ -4047,6 +4287,10 @@ a:hover {
 #header.alt {
 	background: rgba(15, 23, 42, 0.95) !important;
 	backdrop-filter: blur(10px);
+}
+
+body.dark-mode #header.alt {
+	background: #000000 !important;
 }
 
 #header.alt h1 {
@@ -5001,6 +5245,10 @@ body.landing #header.alt {
 	background: rgba(255, 255, 255, 0.95) !important;
 }
 
+body.landing.dark-mode #header.alt {
+	background: #000000 !important;
+}
+
 body.landing #header.alt h1 {
 	opacity: 1 !important;
 	pointer-events: auto !important;
@@ -5046,6 +5294,28 @@ body.landing #banner p a:hover {
 
 body.landing #banner .icon.banner-icon {
 	color: var(--color-fg-bold) !important;
+}
+
+/* Dark mode overrides for landing page banner */
+body.landing.dark-mode #banner h2 {
+	color: #1a1a1a !important;
+}
+
+body.landing.dark-mode #banner p {
+	color: #333333 !important;
+}
+
+body.landing.dark-mode #banner .icon.banner-icon {
+	color: #1a1a1a !important;
+}
+
+body.landing.dark-mode #banner p a {
+	color: #2563eb !important;
+	border-bottom-color: #2563eb !important;
+}
+
+body.landing.dark-mode #banner .more {
+	color: #000000 !important;
 }
 
 /* Update footer for landing page */
@@ -5168,6 +5438,60 @@ body.landing #cta header p {
 	color: rgba(255, 255, 255, 0.8) !important;
 }
 
+/* Dark mode overrides for CTA section */
+body.landing.dark-mode #cta,
+body.landing.dark-mode .wrapper.style4 {
+	background: #000000 !important;
+}
+
+body.landing.dark-mode #cta h2,
+body.landing.dark-mode .wrapper.style4 h2 {
+	color: #e5e5e5 !important;
+}
+
+body.landing.dark-mode #cta p,
+body.landing.dark-mode .wrapper.style4 p {
+	color: #a0a0a0 !important;
+}
+
+body.landing.dark-mode #cta header p {
+	color: #999999 !important;
+}
+
+body.landing.dark-mode #cta .button {
+	color: #ffffff !important;
+}
+
+/* Dark mode overrides for profile section on landing page */
+body.landing.dark-mode .wrapper.style1 {
+	color: #1a1a1a !important;
+}
+
+body.landing.dark-mode .wrapper.style1 h2,
+body.landing.dark-mode .wrapper.style1 h3,
+body.landing.dark-mode .wrapper.style1 h4,
+body.landing.dark-mode .wrapper.style1 h5,
+body.landing.dark-mode .wrapper.style1 h6 {
+	color: #000000 !important;
+}
+
+body.landing.dark-mode .wrapper.style1 p {
+	color: #333333 !important;
+}
+
+body.landing.dark-mode .wrapper.style1 a {
+	color: #2563eb !important;
+}
+
+/* Dark mode overrides for footer icons on landing page */
+body.landing.dark-mode #footer .icons a {
+	color: #a0a0a0 !important;
+}
+
+body.landing.dark-mode #footer .icons a:hover {
+	color: #60a5fa !important;
+}
+
 /* Mobile visibility fixes */
 @media screen and (max-width: 736px) {
 	body.landing #header h1 a {
@@ -5205,4 +5529,34 @@ body.landing #cta header p {
 	#footer .copyright li a {
 		color: #94a3b8 !important;
 	}
+}
+
+/* Dark Mode Toggle - uses existing nav icon styles */
+#header nav > ul > li > a#dark-mode-toggle {
+	font-size: 1.5em !important;
+}
+
+/* Ensure accent color only applies to AJ, not Stuyvenberg */
+.header.accent {
+	color: #e67700 !important;
+}
+
+/* Light mode landing page: Stuyvenberg is always black */
+body.landing:not(.dark-mode) #header h1 a {
+	color: #000000 !important;
+}
+
+/* Dark mode landing page: Stuyvenberg is always white */
+body.landing.dark-mode #header h1 a {
+	color: #ffffff !important;
+}
+
+/* Light mode non-landing pages: depends on existing header styles */
+body:not(.landing):not(.dark-mode) #header h1 a {
+	color: var(--color-fg-bold) !important;
+}
+
+/* Dark mode non-landing pages: white */
+body:not(.landing).dark-mode #header h1 a {
+	color: #ffffff !important;
 }

@@ -7,6 +7,8 @@ $(document).ready(function() {
 	if ($('.wrapper.style1 .opacity-overlay').length === 0) {
 		$('.wrapper.style1').prepend('<div class="opacity-overlay"></div>');
 	}
+
+	// No need to wrap Stuyvenberg anymore - keeping it simple
 });
 
 $(window).on('scroll', function() {
@@ -14,10 +16,10 @@ $(window).on('scroll', function() {
 	var windowHeight = $(window).height();
 
 	// Get section positions
-	var bannerTop = $('#banner').offset().top;
-	var bannerHeight = $('#banner').outerHeight();
-	var profileTop = $('.wrapper.style1').offset().top;
-	var profileHeight = $('.wrapper.style1').outerHeight();
+	var bannerTop = $('#banner').offset() ? $('#banner').offset().top : 0;
+	var bannerHeight = $('#banner').outerHeight() || 0;
+	var profileTop = $('.wrapper.style1').offset() ? $('.wrapper.style1').offset().top : 0;
+	var profileHeight = $('.wrapper.style1').outerHeight() || 0;
 
 	// Reduce the scroll range to make opacity increase faster (use 70% of total height)
 	var totalHeight = (bannerHeight + profileHeight) * 0.7;
