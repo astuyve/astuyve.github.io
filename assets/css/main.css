@@ -3009,7 +3009,7 @@
 
 		.wrapper.style5 {
 			background-color: #ffffff;
-			color: #4E4852;
+			color: #000000;
 		}
 
 			.wrapper.style5 strong, .wrapper.style5 b {
@@ -3033,7 +3033,7 @@
 			}
 
 			.wrapper.style5 header p {
-				color: #8E8892;
+				color: #333333;
 			}
 
 			.wrapper.style5 header.major h2, .wrapper.style5 header.major h3, .wrapper.style5 header.major h4, .wrapper.style5 header.major h5, .wrapper.style5 header.major h6 {
@@ -3041,7 +3041,7 @@
 			}
 
 			.wrapper.style5 header.major p {
-				color: #4E4852;
+				color: #000000;
 			}
 
 			.wrapper.style5 label {
@@ -3959,9 +3959,9 @@
 /* Root Variables for Modern Design */
 :root {
 	--color-bg: #ffffff;
-	--color-fg: #1a1a1a;
-	--color-fg-bold: #0a0a0a;
-	--color-fg-light: #666666;
+	--color-fg: #000000;
+	--color-fg-bold: #000000;
+	--color-fg-light: #333333;
 	--color-border: #e5e5e5;
 	--color-border-bg: #f8f9fa;
 	--color-primary: #3b82f6;
@@ -4329,7 +4329,7 @@ blockquote {
 	padding: 1.25em 0 1.25em 2em !important;
 	background: var(--color-border-bg) !important;
 	border-radius: 0 8px 8px 0 !important;
-	color: #475569 !important;
+	color: #1a1a1a !important;
 }
 
 /* Modern Images */
