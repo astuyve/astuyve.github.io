@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Clawdbot bought me a car
-description: Outsourcing the painful aspects of a car purchase to AI was refreshingly nice, and sold me on the vision of Clawdbot (now Moltbot)
+description: Outsourcing the painful aspects of a car purchase to AI was refreshingly nice, and sold me on the vision of Clawdbot (now OpenClaw)
 categories: posts
 image: assets/images/clawd_car/clawd_home.jpg
 ---
@@ -13,8 +13,8 @@ It's also typically a low-trust endeavor. Manufacturers change incentives every 
 
 So when my family needed to replace our trusty old Subaru, I thought it'd be a good opportunity to say "Claude, take the wheel" and handed over the keys for my digital life to a chatbot.
 
-## Clawdbot, now Moltbot
-[Clawdbot](https://clawd.bot), recently renamed Moltbot to avoid any trademark issues with Anthropic's Claude, is the internet's latest obsession after, well, Claude Code. It's an [open source](https://github.com/clawdbot/clawdbot) project which pairs an LLM with long running processes to do things like read and write email (and monitor for replies), manage your calendar, and drive a browser with great effect. Unlike ChatGPT or Claude Code, Clawdbot does not start with a blank memory every time it starts. It saves files, breadcrumbs, and your chat histories so it can handle tasks which can take a few days without much issue:
+## Clawdbot, then Moltbot, now OpenClaw
+[Clawdbot](https://clawd.bot), recently renamed Moltbot and now OpenClaw to avoid any trademark issues with Anthropic's Claude, is the internet's latest obsession after, well, Claude Code. It's an [open source](https://github.com/clawdbot/clawdbot) project which pairs an LLM with long running processes to do things like read and write email (and monitor for replies), manage your calendar, and drive a browser with great effect. Unlike ChatGPT or Claude Code, Clawdbot does not start with a blank memory every time it starts. It saves files, breadcrumbs, and your chat histories so it can handle tasks which can take a few days without much issue:
 
 <span class="image half"><a href="/assets/images/clawd_car/clawd_bot.png" target="_blank"><img src="/assets/images/clawd_car/clawd_bot.png" alt="Clawdbot logo"></a></span>
 
